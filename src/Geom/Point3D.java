@@ -260,4 +260,14 @@ public class Point3D implements Geom_element, Serializable
 	/** transform from radians to angles */
 	public static double d2r(double a) { return Math.toRadians(a);}
 	////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////my methods////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
+	public Point3D sphericalTOcartesian()
+	{
+		double x=this._x*Math.sin(this._y)*Math.cos(this._z);
+		double y=this._x*Math.sin(this._y)*Math.sin(this._z);
+		double z=this._x*Math.cos(this._y);
+		return new Point3D(x,y,z);
+		
+	}
 }
