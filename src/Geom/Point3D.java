@@ -262,12 +262,19 @@ public class Point3D implements Geom_element, Serializable
 	////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////my methods////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
-	public Point3D sphericalTOcartesian()
+	public void geometriclTOcartesian()
 	{
-		double x=this._x*Math.sin(this._y)*Math.cos(this._z);
-		double y=this._x*Math.sin(this._y)*Math.sin(this._z);
-		double z=this._x*Math.cos(this._y);
-		return new Point3D(x,y,z);
-		
+		int earth_r=6371000;
+		this._x=earth_r*Math.cos(this._x)*Math.cos(this._y);
+		this._y=earth_r*Math.cos(this._x)*Math.sin(this._y);
+		this._z=earth_r*Math.sin(this._x);
+
 	}
+	/* maybe we need
+	public Point3D cartesianTOgeometric()
+	{
+
+
+	}
+	 */
 }
