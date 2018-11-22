@@ -34,9 +34,11 @@ public class MyCoords implements coords_converter  {
 
 		return Math.sqrt(Math.pow(xy_distance, 2)+Math.pow(diff_z, 2));
 	}
-
+/**
+ * https://stackoverflow.com/questions/41912407/calculate-a-vector-in-meter-from-two-gps-coordinates
+ */
 	@Override
-	public Point3D vector3D(Point3D gps0, Point3D gps1) {
+		public Point3D vector3D(Point3D gps0, Point3D gps1) {
 		// TODO Auto-generated method stub
 		double b = earth_r + gps1.z();
 		double c = earth_r + gps0.z();
@@ -65,7 +67,10 @@ public class MyCoords implements coords_converter  {
 
 		return new Point3D(x, y, z);
 	}
-
+/**
+ * azimuth-https://he.wikipedia.org/wiki/%D7%90%D7%96%D7%99%D7%9E%D7%95%D7%98
+ * 
+ */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
 		//	//	 TODO Auto-generated method stub
