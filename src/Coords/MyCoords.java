@@ -102,7 +102,11 @@ public class MyCoords implements coords_converter  {
 		double distance2d=distance2d(gps0, gps1);
 		double x=Math.acos(distance2d/distance);
 		double elevation=distance*Math.sin(x);
-
+		/*
+		 * or just 
+		 * double elevation=gps1.z()-gps0.z();
+		 */
+		
 		arr[0]=azimuth;
 		arr[1]=elevation;
 		arr[2]=distance;
