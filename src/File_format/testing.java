@@ -28,7 +28,7 @@ public class testing {
 //		}
 		
 		Csv2kml a=new Csv2kml();
-		a.csvConvertToKml("‪C:\\Users\\נתנאל בן יששכר\\eclipse-workspace\\Navigation\\WigleWifi_20171201110209.csv","hope");
+		a.csvConvertToKml("‪C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמי\\מטלה 2 מונחה\\Ex2\\data\\WigleWifi_20171203085618.csv","hope");
 		
 		
 //		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\׳ ׳×׳ ׳�׳� ׳‘׳� ׳™׳©׳©׳›׳¨\\Desktop\\example\\WigleWifi_20171201110209.csv"));

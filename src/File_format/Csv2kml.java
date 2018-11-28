@@ -17,7 +17,7 @@ public class Csv2kml {
 		//	File csvFile=new File(csvFileAdress);
 		//	File file = new File(csvFileAdress); 
 
-		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\נתנאל בן יששכר\\eclipse-workspace\\Navigation\\WigleWifi_20171201110209.csv")); 
+		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\מטלה 2 מונחה\\Ex2\\data\\WigleWifi_20171203085618.csv")); 
 		String line=br.readLine();
 
 		String kmlString="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MultiCSV {
-	public static File folder = new File("C:\\Users\\נתנאל בן יששכר\\Desktop");
+	public static File folder = new File("C:\\Users\\דניאל\\Desktop");
 	static String temp = "";
 	public ArrayList<String> arr ;
 
