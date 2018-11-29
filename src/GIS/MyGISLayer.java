@@ -23,12 +23,12 @@ public class MyGISLayer extends HashSet<GIS_element> implements GIS_layer{
 	public String toString()
 	{
 		Iterator<GIS_element> it = this.iterator();
-		String toString = "["; 
+		String toString = "[\n"; 
 		while(it.hasNext())
 		{
 			toString += it.next().toString() + "\n";
 		}
-		toString += "]\n";
+		toString += "]";
 		return toString;
 	}
 	

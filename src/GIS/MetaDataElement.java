@@ -31,7 +31,7 @@ public class MetaDataElement implements Meta_data{
 	}
 	public void setUTC(String DateAndTime) throws ParseException
 	{
-		String[] TimeData = DateAndTime.split("  ");
+		String[] TimeData = DateAndTime.split(" ");
 		String Date = ChangeFormatDate(TimeData[0]);
 		DateAndTime = Date + " " + TimeData[1];
 		long millis  = DateToMilis(DateAndTime);
@@ -50,7 +50,7 @@ public class MetaDataElement implements Meta_data{
 	// change format 03/12/2017 >>  2017-12-03
 	private static String ChangeFormatDate(String Date)
 	{
-		String[] DateAS = Date.split("/");
+		String[] DateAS = Date.split("-");
 		Date = DateAS[2] + "-" + DateAS[1]  + "-" + DateAS[0];
 		return Date;
 	}
