@@ -4,9 +4,9 @@ import Geom.Geom_element;
 import Geom.Point3D;
 import Geom.GpsPoint;
 
-public class GIS_elementL implements GIS_element {
+public class MyGISElement implements GIS_element {
 	GpsPoint GPS ;
-	Meta_data_elementL Meta_dataElement;
+	MyMetaData Meta_dataElement;
 	
 
 	@Override

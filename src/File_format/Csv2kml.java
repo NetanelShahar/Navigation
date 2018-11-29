@@ -14,13 +14,13 @@ public class Csv2kml {
 
 	public void csvConvertToKml(String csvFileAdress,String KmlFileName) throws IOException
 	{
-		//	File csvFile=new File(csvFileAdress);
-		//	File file = new File(csvFileAdress); 
+		
 
-		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\מטלה 2 מונחה\\Ex2\\data\\WigleWifi_20171203085618.csv")); 
+		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\WigleWifi_20171203085618.csv")); 
 		String line=br.readLine();
 
-		String kmlString="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
+		String kmlString=
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
 				"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+"\n"
 				+"<Document><Folder>\n";
 		//String [] arr=line.toString().split(",");
@@ -59,7 +59,7 @@ public class Csv2kml {
 		//String[] arr=line.toString().split(",");
 		String[] arr=s.split(",");
 		String str="<Placemark>\n"
-				+ "<name>"+arr[1]+"</name>\n"
+				+ "<name>"+"<![CDATA[" +arr[1]+ "]]>"+"</name>\n"
 				+"<description>"+arr[10]+"</description>\n"
 				+"<Point><coordinates>"+arr[7]+","+arr[6]+","+arr[8]+"</coordinates></Point>\n"
 				+"<time>"+arr[3]+"</time></Placemark>\n";
