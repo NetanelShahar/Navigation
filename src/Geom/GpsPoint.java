@@ -60,5 +60,9 @@ public class GpsPoint implements Geom_element {
 	{
 		return 0;
 	}
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "lat: " + _lat + " lon: " + _lon  +" alt: " + _alt;
+	}
 
 }

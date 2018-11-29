@@ -2,8 +2,10 @@ package GIS;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -14,8 +16,17 @@ public class MetaDataProject implements Meta_data{
 	
 	long UTC;
 	String timeAsString;
-
+	ArrayList<MetaDataLayer> Data ; 
 	
+	public MetaDataProject() throws ParseException
+	{
+		setUTC();
+		Data = new ArrayList<MetaDataLayer>();
+	}
+	public void push(MetaDataLayer DataLayer) 
+	{
+		Data.add(DataLayer);
+	}
 	@Override
 	public long getUTC() throws ParseException 
 	{
@@ -37,6 +48,17 @@ public class MetaDataProject implements Meta_data{
 	public Point3D get_Orientation() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String toString() {
+		Iterator<MetaDataLayer> it = Data.iterator();
+		String toString = "{"; 
+		while(it.hasNext())
+		{
+			toString += it.next().toString() + "\n";
+		}
+		toString += "}\n";
+		return toString;
 	}
 
 }

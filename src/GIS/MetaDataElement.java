@@ -17,6 +17,9 @@ public class MetaDataElement implements Meta_data{
 	private String _SSID;
 	private String _AccuracyMeters;
 	private String _type;
+	public MetaDataElement() {
+		
+	}
 	public MetaDataElement(String time ,String SSID , String type , String MAC , String AccuracyMeters) throws ParseException 
 	{
 		_timeAsString = time ; 
@@ -76,6 +79,11 @@ public class MetaDataElement implements Meta_data{
 	public String toString()
 	{
 		return "MAC:"+ _MAC + " SSID: " + _SSID + " Time: "  + _timeAsString + " Accuracy: " + _AccuracyMeters + " type: " + _type;
+	}
+	public static void main(String[] args) throws ParseException {
+		MetaDataElement m = new MetaDataElement();
+		m.setUTC("03/12/2017 08:53:08");
+		System.out.println(m.UTC);
 	}
 
 }

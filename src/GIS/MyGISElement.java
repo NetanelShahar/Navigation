@@ -9,7 +9,7 @@ import Geom.GpsPoint;
 public class MyGISElement implements GIS_element {
 	
 	GpsPoint GPS ;
-	MetaDataElement Meta_dataElement;
+	Meta_data Meta_dataElement;
 	
 	public MyGISElement(String ElementAsString) throws ParseException
 	{
@@ -32,6 +32,9 @@ public class MyGISElement implements GIS_element {
 	public void translate(Point3D vec)
 	{
 		
+	}
+	public String toString() {
+		return GPS.toString() + " " + Meta_dataElement.toString();
 	}
 
 }

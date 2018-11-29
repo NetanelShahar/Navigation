@@ -24,10 +24,12 @@ public class MetaDataLayer implements Meta_data
 		Data = new ArrayList<MetaDataElement>();
 		
 	}
+	
 	public void push(MetaDataElement DataElement) 
 	{
 		Data.add(DataElement);
 	}
+	
 	private void setUTC() throws ParseException 
 	{
 		timeAsString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -40,7 +42,7 @@ public class MetaDataLayer implements Meta_data
 	}
 	@Override
 	public long getUTC() throws ParseException {
-		setUTC();		
+			
 		return UTC;
 	}
 
@@ -52,11 +54,12 @@ public class MetaDataLayer implements Meta_data
 	@Override
 	public String toString() {
 		Iterator<MetaDataElement> it = Data.iterator();
-		String toString = ""; 
+		String toString = "["; 
 		while(it.hasNext())
 		{
-			toString = it.next().toString() + "\n";
+			toString += it.next().toString() + "\n";
 		}
+		toString += "]\n";
 		return toString;
 	}
 	
