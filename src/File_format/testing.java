@@ -27,7 +27,7 @@ public class testing {
 //		}
 		
 		Csv2kml a=new Csv2kml();
-		a.csvConvertToKml("‪sss","ssss");
+		a.csvConvertToKml("‪sss","sssa");
 		
 		
 //		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\׳ ׳×׳ ׳�׳� ׳‘׳� ׳™׳©׳©׳›׳¨\\Desktop\\example\\WigleWifi_20171201110209.csv"));

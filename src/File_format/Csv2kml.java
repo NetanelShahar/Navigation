@@ -16,7 +16,7 @@ public class Csv2kml {
 	{
 		
 
-		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\WigleWifi_20171203085618.csv")); 
+		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\WigleWifi_20171201110209.csv")); 
 		String line=br.readLine();
 
 		String kmlString=
@@ -59,7 +59,7 @@ public class Csv2kml {
 		//String[] arr=line.toString().split(",");
 		String[] arr=s.split(",");
 		String str="<Placemark>\n"
-				+ "<name>"+"<![CDATA[" +arr[1]+ "]]>"+"</name>\n"
+				+ "<name>" +arr[1]+"</name>\n"
 				+"<description>"+arr[10]+"</description>\n"
 				+"<Point><coordinates>"+arr[7]+","+arr[6]+","+arr[8]+"</coordinates></Point>\n"
 				+"<time>"+arr[3]+"</time></Placemark>\n";

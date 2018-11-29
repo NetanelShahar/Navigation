@@ -21,8 +21,7 @@ public class TEST {
 		P1.add(L1);
 		System.out.println(P);
 		System.out.println(P1);
-		
-		
+	
 	}
 
 }
