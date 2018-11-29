@@ -9,7 +9,7 @@ import java.util.TimeZone;
 import Geom.Point3D;
 
 
-public class MyMetaData implements Meta_data{
+public class MetaDataElement implements Meta_data{
 
 	private long UTC  ;
 	private String _timeAsString;
@@ -17,7 +17,7 @@ public class MyMetaData implements Meta_data{
 	private String _SSID;
 	private String _AccuracyMeters;
 	private String _type;
-	public MyMetaData(String time ,String SSID , String type , String MAC , String AccuracyMeters) throws ParseException 
+	public MetaDataElement(String time ,String SSID , String type , String MAC , String AccuracyMeters) throws ParseException 
 	{
 		_timeAsString = time ; 
 		setUTC(time);
@@ -58,12 +58,14 @@ public class MyMetaData implements Meta_data{
 
 		return UTC;
 	}
+	
 	private String longToDate(long millis)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return sdf.format(new Date(millis));
 	}
+	
 	@Override
 	public Point3D get_Orientation()
 	{
@@ -73,18 +75,7 @@ public class MyMetaData implements Meta_data{
 	@Override
 	public String toString()
 	{
-		return "The UTC is " + longToDate(UTC) ;
-	}
-	public static void main(String[] args) throws ParseException
-	{
-		MyMetaData m = new MyMetaData("03/12/2017  08:53:08", "Ariel_University", "WIFI", "1c:b9:c4:15:42:68", "3");
-		System.out.println(m.UTC);
-		System.out.println(m._timeAsString);
-		System.out.println(m._MAC);
-		System.out.println(m._AccuracyMeters);
-		System.out.println(m._type);
-		System.out.println(m._SSID);
-		
+		return "MAC:"+ _MAC + " SSID: " + _SSID + " Time: "  + _timeAsString + " Accuracy: " + _AccuracyMeters + " type: " + _type;
 	}
 
 }
