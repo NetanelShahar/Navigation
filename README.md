@@ -22,8 +22,11 @@ the first one is for a regular 3D point and the other one is for gos point
 ### Sorces
 https://stackoverflow.com/questions/1185408/converting-from-longitude-latitude-to-cartesian-coordinates - converting coordinates 
 
-https://stackoverflow.com/questions/41912407/calculate-a-vector-in-meter-from-two-gps-coordinates - calculating vector 3D
+https://stackoverflow.com/questions/41912407/calculate-a-vector-in-meter-from-two-gps-coordinates - calculating 3D vector
 
 http://www.vias.org/comp_geometry/math_coord_convert_3d.htm - calculating distance
+
 http://convertcsv.com/csv-to-kml.htm - how to convert csv to kml(from the resource)
+
 https://en.wikipedia.org/wiki/Azimuth - the idea of Azimuth
+
