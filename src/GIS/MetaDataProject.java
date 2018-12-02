@@ -23,9 +23,9 @@ public class MetaDataProject implements Meta_data{
 		setUTC();
 		Data = new ArrayList<MetaDataLayer>();
 	}
-	public void push(MetaDataLayer DataLayer) 
+	public ArrayList<MetaDataLayer> getData()
 	{
-		Data.add(DataLayer);
+		return Data;
 	}
 	@Override
 	public long getUTC() throws ParseException 

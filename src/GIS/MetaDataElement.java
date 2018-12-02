@@ -78,7 +78,7 @@ public class MetaDataElement implements Meta_data{
 	@Override
 	public String toString()
 	{
-		return "MAC:"+ _MAC + " SSID: " + _SSID + " Time: "  + _timeAsString + " Accuracy: " + _AccuracyMeters + " type: " + _type;
+		return _MAC + "," + _SSID + ","  + _timeAsString + "," + _AccuracyMeters + "," + _type;
 	}
 	public static void main(String[] args) throws ParseException {
 		MetaDataElement m = new MetaDataElement();

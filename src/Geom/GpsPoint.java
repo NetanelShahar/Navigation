@@ -62,7 +62,7 @@ public class GpsPoint implements Geom_element {
 	}
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "lat: " + _lat + " lon: " + _lon  +" alt: " + _alt;
+		return  _lat + "," + _lon  +"," + _alt;
 	}
 
 }

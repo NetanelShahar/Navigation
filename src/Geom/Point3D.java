@@ -262,17 +262,9 @@ public class Point3D implements Geom_element, Serializable
 	////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////my methods////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
-	/**
-	 * https://stackoverflow.com/questions/1185408/converting-from-longitude-latitude-to-cartesian-coordinates
-	 */
-	public void geometriclTOcartesian()
-	{
-		int earth_r=6371000;
-		this._x=earth_r*Math.cos(this._x)*Math.cos(this._y);
-		this._y=earth_r*Math.cos(this._x)*Math.sin(this._y);
-		this._z=earth_r*Math.sin(this._x);
+	
 
-	}
+	
 	/* maybe we need
 	public Point3D cartesianTOgeometric()
 	{

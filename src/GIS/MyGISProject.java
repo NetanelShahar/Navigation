@@ -12,13 +12,17 @@ public class MyGISProject extends HashSet<GIS_layer>  implements GIS_project{
 		MetaDataProject = new MetaDataProject();
 	}
 
-
+	
 	@Override
 	public Meta_data get_Meta_data() {
 		// TODO Auto-generated method stub
 		return MetaDataProject;
+		
 	}
-	
+	public MetaDataProject getData()
+	{
+		return (GIS.MetaDataProject) MetaDataProject;
+	}
 	public String toString()
 	{
 		Iterator<GIS_layer> it = this.iterator();

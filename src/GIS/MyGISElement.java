@@ -17,7 +17,9 @@ public class MyGISElement implements GIS_element {
 		GPS = new GpsPoint(Double.parseDouble(CSVSplit[6]), Double.parseDouble(CSVSplit[7]), Double.parseDouble(CSVSplit[8]));
 		Meta_dataElement = new MetaDataElement(CSVSplit[3], CSVSplit[1], CSVSplit[10], CSVSplit[0], CSVSplit[9]);
 	}
-	
+	public GpsPoint GPS() {
+		return GPS;
+	}
 	@Override
 	public Geom_element getGeom() {
 		return GPS;
@@ -34,7 +36,7 @@ public class MyGISElement implements GIS_element {
 		
 	}
 	public String toString() {
-		return GPS.toString() + " " + Meta_dataElement.toString();
+		return GPS.toString() + "," + Meta_dataElement.toString();
 	}
 
 }

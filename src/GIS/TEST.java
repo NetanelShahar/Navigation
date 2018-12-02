@@ -1,6 +1,8 @@
 package GIS;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
+import java.util.Arrays;
 
 public class TEST {
 
@@ -18,9 +20,12 @@ public class TEST {
 		MyGISProject P = new MyGISProject();
 		MyGISProject P1 = new MyGISProject();
 		P.add(L);
-		P1.add(L1);
+		P.add(L1);
 		System.out.println(P);
-		System.out.println(P1);
+	String str = P.toString();
+	String[] arr = str.split("\n");
+	
+	
 	
 	}
 

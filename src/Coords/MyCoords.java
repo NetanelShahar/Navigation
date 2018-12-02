@@ -6,8 +6,8 @@ public class MyCoords implements coords_converter  {
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		// TODO Auto-generated method stub
-		gps.geometriclTOcartesian();
-		gps.add(local_vector_in_meter);
+		
+		
 		return gps;
 	}
 	public double distance2d(Point3D gps0, Point3D gps1) {
