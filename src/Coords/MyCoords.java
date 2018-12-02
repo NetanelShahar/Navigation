@@ -56,10 +56,23 @@ public class MyCoords implements coords_converter  {
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
 		double[] AzimuthArr = new double[3] ; 
-		double azimuth = gps0.north_angle(gps1);
+	
 		double elevation = gps0.up_angle(gps1);
+		
 		double dis = distance3d(gps0, gps1);
-		AzimuthArr[0] = azimuth; AzimuthArr[1] = elevation; AzimuthArr[2] = dis; 
+
+		double angle1 = Math.toRadians(gps0.x());
+		double angle2 = Math.toRadians((gps1.x()));
+		double diff_lon = Math.toRadians(gps0.y()-gps1.y());
+		double y = Math.sin(diff_lon) * Math.cos(angle2);
+		double x = Math.cos(angle1)*Math.sin(angle2) - Math.sin(angle1)*Math.cos(angle2)*Math.cos(diff_lon);
+		double azimut = Math.atan2(y,x);
+		azimut = Math.toDegrees(azimut);
+		azimut = ((azimut + 360) % 360);
+		
+		
+		
+		AzimuthArr[0] =360- azimut; AzimuthArr[1] = elevation; AzimuthArr[2] = dis; 
 		return AzimuthArr;
 	}
 
