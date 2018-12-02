@@ -10,29 +10,42 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import Geom.Point3D;
-
+/**
+ * This class represent the data on collection<layers>(layer is collection<points>)  in the kml.
+ * The UTC is the time the Current time.
+ * the time in data displayed in two ways, as string and long.
+ * @author DanielAbergel
+ *
+ */
 public class MetaDataProject implements Meta_data{
 	
 	
 	long UTC;
 	String timeAsString;
 	ArrayList<MetaDataLayer> Data ; 
-	
+	/**
+	 * The Constructor set the time to Current time and Setting up an array
+	 * @throws ParseException if there a wrong time format
+	 */
 	public MetaDataProject() throws ParseException
 	{
 		setUTC();
 		Data = new ArrayList<MetaDataLayer>();
 	}
-	public ArrayList<MetaDataLayer> getData()
-	{
-		return Data;
-	}
+	
+	/**
+	 * @return the time as long 
+	 */
 	@Override
 	public long getUTC() throws ParseException 
 	{
 		// TODO Auto-generated method stub
 		return UTC;
 	}
+	/**
+	 * set the time to Current time .
+	 * @throws ParseException if there a wrong time format
+	 */
 	private void setUTC() throws ParseException 
 	{
 		timeAsString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -49,7 +62,9 @@ public class MetaDataProject implements Meta_data{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	/**
+	 * toString method
+	 */
 	public String toString() {
 		Iterator<MetaDataLayer> it = Data.iterator();
 		String toString = "{"; 

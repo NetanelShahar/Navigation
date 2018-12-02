@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.Arrays;
 
-public class TEST {
+public class ProjectBuildExample {
 
 	public static void main(String[] args) throws ParseException {
 		
