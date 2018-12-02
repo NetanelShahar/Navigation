@@ -55,7 +55,12 @@ public class MyCoords implements coords_converter  {
  */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
-		DOUBLE A
+		double[] AzimuthArr = new double[3] ; 
+		double azimuth = gps0.north_angle(gps1);
+		double elevation = gps0.up_angle(gps1);
+		double dis = distance3d(gps0, gps1);
+		AzimuthArr[0] = azimuth; AzimuthArr[1] = elevation; AzimuthArr[2] = dis; 
+		return AzimuthArr;
 	}
 
 	@Override
