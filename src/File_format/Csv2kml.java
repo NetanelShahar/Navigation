@@ -24,16 +24,27 @@ import GIS.MetaDataLayer;
 import GIS.MyGISElement;
 import GIS.MyGISLayer;
 import GIS.MyGISProject;
-
+/**
+ * This class is a Format class There is 2 options to do a format:
+ * CSV To Object To KML / CSV To KML Directly
+ * in the format function ObjectToKml Each layer will be of a different color
+ * @author DanielAbergel
+ *
+ */
 public class Csv2kml {
 
-	long UTC ; 
-	
-	private int urlIndex=0;
-	private String [] urlArray= {"red","yellow","green"};
+	long UTC ; // time as long . 
+	private int urlIndex=0; // Represents the color id of each layer
+	private String [] urlArray= {"red","yellow","green"}; //Represents the color of each layer
 
 
-
+	/**
+	 * /**
+	 * The function takes time as String and covert the String to long 
+	 * @param DateAndTime represent the time as String  
+	 * @return the time as long 
+	 * @throws ParseException if there a wrong time format
+	 */
 	private long DateToMilis(String dateAndTime) throws ParseException
 	{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -44,12 +55,20 @@ public class Csv2kml {
 		return millis;
 	}
 
-
+/**
+ * The function takes a CSV file and Makes manual KML file
+ * Then the function opens PlaceMark manually, and adds the data and the point COORDINATE.
+ * The function closes the file and tries to create it with the name the function received, the file will be in the project folder 
+ * @param csvFileAdress represent the Folder path of the CSV file
+ * @param KmlFileName represent the output file name.
+ * @throws IOException if there a input or output error
+ * @throws ParseException if there a wrong time format
+ */
 	public void csvConvertToKml(String csvFileAdress,String KmlFileName) throws IOException, ParseException
 	{
 
 
-		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\WigleWifi_20171201110209.csv")); 
+		BufferedReader br = new BufferedReader(new FileReader(csvFileAdress)); 
 		String line=br.readLine();
 
 		String kmlString=
@@ -64,7 +83,7 @@ public class Csv2kml {
 		{
 
 			kmlString=kmlString+kmlConvert(line.toString());
-			//			kmlString=kmlString+line.toString()+"\n";
+			
 			urlIndex++;
 
 			line = br.readLine();
@@ -93,49 +112,50 @@ public class Csv2kml {
 
 
 
-
-	public String kmlConvert(String s) throws ParseException
+/**
+ * The function Receiving data as a String and make PlaceMark as a String and returns it 
+ * @param PointandData represent the Data of the point . 
+ * @return the PlaceMark of this point. 
+ * @throws ParseException if there a wrong time format
+ */
+	public String kmlConvert(String PointandData) throws ParseException
 	{
 		//String[] arr=line.toString().split(",");
-		String[] arr=s.split(",");
+		String[] arr=PointandData.split(",");
 		long time = DateToMilis(arr[3]);
 		String str="<Placemark>\n"
 				+ "<name>" +arr[1]+"</name>\n"
-//				+"<Style id=\"mystyle\">\r\n" + 
-//				"  <IconStyle>\r\n" + 
-//				"    <scale>1.3</scale>\r\n" + 
-//				"    <Icon>\r\n" + 
-//				"      <href>https://image.flaticon.com/icons/svg/220/220334.svg</href>\r\n" + 
-//				"    </Icon>\r\n" + 
-//				"  </IconStyle>\r\n" + 
-//				"</Style>"
 				+"<description><![CDATA[BSSID: <b>"+arr[0]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[3]+ "</b>]]" + "></description><styleUrl>#"+urlArray[urlIndex%urlArray.length]+"</styleUrl>\n"
 				+"<Point><coordinates>"+arr[7]+","+arr[6]+","+arr[8]+"</coordinates></Point>\n"
 				+"<time>"+arr[3]+"</time></Placemark>\n";
 
 		return str;
 	}
-
+	/**
+	 * The function Receiving data as a String and make PlaceMark as a String and returns it 
+	 * this functions is build PlaceMark for the ObjectToKml function
+	 * @param Data represent the Data as a String .
+     * @throws ParseException if there a wrong time format
+	 */
 	private String PointToKml(String Data) throws ParseException
 	{
 		String[] arr=Data.split(",");
 		long time = DateToMilis(arr[5]);
 		String str="<Placemark>\n"
 				+ "<name>" +arr[4]+"</name>\n"
-//				+"<Style id=\"mystyle\">\r\n" + 
-//				"  <IconStyle>\r\n" + 
-//				"    <scale>1.3</scale>\r\n" + 
-//				"    <Icon>\r\n" + 
-//				"      <href>https://image.flaticon.com/icons/svg/220/220334.svg</href>\r\n" + 
-//				"    </Icon>\r\n" + 
-//				"  </IconStyle>\r\n" + 
-//				"</Style>"
 				+"<description><![CDATA[BSSID: <b>"+arr[3]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[5]+ "</b>]]" + "></description><styleUrl>#"+urlArray[urlIndex%urlArray.length]+"</styleUrl>\n"
 				+"<Point><coordinates>"+arr[1]+","+arr[0]+","+arr[2]+"</coordinates></Point>\n"
 				+"<time>"+arr[5]+"</time></Placemark>\n";
 
 		return str;
 	}
+	/**
+	 * The function takes a GIS_Project Object and Makes manual KML file
+     * Then the function opens PlaceMark manually, and adds the data and the point COORDINATE.
+     * The function closes the file and tries to create it , the file will be in the project folder 
+	 * @param Project represent a GIS_Project with GIS_Layers..
+	 * @throws ParseException if there a wrong time format
+	 */
 	public void ObjectToKml(MyGISProject Project) throws ParseException
 	{
 		String KmlAsString = 
@@ -163,7 +183,6 @@ public class Csv2kml {
 
 		}
 		KmlAsString+="</Folder></Document>\n</kml>";
-		//	System.out.println(KmlAsString);
 
 		try {
 			File file=new File("qqqqq"+".kml");

@@ -111,7 +111,7 @@ public class Point3D implements Geom_element, Serializable
 	public final static int ONSEGMENT = 0,  LEFT = 1, RIGHT = 2, INFRONTOFA = 3, BEHINDB = 4, ERROR = 5;
 	public final static int DOWN = 6, UP = 7;
 
-	/** return up iff this point is above the SEGMENT (not the line) */
+	/* return up iff this point is above the SEGMENT (not the line) */
 	public int pointLineTest2(Point3D a, Point3D b) {
 		int flag = this.pointLineTest(a,b);
 		if(a._x < b._x ) {
@@ -131,7 +131,7 @@ public class Point3D implements Geom_element, Serializable
 	}
 
 
-	/** pointLineTest <br>
+	/* pointLineTest <br>
 	test the following location of a point regards a line segment - all in 2D projection.<br><br>
 
 	ONSEGMENT:  ï¿½ï¿½ï¿½ï¿½ï¿½a----+----bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                              <br> <br>
@@ -209,13 +209,13 @@ public class Point3D implements Geom_element, Serializable
 		_x = (center.x() +  radius * Math.cos(a+angle));
 		_y = (center.y() +  radius * Math.sin(a+angle));
 	}								
-	/** computes the angleXY between p1 and p2 in RADIANS: <br><br>
+	/* computes the angleXY between p1 and p2 in RADIANS: <br><br>
 	up:(PI/2)  , down (-PI/2) , right(0),  left(+- PI).   [-PI, +PI]	*/
 	public double angleXY(Point3D p) {
 		if(p==null) throw new RuntimeException("** Error: Point3D angle got null **");
 		return Math.atan2((p._y-_y), (p._x-_x));
 	}
-	/** computes the angleXY between p1 and p2 in RADIANS: <br><br>
+	/* computes the angleXY between p1 and p2 in RADIANS: <br><br>
 	up:(PI/2)  , down (1.5PI) , right(0),  left(PI).   [0,2PI].	*/
 	public double angleXY_2PI(Point3D p) {
 		if(p==null) throw new RuntimeException("** Error: Point3D angle got null **");
@@ -223,12 +223,12 @@ public class Point3D implements Geom_element, Serializable
 		if (ans<0) ans = 2*Math.PI+ans;
 		return ans;
 	}
-	/** computes the angleZ between p1 and p2 in RADIANS */ 							
+	/* computes the angleZ between p1 and p2 in RADIANS */ 							
 	public double angleZ(Point3D p) {
 		if(p==null) throw new RuntimeException("** Error: Point3D angleZ got null **");
 		return Math.atan2((p._z-_z), this.distance2D(p));
 	}	
-	/** return the (planer angle of the vector between this --> p, in DEGREES, in a
+	/** return the (planer angle of the vector between this -- p, in DEGREES, in a
 	 * compass order: north 0, east 90, south 180, west 270.
 	 * @param p is the end point of the vector (z value is ignored). 
 	 * @return angle in compass styye [0,360).
@@ -241,7 +241,7 @@ public class Point3D implements Geom_element, Serializable
 		else ans = 450-a_deg;
 		return ans;
 	}
-	/** return the vertical angles in DEGREES of the vector this-->p
+	/* return the vertical angles in DEGREES of the vector this--p
 	 * 
 	 * */
 	public double up_angle(Point3D p) {
@@ -249,7 +249,7 @@ public class Point3D implements Geom_element, Serializable
 		ans = Math.atan2((p._z-_z), this.distance2D(p));
 		return Math.toDegrees(ans);
 	}
-	/** return the vertical angles in DEGREES of the vector this-->p, 
+	/*return the vertical angles in DEGREES of the vector this--p, 
 	 *  @param h: is the extra height of the point p (used by GISElement).
 	 * */
 	public double up_angle(Point3D p, double h) {
@@ -257,22 +257,35 @@ public class Point3D implements Geom_element, Serializable
 		ans = Math.atan2((p._z+h-_z), this.distance2D(p));
 		return Math.toDegrees(ans);
 	}
-	/** transform from radians to angles */
+	/* transform from radians to angles */
 	public static double r2d(double a) { return Math.toDegrees(a);}
-	/** transform from radians to angles */
+	/* transform from radians to angles */
 	public static double d2r(double a) { return Math.toRadians(a);}
 	////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////my methods////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * source: from the äîøú ÷åøãéðèåú.xlsx Tracking the steps of the convert 
+	 * the  Meter2GPS function do the same things reversed.
+	 * the function also change the Point values from gps to meter. 
+	 * @return a new Point3D wich its the GPS point in meters . 
+	 */
 	public Point3D GPS2Meter()
 	{
-		double RadianX=Math.toRadians(_x);// X From GPS To Rad
-		double RadianY=Math.toRadians(_y);// Y From GPS To Rad
-		double MeterX=Math.sin(RadianX)*6371000;
-		double MeterY=Math.sin(RadianY)*6371000*0.847091174;
+		_x=Math.toRadians(_x);// X From GPS To Rad
+		_y=Math.toRadians(_y);// Y From GPS To Rad
+		_x=Math.sin(_x)*6371000;
+		_y=Math.sin(_y)*6371000*0.847091174;
 		_z = _z  ; // no defernt
-		return new Point3D(MeterX, MeterY, _z);
+		return new Point3D(_x, _y, _z);
 	}
+	
+	/**
+	 * source: from the äîøú ÷åøãéðèåú.xlsx Tracking the steps of the convert reversed
+	 * the function also change the Point values from meter to gps. 
+	 * @return a new Point3D wich its the GPS point in meters . 
+	 */
 	//doing the opsite from GPS2Meter
 	public Point3D Meter2GPS()
 	{

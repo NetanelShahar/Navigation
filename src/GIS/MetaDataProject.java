@@ -11,7 +11,7 @@ import java.util.TimeZone;
 
 import Geom.Point3D;
 /**
- * This class represent the data on collection<layers>(layer is collection<points>)  in the kml.
+ * This class represent the data on collection(layers)(layer is collection(points))  in the kml.
  * The UTC is the time the Current time.
  * the time in data displayed in two ways, as string and long.
  * @author DanielAbergel

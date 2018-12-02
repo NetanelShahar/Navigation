@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 /**
- * This class represent a collection<Point> with data in the KML ( the collection is a HashSet).
+ * This class represent a collection(Point) with data in the KML ( the collection is a HashSet).
  * the class The department has two fields:
- * META DATA(a MetaDataLayer class is an collection of points(elements)) and HashSet<GIS_Element>
+ * META DATA(a MetaDataLayer class is an collection of points(elements)) and HashSet(GIS_Element)
  * @author DanielAbergel
  *
  */

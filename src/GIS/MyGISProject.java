@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.util.HashSet;
 import java.util.Iterator;
 /**
- * This class represent a collection<Layers> with data in the KML ( the collection is a HashSet).
+ * This class represent a collection(Layers) with data in the KML ( the collection is a HashSet).
  * the class The department has two fields:
- * META DATA(a MetaDataLayer class is an collection of points(layers(points collection)) and HashSet<GIS_Layer>
+ * META DATA(a MetaDataLayer class is an collection of points(layers(points collection)) and HashSet(GIS_Layer)
  * @author DanielAbergel
  */
 public class MyGISProject extends HashSet<GIS_layer>  implements GIS_project{

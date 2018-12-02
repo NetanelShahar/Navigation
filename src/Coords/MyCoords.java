@@ -2,7 +2,16 @@ package Coords;
 import Geom.Point3D;
 
 public class MyCoords implements coords_converter  {
+	
 	final int earth_r=6371000;
+	/**
+	 * This function convert the GPS point to meter and add a vector to the point.
+	 * and converts back the to new GPS Point
+	 * 
+	 * @param gps represent a GPS point
+	 * @param local_vector_in_meter  represent a vector in meter
+	 * @return the new 3D point we found
+	 */
 	@Override
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		// TODO Auto-generated method stub
@@ -13,6 +22,14 @@ public class MyCoords implements coords_converter  {
 		Point3D returnP = new Point3D(gps);
 		return returnP;
 	}
+	/**
+	 * This function computes the 2D distance (in meters) between the two GPS points 
+	 * we used the file Excel that was send to use by Boaz formola.
+	 * 
+	 * @param gps0 represent the first point
+	 * @param gps1 represent the second point
+	 * @return the distance 2D in meters between two points
+	 */
 	public double distance2d(Point3D gps0, Point3D gps1) 
 	{
 		double lon_norm=Math.cos(gps0.x()*(Math.PI/180));
@@ -29,6 +46,14 @@ public class MyCoords implements coords_converter  {
 		double y_meter=Math.sin(diff_rad_y)*earth_r*lon_norm;
 		return Math.sqrt(Math.pow(x_meter, 2)+Math.pow(y_meter, 2));
 	}
+	/**
+	 * This function computes the 3D distance (in meters) between the two GPS points
+	 * we used the file Excel that was send to use by Boaz formola.
+	 * 
+	 * @param gps0 represent the first point
+	 * @param gps1 represent the second point
+	 * @return the distance 3D in meters between the two points
+	 */
 	@Override
 	public double distance3d(Point3D gps0, Point3D gps1) {
 		// TODO Auto-generated method stub
@@ -38,7 +63,14 @@ public class MyCoords implements coords_converter  {
 
 		return Math.sqrt(Math.pow(xy_distance, 2)+Math.pow(diff_z, 2));
 	}
-
+	/**
+	 * This function converse the gps points to meter 
+	 * and computes the 3D vector (in meters) between the two GPS's points
+	 * 
+	 * @param gps0 represent the first gps point
+	 * @param gps1 represent the second gps point
+	 * @return the 3D vector between the two points
+	 */
 	@Override
 		public Point3D vector3D(Point3D gps0, Point3D gps1) {
 		// TODO Auto-generated method stub
@@ -49,10 +81,14 @@ public class MyCoords implements coords_converter  {
 		double Z = gps0.z() - gps1.z();
 		return new Point3D(X, Y, Z);
 	}
-/**
- * azimuth-https://he.wikipedia.org/wiki/%D7%90%D7%96%D7%99%D7%9E%D7%95%D7%98
- * 
- */
+	/**
+	 * This function computes the polar representation of the 3D vector be
+	 * gps0--gps1 the function calculate the azimuth, the elevation and the distance - from coords_converter
+	 * 
+	 * @param gps0  represent the first gps point
+	 * @param gps1 represent the second gps point
+	 * @return an array- arr[0]- azimuth, arr[1]- elevation, arr[2]- distance
+	 */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
 		double[] AzimuthArr = new double[3] ; 
@@ -75,7 +111,13 @@ public class MyCoords implements coords_converter  {
 		AzimuthArr[0] =360- azimut; AzimuthArr[1] = elevation; AzimuthArr[2] = dis; 
 		return AzimuthArr;
 	}
-
+	/**
+	 * This function verify if this point is a valid lat, lon , alt coordinate:
+	 * [-180,+180],[-90,+90],[-450, +inf] - from coords_converter
+	 * 
+	 * @param p represent a point 
+	 * @return true if the gps point is valid and false otherwise 
+	 */
 	@Override
 	public boolean isValid_GPS_Point(Point3D p) {
 		// TODO Auto-generated method stub

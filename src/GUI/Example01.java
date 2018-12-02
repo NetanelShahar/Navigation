@@ -16,7 +16,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Example01 extends Frame {
-/**
+/*
  * Instantiates an Example01 object.
  **/
 public static void main(String args[]) {
