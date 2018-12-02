@@ -1,6 +1,8 @@
 package Geom;
 
 import java.io.Serializable;
+
+import Geom.Point3D;
 public class Point3D implements Geom_element, Serializable 
 {
 	/**
@@ -262,14 +264,25 @@ public class Point3D implements Geom_element, Serializable
 	////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////my methods////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
-	
-
-	
-	/* maybe we need
-	public Point3D cartesianTOgeometric()
+	public Point3D GPS2Meter()
 	{
-
-
+		double RadianX=Math.toRadians(_x);// X From GPS To Rad
+		double RadianY=Math.toRadians(_y);// Y From GPS To Rad
+		double MeterX=Math.sin(RadianX)*6371000;
+		double MeterY=Math.sin(RadianY)*6371000*0.847091174;
+		_z = _z  ; // no defernt
+		return new Point3D(MeterX, MeterY, _z);
 	}
-	 */
+	//doing the opsite from GPS2Meter
+	public Point3D Meter2GPS()
+	{
+		_x=_x/6371000;
+		_y=(_y/6371000)/0.847091174;
+		_x=Math.asin(_x);
+		_y=Math.asin(_y);
+		_x=Math.toDegrees(_x);
+		_y=Math.toDegrees(_y);
+		_z = _z ;
+		return new Point3D(_x, _y, _z);
+	}
 }

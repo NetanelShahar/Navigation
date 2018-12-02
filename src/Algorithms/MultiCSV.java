@@ -15,15 +15,9 @@ import GIS.MyGISProject;
 
 public class MultiCSV {
 	
-	public static File folder = new File("C:\\Users\\דניאל\\Desktop\\aaa");
-	static MyGISProject _Project ;
+	public static File folder = new File("C:\\Users\\דניאל\\Desktop");
+
 	
-	public MultiCSV() throws ParseException {
-		_Project = new MyGISProject();
-	}
-
-
-
 	public static MyGISProject FileToObject(final File folder, MyGISProject Project) throws ParseException {
 	
 		for (final File fileEntry : folder.listFiles()) {
@@ -35,8 +29,7 @@ public class MultiCSV {
 				System.out.println(fileEntry.getName());
 				if(fileEntry.getName().contains(".csv"))
 				{
-			        String line = "";
-			        String cvsSplitBy = ",";
+			        String line;
 
 			        try (BufferedReader br = new BufferedReader(new FileReader(fileEntry))) 
 			        {
@@ -56,19 +49,10 @@ public class MultiCSV {
 			            e.printStackTrace();
 			        }
 				}
-				
 			}
 		}
 		return Project;
 	}
-	public static void main(String[] args) throws ParseException {
-		// TODO Auto-generated method stub
-		System.out.println("Reading files under the folder "+ folder.getAbsolutePath());
-     
-		MultiCSV s = new MultiCSV();
-		MyGISProject P =  FileToObject(folder,_Project);
-		Csv2kml f = new Csv2kml();
-		f.ObjectToKml(P);
-	}
+
 
 }

@@ -58,7 +58,6 @@ public class MetaDataElement implements Meta_data{
 	@Override
 	public long getUTC()
 	{
-
 		return UTC;
 	}
 	

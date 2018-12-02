@@ -7,10 +7,14 @@ public class MyCoords implements coords_converter  {
 	public Point3D add(Point3D gps, Point3D local_vector_in_meter) {
 		// TODO Auto-generated method stub
 		
-		
-		return gps;
+		gps.GPS2Meter();
+		gps.add(local_vector_in_meter);
+		gps.Meter2GPS();
+		Point3D returnP = new Point3D(gps);
+		return returnP;
 	}
-	public double distance2d(Point3D gps0, Point3D gps1) {
+	public double distance2d(Point3D gps0, Point3D gps1) 
+	{
 		double lon_norm=Math.cos(gps0.x()*(Math.PI/180));
 		System.out.println(lon_norm);
 

@@ -26,6 +26,7 @@ import GIS.MyGISLayer;
 import GIS.MyGISProject;
 
 public class Csv2kml {
+
 	long UTC ; 
 
 
@@ -41,66 +42,66 @@ public class Csv2kml {
 	}
 
 
-	//	public void csvConvertToKml(String csvFileAdress,String KmlFileName) throws IOException, ParseException
-	//	{
-	//
-	//
-	//	BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\WigleWifi_20171201110209.csv")); 
-	//		String line=br.readLine();
-	//
-	//		String kmlString=
-	//				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
-	//						"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+"\n"
-	//						+"<Document><Folder>\n";
-	//		//String [] arr=line.toString().split(",");
-	//		line=br.readLine();///maybe i lose an important(first) line
-	//		line=br.readLine();
-	//		while (line != null) //maybe adding &&!line.isempty
-	//		{
-	//
-	//			kmlString=kmlString+kmlConvert(line.toString());
-	//			//			kmlString=kmlString+line.toString()+"\n";
-	//
-	//			line = br.readLine();
-	//		}
-	//		br.close();
-	//		kmlString=kmlString+"</Folder></Document>\n</kml>";
-	//		System.out.println(kmlString);
-	//
-	//
-	//		try {
-	//			File file=new File(KmlFileName+".kml");
-	//
-	//			if(!file.exists())
-	//				file.createNewFile();
-	//
-	//			PrintWriter pw=new PrintWriter(file);
-	//			pw.print(kmlString);
-	//			pw.close();
-	//			System.out.println("done");
-	//		}catch(IOException e)
-	//		{
-	//			e.printStackTrace();
-	//		}
-	//
-	//	}
-	//
-	//
-	//
-	//	//<description><![CDATA[BSSID: <b>00:30:4f:82:7b:30</b><br/>Capabilities: <b>[WPA2-PSK-CCMP-preauth][ESS][BLE]</b><br/>Frequency: <b>2462</b><br/>Timestamp: <b>1512118796999</b><br/>Date: <b>2017-12-01 10:59:56</b>]]></description>
-	//	public String kmlConvert(String s) throws ParseException
-	//	{
-	//		//String[] arr=line.toString().split(",");
-	//		String[] arr=s.split(",");
-	//		long time = DateToMilis(arr[3]);
-	//		String str="<Placemark>\n"
-	//				+ "<name>" +arr[1]+"</name>\n"
-	//				+"<description><![CDATA[BSSID: <b>"+arr[0]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[3]+ "</b>]]" + "></description>\n"
-	//				+"<Point><coordinates>"+arr[7]+","+arr[6]+","+arr[8]+"</coordinates></Point>\n"
-	//				+"<time>"+arr[3]+"</time></Placemark>\n";
-	//
-	//		return str;
-	//	}
+	public void csvConvertToKml(String csvFileAdress,String KmlFileName) throws IOException, ParseException
+	{
+
+
+		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\דניאל\\Desktop\\WigleWifi_20171201110209.csv")); 
+		String line=br.readLine();
+
+		String kmlString=
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
+						"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+"\n"
+						+"<Document><Folder>\n";
+		
+		line=br.readLine();
+		line=br.readLine();
+		while (line != null) 
+		{
+
+			kmlString=kmlString+kmlConvert(line.toString());
+			//			kmlString=kmlString+line.toString()+"\n";
+
+			line = br.readLine();
+		}
+		br.close();
+		kmlString=kmlString+"</Folder></Document>\n</kml>";
+		System.out.println(kmlString);
+
+
+		try {
+			File file=new File(KmlFileName+".kml");
+
+			if(!file.exists())
+				file.createNewFile();
+
+			PrintWriter pw=new PrintWriter(file);
+			pw.print(kmlString);
+			pw.close();
+			System.out.println("done");
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+
+
+	
+	public String kmlConvert(String s) throws ParseException
+	{
+		//String[] arr=line.toString().split(",");
+		String[] arr=s.split(",");
+		long time = DateToMilis(arr[3]);
+		String str="<Placemark>\n"
+				+ "<name>" +arr[1]+"</name>\n"
+				+"<description><![CDATA[BSSID: <b>"+arr[0]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[3]+ "</b>]]" + "></description>\n"
+				+"<Point><coordinates>"+arr[7]+","+arr[6]+","+arr[8]+"</coordinates></Point>\n"
+				+"<time>"+arr[3]+"</time></Placemark>\n";
+
+		return str;
+	}
 
 	private String PointToKml(String Data) throws ParseException
 	{
@@ -134,7 +135,7 @@ public class Csv2kml {
 
 		}
 		KmlAsString+="</Folder></Document>\n</kml>";
-		System.out.println(KmlAsString);
+		//	System.out.println(KmlAsString);
 
 		try {
 			File file=new File("qqqqq"+".kml");
@@ -153,14 +154,6 @@ public class Csv2kml {
 
 	}
 
-
-
-
-	public static void main(String[] args) throws ParseException {
-		
-		
-
-	}
 }
 
 
