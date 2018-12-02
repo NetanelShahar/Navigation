@@ -34,6 +34,7 @@ public class MetaDataLayer implements Meta_data
 		
 	}
 	/**
+	 * source : https://stackoverflow.com/questions/12081417/convert-utc-date-into-milliseconds
 	 * set the time to Current time .
 	 * @throws ParseException if there a wrong time format
 	 */

@@ -7,7 +7,7 @@ public class MyCoords implements coords_converter  {
 	/**
 	 * This function convert the GPS point to meter and add a vector to the point.
 	 * and converts back the to new GPS Point
-	 * 
+	 * source : as Point3D function from boaz formola Exel file.
 	 * @param gps represent a GPS point
 	 * @param local_vector_in_meter  represent a vector in meter
 	 * @return the new 3D point we found

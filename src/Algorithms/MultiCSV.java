@@ -35,7 +35,8 @@ public class MultiCSV {
 	}
 
 /**
- * 
+ * source : https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
+ * Descreption is in the top of the class
  * @param folder represent the file folder 
  * @param Project represent the project that returns after the functions finish.
  * @return MyGISProject Project with all layers from the CSV Files 

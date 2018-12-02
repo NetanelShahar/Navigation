@@ -60,6 +60,7 @@ public class MetaDataElement implements Meta_data{
 	}
 	/**
 	 * The function convert the the time from string to  long and returns it
+	 * source : https://stackoverflow.com/questions/12081417/convert-utc-date-into-milliseconds
 	 * @param dateAndTime represent the time as String 
 	 * @return the time as long .
 	 * @throws ParseException if there a wrong time format
