@@ -38,38 +38,16 @@ public class MyCoords implements coords_converter  {
 
 		return Math.sqrt(Math.pow(xy_distance, 2)+Math.pow(diff_z, 2));
 	}
-/**
- * https://stackoverflow.com/questions/41912407/calculate-a-vector-in-meter-from-two-gps-coordinates
- */
+
 	@Override
 		public Point3D vector3D(Point3D gps0, Point3D gps1) {
 		// TODO Auto-generated method stub
-		double b = earth_r + gps1.z();
-		double c = earth_r + gps0.z();
-
-		double b2 = b*b;
-		double c2 = c*c;
-		double bc2 = 2*b*c;
-
-		// Longitudinal calculations
-		double alpha = gps1.x() - gps0.x();
-		// Conversion to radian
-		alpha = alpha * Math.PI / 180;
-		// Small-angle approximation
-		double cos = 1 - alpha*alpha/2; //Math.cos(alpha);
-		// Use the law of cosines / Al Kashi theorem
-		double x        = Math.sqrt(b2 + c2 - bc2*cos);
-
-		// Repeat for latitudinal calculations
-		alpha = gps1.y() - gps0.y();
-		alpha = alpha * Math.PI / 180;
-		cos = 1 - alpha*alpha/2; //Math.cos(alpha);
-		double y = Math.sqrt(b2 + c2 - bc2*cos);
-
-		// Obtain vertical difference, too
-		double z = gps1.z() - gps0.z();
-
-		return new Point3D(x, y, z);
+		gps0.GPS2Meter();
+		gps1.GPS2Meter();
+		double X = gps0.x() - gps1.x();
+		double Y = gps0.y() - gps1.y();
+		double Z = gps0.z() - gps1.z();
+		return new Point3D(X, Y, Z);
 	}
 /**
  * azimuth-https://he.wikipedia.org/wiki/%D7%90%D7%96%D7%99%D7%9E%D7%95%D7%98
@@ -77,45 +55,7 @@ public class MyCoords implements coords_converter  {
  */
 	@Override
 	public double[] azimuth_elevation_dist(Point3D gps0, Point3D gps1) {
-		//	//	 TODO Auto-generated method stub
-		//				Point3D temp0=new Point3D(gps0.sphericalTOcartesian());
-		//				Point3D temp1=new Point3D(gps1.sphericalTOcartesian());
-		double [] arr=new double[3];
-		//		double distance =Math.sqrt(Math.pow(temp1.x()-temp0.x(), 2)+Math.pow(temp1.y()-temp0.y(), 2)+Math.pow(temp1.z()-temp0.z(), 2));
-		//		System.out.println(distance);
-		//		double plunge=Math.toDegrees(Math.asin((temp1.z()-temp0.z())/distance));
-		//		System.out.println(plunge);
-		//		double azimuth=Math.toDegrees(Math.atan2(temp1.x()-temp0.x(),temp1.y()-temp0.y()));
-		//		System.out.println(azimuth);
-		double dy=gps1.x()-gps0.x();
-		double dx=gps1.y()-gps0.y();
-		double alpha=Math.abs(Math.atan(dy/dx)*(180/Math.PI));
-
-		double azimuth;
-		if(dx<0&&dy<0)
-			azimuth=180+alpha;
-		else if(dx<0&&dy>0)
-			azimuth=180-alpha;
-		else if(dx>0&&dy<0)
-			azimuth=360-alpha;
-		else
-			azimuth=alpha;
-
-		double distance=distance3d(gps0, gps1);
-
-		double distance2d=distance2d(gps0, gps1);
-		double x=Math.acos(distance2d/distance);
-		double elevation=distance*Math.sin(x);
-		/*
-		 * or just 
-		 * double elevation=gps1.z()-gps0.z();
-		 */
-		
-		arr[0]=azimuth;
-		arr[1]=elevation;
-		arr[2]=distance;
-
-				return arr;
+		DOUBLE A
 	}
 
 	@Override

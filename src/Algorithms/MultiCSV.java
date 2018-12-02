@@ -14,45 +14,58 @@ import GIS.MyGISLayer;
 import GIS.MyGISProject;
 
 public class MultiCSV {
-	
-	public static File folder = new File("C:\\Users\\דניאל\\Desktop");
 
-	
+	public static File folder ;
+	 
+	public MultiCSV(String FolderSource){
+		// TODO Auto-generated constructor stub
+		folder = new  File(FolderSource);
+	}
+
+
 	public static MyGISProject FileToObject(final File folder, MyGISProject Project) throws ParseException {
-	
+
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.isDirectory()) {
-				 System.out.println("Reading files under the folder "+folder.getAbsolutePath());
+				System.out.println("Reading files under the folder "+folder.getAbsolutePath());
 				FileToObject(fileEntry, Project);
 			} else {
-				
+
 				System.out.println(fileEntry.getName());
 				if(fileEntry.getName().contains(".csv"))
 				{
-			        String line;
+					String line;
 
-			        try (BufferedReader br = new BufferedReader(new FileReader(fileEntry))) 
-			        {
-			        	MyGISLayer Layer = new MyGISLayer();
-			        	br.readLine();
-			        	br.readLine();
-			            while ((line = br.readLine()) != null) 
-			            {
-			            	Layer.add(new MyGISElement(line));
-			                			                
-			            }
-			            Project.add(Layer);
-			            br.close();
+					try (BufferedReader br = new BufferedReader(new FileReader(fileEntry))) 
+					{
+						MyGISLayer Layer = new MyGISLayer();
+						br.readLine();
+						br.readLine();
+						while ((line = br.readLine()) != null) 
+						{
+							Layer.add(new MyGISElement(line));
 
-			        } catch (IOException e) 
-			        {
-			            e.printStackTrace();
-			        }
+						}
+						Project.add(Layer);
+						br.close();
+
+					} catch (IOException e) 
+					{
+						e.printStackTrace();
+					}
 				}
 			}
 		}
 		return Project;
 	}
 
+	
+	public static void main(String[] args) throws ParseException {
+		Csv2kml c = new Csv2kml();
+		MultiCSV m = new MultiCSV("C:\\Users\\דניאל\\Desktop\\aaa");
+		MyGISProject p = new MyGISProject(); 
+		 p = FileToObject(folder, p);
+		 c.ObjectToKml(p);
+	}
 
 }

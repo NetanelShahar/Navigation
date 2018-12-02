@@ -79,10 +79,6 @@ public class MetaDataElement implements Meta_data{
 	{
 		return _MAC + "," + _SSID + ","  + _timeAsString + "," + _AccuracyMeters + "," + _type;
 	}
-	public static void main(String[] args) throws ParseException {
-		MetaDataElement m = new MetaDataElement();
-		m.setUTC("03/12/2017 08:53:08");
-		System.out.println(m.UTC);
-	}
+
 
 }

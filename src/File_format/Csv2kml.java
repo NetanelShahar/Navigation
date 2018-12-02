@@ -29,8 +29,6 @@ public class Csv2kml {
 
 	long UTC ; 
 
-
-
 	private long DateToMilis(String dateAndTime) throws ParseException
 	{
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
@@ -110,7 +108,8 @@ public class Csv2kml {
 		String str="<Placemark>\n"
 				+ "<name>" +arr[4]+"</name>\n"
 				+"<description><![CDATA[BSSID: <b>"+arr[3]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[5]+ "</b>]]" + "></description>\n"
-				+"<Point><coordinates>"+arr[1]+","+arr[0]+","+arr[2]+"</coordinates></Point>\n"
+				+"<styleUrl>#red</styleUrl>\n" +
+				"<Point><coordinates>"+arr[1]+","+arr[0]+","+arr[2]+"</coordinates></Point>\n"
 				+"<time>"+arr[5]+"</time></Placemark>\n";
 
 		return str;
@@ -153,6 +152,7 @@ public class Csv2kml {
 		}
 
 	}
+
 
 }
 
