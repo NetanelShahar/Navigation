@@ -17,6 +17,8 @@ in this package there are 2 classes that presents 2 kind of points
 the first one is for a regular 3D point and the other one is for gos point
 
 ### Gis package
+This package represents a data structure that contains GPS point information, within the project there are layers where each layer represents a path of points.
+Each point is reserved as an element which has information for each point such as: accuracy, name, etc.
 
 
 ### Sorces
