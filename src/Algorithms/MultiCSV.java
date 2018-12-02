@@ -62,7 +62,7 @@ public class MultiCSV {
 	
 	public static void main(String[] args) throws ParseException {
 		Csv2kml c = new Csv2kml();
-		MultiCSV m = new MultiCSV("C:\\Users\\דניאל\\Desktop\\aaa");
+		MultiCSV m = new MultiCSV("C:\\Users\\נתנאל בן יששכר\\Desktop\\ssaas");
 		MyGISProject p = new MyGISProject(); 
 		 p = FileToObject(folder, p);
 		 c.ObjectToKml(p);

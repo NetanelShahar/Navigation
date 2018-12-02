@@ -28,6 +28,11 @@ import GIS.MyGISProject;
 public class Csv2kml {
 
 	long UTC ; 
+	
+	private int urlIndex=0;
+	private String [] urlArray= {"red","yellow","green"};
+
+
 
 	private long DateToMilis(String dateAndTime) throws ParseException
 	{
@@ -50,8 +55,9 @@ public class Csv2kml {
 		String kmlString=
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
 						"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+"\n"
-						+"<Document><Folder>\n";
-		
+						+"<Document><Style id=\"red\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href></Icon></IconStyle></Style><Style id=\"yellow\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon></IconStyle></Style><Style id=\"green\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style><Folder>" + 
+						"\n";
+
 		line=br.readLine();
 		line=br.readLine();
 		while (line != null) 
@@ -59,6 +65,7 @@ public class Csv2kml {
 
 			kmlString=kmlString+kmlConvert(line.toString());
 			//			kmlString=kmlString+line.toString()+"\n";
+			urlIndex++;
 
 			line = br.readLine();
 		}
@@ -86,7 +93,7 @@ public class Csv2kml {
 
 
 
-	
+
 	public String kmlConvert(String s) throws ParseException
 	{
 		//String[] arr=line.toString().split(",");
@@ -94,7 +101,15 @@ public class Csv2kml {
 		long time = DateToMilis(arr[3]);
 		String str="<Placemark>\n"
 				+ "<name>" +arr[1]+"</name>\n"
-				+"<description><![CDATA[BSSID: <b>"+arr[0]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[3]+ "</b>]]" + "></description>\n"
+//				+"<Style id=\"mystyle\">\r\n" + 
+//				"  <IconStyle>\r\n" + 
+//				"    <scale>1.3</scale>\r\n" + 
+//				"    <Icon>\r\n" + 
+//				"      <href>https://image.flaticon.com/icons/svg/220/220334.svg</href>\r\n" + 
+//				"    </Icon>\r\n" + 
+//				"  </IconStyle>\r\n" + 
+//				"</Style>"
+				+"<description><![CDATA[BSSID: <b>"+arr[0]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[3]+ "</b>]]" + "></description><styleUrl>#"+urlArray[urlIndex%urlArray.length]+"</styleUrl>\n"
 				+"<Point><coordinates>"+arr[7]+","+arr[6]+","+arr[8]+"</coordinates></Point>\n"
 				+"<time>"+arr[3]+"</time></Placemark>\n";
 
@@ -107,9 +122,16 @@ public class Csv2kml {
 		long time = DateToMilis(arr[5]);
 		String str="<Placemark>\n"
 				+ "<name>" +arr[4]+"</name>\n"
-				+"<description><![CDATA[BSSID: <b>"+arr[3]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[5]+ "</b>]]" + "></description>\n"
-				+"<styleUrl>#red</styleUrl>\n" +
-				"<Point><coordinates>"+arr[1]+","+arr[0]+","+arr[2]+"</coordinates></Point>\n"
+//				+"<Style id=\"mystyle\">\r\n" + 
+//				"  <IconStyle>\r\n" + 
+//				"    <scale>1.3</scale>\r\n" + 
+//				"    <Icon>\r\n" + 
+//				"      <href>https://image.flaticon.com/icons/svg/220/220334.svg</href>\r\n" + 
+//				"    </Icon>\r\n" + 
+//				"  </IconStyle>\r\n" + 
+//				"</Style>"
+				+"<description><![CDATA[BSSID: <b>"+arr[3]+"</b><br/>Timestamp: <b>"+time+"</b><br/>Data: <b>"+ arr[5]+ "</b>]]" + "></description><styleUrl>#"+urlArray[urlIndex%urlArray.length]+"</styleUrl>\n"
+				+"<Point><coordinates>"+arr[1]+","+arr[0]+","+arr[2]+"</coordinates></Point>\n"
 				+"<time>"+arr[5]+"</time></Placemark>\n";
 
 		return str;
@@ -119,17 +141,24 @@ public class Csv2kml {
 		String KmlAsString = 
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
 						"<kml xmlns=\"http://www.opengis.net/kml/2.2\">"+"\n"
-						+"<Document><Folder>\n"; 
+						+"<Document><Style id=\"red\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/red-dot.png</href></Icon></IconStyle></Style><Style id=\"yellow\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/yellow-dot.png</href></Icon></IconStyle></Style><Style id=\"green\"><IconStyle><Icon><href>http://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon></IconStyle></Style><Folder>\r\n" + 
+						"\n"; 
 		String toString = Project.toString();
 		String[] ProjectAsString = toString.split("\n");
 		int i = 1 ;
 		while(!ProjectAsString[i].equals("}"))
 		{
-			if(ProjectAsString[i].equals("[") || ProjectAsString[i].equals("]")) i++;
+			if(ProjectAsString[i].equals("[") || ProjectAsString[i].equals("]")) 
+				{
+				i++;
+				
+			if(ProjectAsString[i].equals("[")) urlIndex++; 
+				}	
 			else
 			{
 				KmlAsString += PointToKml(ProjectAsString[i]);
 				i++;
+				
 			}
 
 		}
@@ -153,11 +182,4 @@ public class Csv2kml {
 
 	}
 
-
 }
-
-
-
-
-
-
