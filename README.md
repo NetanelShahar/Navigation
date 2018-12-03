@@ -43,6 +43,8 @@ Each point is reserved as an element which has information for each point such a
 - GIS_Element : Represents a GPS point of a map with information about the point.
 - GIS_Layer : Represents a collection of points / directions on the map. (Similar to one csv file)
 - GIS_Project : Represents a collection of layers / tracks on the map. (Similar to the folder of .csv files)
+ #### ClassDiagram
+ ![gisdiagram](https://user-images.githubusercontent.com/44754325/49364562-44fe5200-f6ed-11e8-9ab9-3a45eab38ee7.jpg)
 ### ExampleGameMap
 ![ariel1](https://user-images.githubusercontent.com/44754325/49361557-0b294d80-f6e5-11e8-90f0-a871b2571359.png)
 ### Sorces
