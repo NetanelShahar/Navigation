@@ -40,6 +40,7 @@ public class Csv2kml {
 
 	/**
 	 * /**
+	 * source : https://stackoverflow.com/questions/12081417/convert-utc-date-into-milliseconds
 	 * The function takes time as String and covert the String to long 
 	 * @param DateAndTime represent the time as String  
 	 * @return the time as long 
