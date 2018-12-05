@@ -296,6 +296,7 @@ public class Point3D implements Geom_element, Serializable
 		_x=Math.toDegrees(_x);
 		_y=Math.toDegrees(_y);
 		_z = _z ;
+		
 		return new Point3D(_x, _y, _z);
 	}
 }
