@@ -1,7 +1,7 @@
 package Game_objects;
 
-import Game.Pixel;
 import Geom.GpsPoint;
+import Maps.Pixel;
 
 public class Fruit {
 

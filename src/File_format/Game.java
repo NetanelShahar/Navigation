@@ -13,12 +13,12 @@ import Game_objects.Packman;
 import Geom.GpsPoint;
 import myMath.Monom;
 
-public class CsvGameResolver {
+public class Game {
 	
 	ArrayList<Packman> packmanList;
 	ArrayList<Fruit> fruitList;
 	
-	public CsvGameResolver(String csvFileAdress) throws IOException
+	public Game(String csvFileAdress) throws IOException
 	{
 		this.packmanList=new ArrayList<Packman>() ;
 		this.fruitList=new ArrayList<Fruit>() ;
