@@ -6,5 +6,10 @@
 	<classpathentry kind="src" path="Tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/נתנאל בן יששכר/Desktop/jar_kml/javaapiforkml-2.2.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/נתנאל בן יששכר/Desktop/jar_kml/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/נתנאל בן יששכר/Desktop/jar_kml/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/נתנאל בן יששכר/Desktop/jar_kml/jaxb-impl-2.1.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/נתנאל בן יששכר/Desktop/jar_kml/geronimo-activation_1.1_spec-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
