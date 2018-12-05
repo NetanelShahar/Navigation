@@ -2,92 +2,73 @@ package Game;
 
 import java.util.Arrays;
 
+import Coords.MyCoords;
 import Geom.Point3D;
 
 public class Map 
 {
+	private Point3D StartPoint ; 
+	private Point3D EndPoint ; 
+	private Pixel FrameSize ; 
+
+	public Map()
+	{
+		StartPoint =  new Point3D(35.20234,32.10584,0); 
+		EndPoint = new Point3D(35.21237,32.10193,0);
+		FrameSize = new Pixel(1433, 642);
+	}
 
 	public static void main(String[] args) 
 	{
-		Point3D P0 = new Point3D(35.20234,32.10584,0);
-		Point3D P1 = new Point3D(35.21237,32.10193,0);
-		P0.GPS2Meter();
-		P1.GPS2Meter();
-		double disX = P1.x() - P0.x() ;
-		double disY = P1.y() - P0.y();
-		double PixelsizeX  =1433 ; 
-		double PixelsizeY = 642 ;
-		double PixelAsMeterX = disX / PixelsizeX ; 
-		double PixelAsMeterY = disY / PixelsizeY ;
-		Point3D p = Calculate1(500, 500, PixelAsMeterX, PixelAsMeterY, P0);
-		System.out.println(p);
-
-		//		
-		//		double y1 = 32.10584;
-		//		double x1 = 35.20234;
-		//		double x2 = 35.21237;
-		//		double y2 = 32.10193;
-		//		
-		//		double[] xy1arr =  GPS2Meter(x1, y1);
-		//		double[] xy2arr =  GPS2Meter(x2, y2);
-		//		double disX = xy2arr[0] - xy1arr[0];
-		//		double disY = xy2arr[1] - xy1arr[1];
-		//		double PixelsizeX  =1433 ; 
-		//		double PixelsizeY = 642 ;
-		//		double PixelAsMeterX = disX / PixelsizeX ; 
-		//		double PixelAsMeterY = disY / PixelsizeY ;
-		//		double[] h = Calculate(500, 642, PixelAsMeterX, PixelAsMeterY, xy1arr);
-		//		System.out.println(Arrays.toString(h));
-		//		System.out.println(Arrays.toString(Meter2GPS(h[0], h[1])));
-
-
-
+		Map m = new Map();
+		//		Point3D p = m.Pixel2GPSPoint( 800, 500);
+		Point3D Point = new Point3D(35.20583951035946,32.10279481424197,0);
+		Pixel p = m.GPSPoint2Pixel(Point);
+				System.out.println(p);
 
 	}
-	
-	
-	public static Point3D Calculate1(double PixelX , double PixelY , double PixelAsMeterX ,double PixelAsMeterY , Point3D p)
+
+
+	public  Point3D Pixel2GPSPoint( double PixelXMove , double PixelYMove )
 	{
-		PixelX = PixelX * PixelAsMeterX ; 
-		PixelY = PixelY * PixelAsMeterY;
-		p = new Point3D(PixelX + p.x(),PixelY + p.y(),0);
-		p.Meter2GPS();
-		return p ;
-	}
-	public static double[] Calculate(double x , double y , double PixelAsMeterX ,double PixelAsMeterY , double[]  xy0arr)
-	{
-		double X = x *PixelAsMeterX ; 
-		double Y = y * PixelAsMeterY;
-		double[] h = new double[2];
-		h[0] = xy0arr[0] + X; 
-		h[1] = xy0arr[1] + Y;
-
-		return h ;
+		Pixel  p  =  Pixel2Meter(FrameSize.get_PixelX(), FrameSize.get_PixelY());
+		PixelXMove = PixelXMove * p.get_PixelX(); 
+		PixelYMove = PixelYMove * p.get_PixelY();
+		StartPoint = new Point3D(PixelXMove + StartPoint.x(),PixelYMove + StartPoint.y(),0);
+		StartPoint.Meter2GPS();
+		return StartPoint ;
 	}
 
-	public static double[] Meter2GPS(double _x , double _y)
+	private Pixel Pixel2Meter(double PixelXSize , double PixelYSize )
 	{
-		_x=_x/6371000;
-		_y=(_y/6371000)/0.847091174;
-		_x=Math.asin(_x);
-		_y=Math.asin(_y);
-		_x=Math.toDegrees(_x);
-		_y=Math.toDegrees(_y);
-		double[] h = new double[2];
-		h[0] = _x ; 
-		h[1] = _y;
-		return h ;
+
+		StartPoint.GPS2Meter();
+		EndPoint.GPS2Meter();
+		double disX = EndPoint.x() - StartPoint.x() ;
+		double disY = EndPoint.y() - StartPoint.y();
+		double PixelAsMeterX = disX / PixelXSize ; 
+		double PixelAsMeterY = disY / PixelYSize ;
+		Pixel _Pixel = new Pixel(PixelAsMeterX, PixelAsMeterY);
+		return _Pixel ;
 	}
 
-	public static double[] GPS2Meter(double _x , double _y)
+	public  Pixel GPSPoint2Pixel(Point3D Point)
 	{
-		_x=Math.toRadians(_x);// X From GPS To Rad
-		_y=Math.toRadians(_y);// Y From GPS To Rad
-		_x=Math.sin(_x)*6371000;
-		_y=Math.sin(_y)*6371000*0.847091174;
-		double[] h = new double[2];
-		h[0] = _x ; 
-		h[1] = _y;
-		return h ;
+		Pixel  Worth  =  Pixel2Meter(FrameSize.get_PixelX(), FrameSize.get_PixelY());
+		StartPoint.GPS2Meter();
+		EndPoint.GPS2Meter();
+		double disX = Point.x() - StartPoint.x() ;
+		double disY = Point.y() - StartPoint.y();
+		double dx = disX / Worth.get_PixelX() ; 
+		double dy = disY / Worth.get_PixelY() ; 
+		return new Pixel(dx, dy) ; 
 	}
+
+	private boolean isVaildPixel(Pixel p)
+	{
+		Pixel PSubtract = FrameSize.Subtract(p) ;
+		return PSubtract.get_PixelX() > 0 && PSubtract.get_PixelY() > 0;
+	}
+
+
 }
