@@ -9,32 +9,21 @@ import Geom.Point3D;
 
 public class Map 
 {
-	
+
 	private Point3D StartPoint ; 
 	private Point3D EndPoint ; 
 	private Pixel FrameSize ; 
-	
-	
+
+
 	public Map()
 	{
-		
 		StartPoint =  new Point3D(35.20234,32.10584,0); 
 		EndPoint = new Point3D(35.21237,32.10193,0);
 		FrameSize = new Pixel(1433, 642);
 		StartPoint.GPS2Meter();
 		EndPoint.GPS2Meter();
-		
 	}
 
-	public static void main(String[] args) 
-	{
-		Map m = new Map();
-		//		Point3D p = m.Pixel2GPSPoint( 800, 500);
-		Point3D Point = new Point3D(35.21237,32.10193,0);
-		Pixel p = m.GPSPoint2Pixel(Point);
-				System.out.println(p);
-
-	}
 
 
 	public  Point3D Pixel2GPSPoint( double PixelXMove , double PixelYMove )
@@ -50,7 +39,7 @@ public class Map
 	private Pixel Pixel2Meter(double PixelXSize , double PixelYSize )
 	{
 
-		
+
 		double disX = EndPoint.x() - StartPoint.x() ;
 		double disY = EndPoint.y() - StartPoint.y();
 		double PixelAsMeterX = disX / PixelXSize ; 
@@ -70,7 +59,7 @@ public class Map
 		Point.Meter2GPS();
 		Pixel Pix = new Pixel(dx, dy);
 		if(isVaildPixel(Pix)) 
-		return Pix ; 
+			return Pix ; 
 		else 
 		{
 			throw new RuntimeException("The Pixel is out of bounds");
