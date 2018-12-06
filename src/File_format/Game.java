@@ -14,10 +14,10 @@ import Geom.GpsPoint;
 
 
 public class Game {
-	
-	ArrayList<Packman> packmanList;
-	ArrayList<Fruit> fruitList;
-	
+
+	public ArrayList<Packman> packmanList;
+	public ArrayList<Fruit> fruitList;
+
 	public Game(String csvFileAdress) throws IOException
 	{
 		this.packmanList=new ArrayList<Packman>() ;
@@ -78,11 +78,11 @@ public class Game {
 		int id=Integer.parseInt(arr[1]);
 		GpsPoint gpsLocation=new GpsPoint(Integer.parseInt(arr[2]),Integer.parseInt( arr[3]),Integer.parseInt( arr[4]));
 		int value=Integer.parseInt(arr[5]);
-		
+
 		Fruit temp=new Fruit(id,gpsLocation,value);
 
 		this.fruitList.add(temp);
-		
+
 	}
 
 
