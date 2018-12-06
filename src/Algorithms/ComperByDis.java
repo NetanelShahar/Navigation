@@ -4,10 +4,10 @@ import java.util.Comparator;
 
 import Game_objects.Packman;
 
-public class ComperByDis implements Comparator<Node>{
+public class ComperByDis implements Comparator<PackManNode>{
 	
 	@Override
-	public int compare(Node n1, Node n2)
+	public int compare(PackManNode n1, PackManNode n2)
 	{
 		if(n1.get_dis() > n2.get_dis())
 			return 1;

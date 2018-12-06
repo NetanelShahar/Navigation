@@ -2,13 +2,13 @@ package Algorithms;
 
 import Game_objects.Packman;
 
-public class Node 
+public class PackManNode 
 {
 
 	private double _dis ; 
 	private Packman _pacman;
 	
-	public Node(double dis , Packman pacman) 
+	public PackManNode(double dis , Packman pacman) 
 	{
 		
 		set_dis(dis) ;
