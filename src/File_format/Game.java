@@ -37,6 +37,7 @@ public class Game {
 			String stringLine=line.toString();
 
 			line = br.readLine();
+			line = br.readLine();
 			pacmanORfruit(stringLine);
 		}
 		try {
