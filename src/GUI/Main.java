@@ -9,7 +9,7 @@ public class Main
 	{
 		MainWindow window = new MainWindow();
 		window.setVisible(true);
-		window.setSize(window.myImage.getWidth()+12,window.myImage.getHeight()+110);
+		window.setSize(window.myImage.getWidth(),window.myImage.getHeight());
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}

@@ -82,6 +82,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 		myImage=resizedImage;
 		this.repaint();
+		
 	}
 
 	int x = -1;
@@ -98,6 +99,15 @@ public class MainWindow extends JFrame implements MouseListener
 			y = y - (r / 2);
 			g.fillOval(x, y, r, r);
 		}
+	}
+	public double getXsize()
+	{
+		return myImage.getWidth();
+	}
+	
+	public double getYsize()
+	{
+		return myImage.getHeight();
 	}
 
 	@Override
