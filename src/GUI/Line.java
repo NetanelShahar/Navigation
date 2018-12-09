@@ -11,6 +11,11 @@ public class Line {
 		this.start=new Pixel(start_x, start_y);
 		this.end=new Pixel(end_x, end_y);
 	}
+	public Line(Pixel start , Pixel end)
+	{
+		this.start = start;
+		this.end = end;
+	}
 
 	public Pixel getStart() {
 		return start;

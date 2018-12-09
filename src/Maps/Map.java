@@ -92,7 +92,12 @@ public class Map
 		FrameSize.set_PixelX(p.get_PixelX());
 		FrameSize.set_PixelY(p.get_PixelY());
 		for (int i = 0; i < arr.size(); i++) {
-			arr.set(i, GPSPoint2Pixel(change.get(i)));
+			Pixel temp = GPSPoint2Pixel(change.get(i));
+			arr.get(i).set_PixelX(temp.get_PixelX());
+			arr.get(i).set_PixelY(temp.get_PixelY());
+			
+			
+			
 		}
 		
 	}
