@@ -74,8 +74,9 @@ public class Map
 			return Pix ; 
 		else 
 		{
-			throw new RuntimeException("The Pixel is out of bounds");
-		}
+//			throw new RuntimeException("The Pixel is out of bounds");
+		} 
+		return Pix ; 
 	}
 
 	private boolean isVaildPixel(Pixel p)

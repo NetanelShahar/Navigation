@@ -37,7 +37,7 @@ public class Game {
 			String stringLine=line.toString();
 
 			line = br.readLine();
-			line = br.readLine();
+			
 			pacmanORfruit(stringLine);
 		}
 		try {
@@ -64,7 +64,7 @@ public class Game {
 	{
 
 		int id=Integer.parseInt(arr[1]);
-		GpsPoint gpsLocation=new GpsPoint(Integer.parseInt(arr[2]),Integer.parseInt( arr[3]),Integer.parseInt( arr[4]));
+		GpsPoint gpsLocation=new GpsPoint(Double.parseDouble(arr[2]),Double.parseDouble( arr[3]),Double.parseDouble( arr[4]));
 		int speed=Integer.parseInt(arr[5]);
 		int radius=Integer.parseInt(arr[6]);
 
@@ -77,7 +77,7 @@ public class Game {
 	private void buildTHEfruit(String[] arr)
 	{
 		int id=Integer.parseInt(arr[1]);
-		GpsPoint gpsLocation=new GpsPoint(Integer.parseInt(arr[2]),Integer.parseInt( arr[3]),Integer.parseInt( arr[4]));
+		GpsPoint gpsLocation=new GpsPoint(Double.parseDouble(arr[2]),Double.parseDouble( arr[3]),Double.parseDouble( arr[4]));
 		int value=Integer.parseInt(arr[5]);
 
 		Fruit temp=new Fruit(id,gpsLocation,value);

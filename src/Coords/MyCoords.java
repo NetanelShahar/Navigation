@@ -50,7 +50,7 @@ public class MyCoords implements coords_converter  {
 	public double distance2d(GpsPoint gps0, GpsPoint gps1) 
 	{
 		double lon_norm=Math.cos(gps0.getLat()*(Math.PI/180));
-		System.out.println(lon_norm);
+		
 
 		double diff_x=gps1.getLat()-gps0.getLat();
 		double diff_y=gps1.getLon()-gps0.getLon();

@@ -1,13 +1,24 @@
 package Maps;
 
+import Geom.GpsPoint;
+import Geom.Point3D;
+
 public class Pixel {
 	
 	private double _PixelX;
 	private double _PixelY;
+	Map map ;
 	
 	public  Pixel(double PixelX , double PixelY){
 		set_PixelX(PixelX);
 		set_PixelY(PixelY);
+	}
+
+	public Pixel(Point3D xYZlocation) {
+		map = new Map();
+		Pixel temp = map.GPSPoint2Pixel(xYZlocation);
+		set_PixelX(temp._PixelX);
+		set_PixelY(temp._PixelY);
 	}
 
 	public double get_PixelX() {

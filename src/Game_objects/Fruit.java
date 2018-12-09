@@ -11,14 +11,17 @@ public class Fruit {
 	private GpsPoint gpsLocation;
 	private Point3D XYZlocation;
 	private Pixel pixelLocation;
+	public Point3D p ; 
 	
 	public Fruit(int id,GpsPoint gpsLocation,int value)
 	{
 		this.id=id;
 		this.gpsLocation=gpsLocation;
 		this.value=value;
+		p = new Point3D(gpsLocation.getLon(),gpsLocation.getLat(),gpsLocation.getAlt());
+		
 		this.XYZlocation=new Point3D(gpsLocation.getLat(),gpsLocation.getLon(),gpsLocation.getAlt()).GPS2Meter();
-
+		this.pixelLocation = new Pixel(p);
 	}
 	public Fruit(int id,Pixel pixelLocation,int value)
 	{

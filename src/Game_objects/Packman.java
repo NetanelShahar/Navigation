@@ -14,15 +14,20 @@ public class Packman {
 	private Pixel pixelLocation;
 	private int speed;
 	private int radius;
+	public Path path;
+	public double time ; 
+	public Point3D p ;
 
 	public Packman(int id,GpsPoint gpsLocation,int speed,int radius)
 	{
-
+		path = new Path();
 		this.id=id;
 		this.gpsLocation=gpsLocation;
 		this.speed=speed;
 		this.radius=radius;
+		p = new Point3D(gpsLocation.getLon(),gpsLocation.getLat(),gpsLocation.getAlt());
 		this.XYZlocation=new Point3D(gpsLocation.getLat(),gpsLocation.getLon(),gpsLocation.getAlt()).GPS2Meter();
+		this.pixelLocation = new Pixel(p);
 
 	}
 	public Packman(int id,Pixel pixelLocation,int speed,int radius)

@@ -1,29 +1,31 @@
 package Algorithms;
 
+import Game_objects.Fruit;
 import Game_objects.Packman;
 
 public class PackManNode 
 {
 
-	private double _dis ; 
-	private Packman _pacman;
-	private double _time ; 
+
+	public Packman _pacman;
+	public double time ;
+	public Fruit fruit;
+	public int fruitindex;
 	
-	public PackManNode(double dis , Packman pacman ) 
+	public PackManNode(double time , Packman pacman , Fruit fruit ) 
 	{
-		setTime(0);
-		set_dis(dis) ;
+		this.fruit = fruit; 
+		this.time = time ; 
 		set_pacman(pacman);
 	}
-	
-	public double get_dis() 
+	public void init(Fruit f)
 	{
-		return _dis;
+		time = Double.MAX_VALUE;
+		fruitindex = -1 ;
+		fruit = f;
+		
 	}
-	private void set_dis(double _dis)
-	{
-		this._dis = _dis;
-	}
+
 	public Packman get_pacman() 
 	{
 		return _pacman;
@@ -33,11 +35,4 @@ public class PackManNode
 		this._pacman = _pacman;
 	}
 
-	public double getTime() {
-		return _time;
-	}
-
-	public void setTime(double time) {
-		this._time = time;
-	}
 }

@@ -32,5 +32,11 @@ public class Line {
 	public void setEnd(Pixel end) {
 		this.end = end;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return start.toString() + " --> " + end.toString();
+	}
 
 }
