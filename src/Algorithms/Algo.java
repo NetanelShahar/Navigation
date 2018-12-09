@@ -15,21 +15,29 @@ public class Algo {
 	MyCoords Convert = new MyCoords();
 	ComperByDis cbd = new ComperByDis();
 	Map map=new Map();
-	
+
 
 	public ArrayList<Path> Short(ArrayList<Packman> Packmans , ArrayList<Fruit> Fruits)
 	{
+		ArrayList<PackmanTOfruit> pacmanTOfruit=new ArrayList<PackmanTOfruit>();
 		while(Fruits.size()!=0)
 		{
 			for(int i=0;i<Packmans.size();++i)
 			{
-				for (int j=0;j<Fruits.size();++i)
+				double dist_closestFruit=Convert.distance2d(Packmans.get(i).getGpsLocation(),Fruits.get(0).getGpsLocation())/Packmans.get(i).getSpeed();
+				Fruit closestFruit=Fruits.get(0);
+				for (int j=1;j<Fruits.size();++i)
 				{
-					Convert.distance2d(map.Pixel2GPSPoint(Packmans.get(j).ge)
-					
-					
+					double currentFruit=Convert.distance2d(Packmans.get(i).getGpsLocation(),Fruits.get(j).getGpsLocation())/Packmans.get(i).getSpeed();
+					if(currentFruit<dist_closestFruit)
+					{
+						dist_closestFruit=currentFruit;
+						closestFruit=Fruits.get(j);
+					}
 					
 				}
+				pacmanTOfruit.add(Packmans.get(i),closestFruit);
+				
 			}
 
 
@@ -38,8 +46,9 @@ public class Algo {
 
 		return null;
 	}
-	
-	public Fruit shortest()
+
+
+
 
 
 

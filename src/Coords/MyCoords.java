@@ -1,4 +1,5 @@
 package Coords;
+import Geom.GpsPoint;
 import Geom.Point3D;
 
 public class MyCoords implements coords_converter  {
@@ -37,6 +38,22 @@ public class MyCoords implements coords_converter  {
 
 		double diff_x=gps1.x()-gps0.x();
 		double diff_y=gps1.y()-gps0.y();
+
+
+		double diff_rad_x=diff_x*(Math.PI/180);
+		double diff_rad_y=diff_y*(Math.PI/180);
+
+		double x_meter=Math.sin(diff_rad_x)*earth_r;
+		double y_meter=Math.sin(diff_rad_y)*earth_r*lon_norm;
+		return Math.sqrt(Math.pow(x_meter, 2)+Math.pow(y_meter, 2));
+	}
+	public double distance2d(GpsPoint gps0, GpsPoint gps1) 
+	{
+		double lon_norm=Math.cos(gps0.getLat()*(Math.PI/180));
+		System.out.println(lon_norm);
+
+		double diff_x=gps1.getLat()-gps0.getLat();
+		double diff_y=gps1.getLon()-gps0.getLon();
 
 
 		double diff_rad_x=diff_x*(Math.PI/180);
