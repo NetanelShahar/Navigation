@@ -1,12 +1,9 @@
 package GUI;
 
-import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -18,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import Maps.Map;
@@ -29,8 +25,9 @@ public class MainWindow extends JFrame implements MouseListener
 {
 	public Map GameMap ; 
 	ArrayList<Pixel> Circles ; 
+	ArrayList<Line> Lines ;
 	public BufferedImage myLATERimage;
-	public LinesComponent lines = new LinesComponent(GameMap.myImage);
+	//public LinesComponent lines = new LinesComponent(GameMap.myImage);
 
 	public MainWindow() 
 	{
@@ -54,18 +51,10 @@ public class MainWindow extends JFrame implements MouseListener
 
 	private void initGUI() 
 	{
-//		MenuBar menuBar = new MenuBar();
-//		Menu menu = new Menu("Menu"); 
-//		MenuItem item1 = new MenuItem("menu item 1");
-//		MenuItem item2 = new MenuItem("menu item 2");
-//
-//		menuBar.add(menu);
-//		menu.add(item1);
-//		menu.add(item2);
-//		this.setMenuBar(menuBar);
-		GameMap = new Map();
-	    Circles = new ArrayList<Pixel>();
 
+		GameMap = new Map();
+		Circles = new ArrayList<Pixel>();
+		Lines=new ArrayList<Line>();
 		try {
 			GameMap.myImage = ImageIO.read(new File("Ariel1.PNG"));
 		} catch (IOException e) {
@@ -77,8 +66,6 @@ public class MainWindow extends JFrame implements MouseListener
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 
 	}
 	private void scaledImage(Image img,int w, int h)
@@ -92,7 +79,7 @@ public class MainWindow extends JFrame implements MouseListener
 		GameMap.myImage=resizedImage;
 		GameMap.ChangeFrameSize(new Pixel(GameMap.myImage.getWidth(), GameMap.myImage.getHeight()), Circles);
 		this.repaint();
-		
+
 	}
 
 	int x = -1;
@@ -101,23 +88,24 @@ public class MainWindow extends JFrame implements MouseListener
 	public void paint(Graphics g)
 	{
 		g.drawImage(GameMap.myImage, 0, 0, this);
-	
-			if(x!=-1 && y!=-1)
-			{
-				
-				for (int i = 0; i < Circles.size(); i++) {
-					g.fillOval((int)Circles.get(i).get_PixelX(), (int)Circles.get(i).get_PixelY(), 10	, 10);
-				}
-			
+		if(x!=-1 && y!=-1)
+		{
+
+			for (int i = 0; i < Circles.size(); i++) {
+				g.fillOval((int)Circles.get(i).get_PixelX(), (int)Circles.get(i).get_PixelY(), 10	, 10);
+				if(i!=Circles.size()-1)
+					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
+
 			}
-	
-		
+
+		}
+
 	}
 	public double getXsize()
 	{
 		return GameMap.myImage.getWidth();
 	}
-	
+
 	public double getYsize()
 	{
 		return GameMap.myImage.getHeight();
@@ -130,10 +118,14 @@ public class MainWindow extends JFrame implements MouseListener
 		x = arg.getX();
 		y = arg.getY();
 		Circles.add(new Pixel(x, y));
+		if(Circles.size()>1)
+		{
+			Lines.add(new Line((int)Circles.get(Circles.size()-2).get_PixelX(),(int)Circles.get(Circles.size()-2).get_PixelY(),x, y));
+		}
+
 		repaint();
-///////////should be deletd after figure the main purpose
-		Color randomColor = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
-		lines.addLine((int)Circles.get(i).get_PixelX(),(int)Circles.get(i).get_PixelY(),(int)Circles.get(i+1).get_PixelX(),(int)Circles.get(i+1).get_PixelY(),randomColor);
+	
+
 	}
 
 	@Override
