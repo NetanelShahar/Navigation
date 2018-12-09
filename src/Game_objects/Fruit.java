@@ -2,6 +2,7 @@ package Game_objects;
 
 import Geom.GpsPoint;
 import Geom.Point3D;
+import Maps.Map;
 import Maps.Pixel;
 
 public class Fruit {
@@ -19,7 +20,15 @@ public class Fruit {
 		this.XYZlocation=new Point3D(gpsLocation.getLat(),gpsLocation.getLon(),gpsLocation.getAlt()).GPS2Meter();
 
 	}
-	
+	public Fruit(int id,Pixel pixelLocation,int value)
+	{
+		Map map=new Map();
+		this.id=id;
+		this.pixelLocation=pixelLocation;
+		this.value=value;
+		this.gpsLocation=new GpsPoint(map.Pixel2GPSPoint(pixelLocation.get_PixelX(),pixelLocation.get_PixelY()).x(),map.Pixel2GPSPoint(pixelLocation.get_PixelX(),pixelLocation.get_PixelY()).y(),0);
+
+	}
 	public Point3D getXYZlocation() {
 		return XYZlocation;
 	}
