@@ -3,6 +3,7 @@ package Maps;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.imageio.ImageIO;
@@ -81,6 +82,19 @@ public class Map
 	{
 		Pixel PSubtract = FrameSize.Subtract(p) ;
 		return PSubtract.get_PixelX() > 0 && PSubtract.get_PixelY() > 0;
+	}
+	public void ChangeFrameSize(Pixel p , ArrayList<Pixel> arr )
+	{
+		ArrayList<Point3D> change = new ArrayList<Point3D>();
+		for (int i = 0; i < arr.size(); i++) {
+			change.add(Pixel2GPSPoint(arr.get(i).get_PixelX(), arr.get(i).get_PixelY()));
+		}
+		FrameSize.set_PixelX(p.get_PixelX());
+		FrameSize.set_PixelY(p.get_PixelY());
+		for (int i = 0; i < arr.size(); i++) {
+			arr.set(i, GPSPoint2Pixel(change.get(i)));
+		}
+		
 	}
 
 

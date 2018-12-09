@@ -88,7 +88,7 @@ public class MainWindow extends JFrame implements MouseListener
 		g2.dispose();
 
 		GameMap.myImage=resizedImage;
-		
+		GameMap.ChangeFrameSize(new Pixel(GameMap.myImage.getWidth(), GameMap.myImage.getHeight()), Circles);
 		this.repaint();
 		
 	}
