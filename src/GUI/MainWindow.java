@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -29,6 +30,7 @@ public class MainWindow extends JFrame implements MouseListener
 	public Map GameMap ; 
 	ArrayList<Pixel> Circles ; 
 	public BufferedImage myLATERimage;
+	public LinesComponent lines = new LinesComponent(GameMap.myImage);
 
 	public MainWindow() 
 	{
@@ -129,6 +131,9 @@ public class MainWindow extends JFrame implements MouseListener
 		y = arg.getY();
 		Circles.add(new Pixel(x, y));
 		repaint();
+///////////should be deletd after figure the main purpose
+		Color randomColor = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
+		lines.addLine((int)Circles.get(i).get_PixelX(),(int)Circles.get(i).get_PixelY(),(int)Circles.get(i+1).get_PixelX(),(int)Circles.get(i+1).get_PixelY(),randomColor);
 	}
 
 	@Override
