@@ -7,10 +7,11 @@ public class PackManNode
 
 	private double _dis ; 
 	private Packman _pacman;
+	private double _time ; 
 	
-	public PackManNode(double dis , Packman pacman) 
+	public PackManNode(double dis , Packman pacman ) 
 	{
-		
+		setTime(0);
 		set_dis(dis) ;
 		set_pacman(pacman);
 	}
@@ -30,5 +31,13 @@ public class PackManNode
 	private void set_pacman(Packman _pacman) 
 	{
 		this._pacman = _pacman;
+	}
+
+	public double getTime() {
+		return _time;
+	}
+
+	public void setTime(double time) {
+		this._time = time;
 	}
 }

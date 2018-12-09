@@ -1,7 +1,11 @@
 package Maps;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
+import javax.imageio.ImageIO;
 import javax.xml.ws.Endpoint;
 
 import Coords.MyCoords;
@@ -13,6 +17,7 @@ public class Map
 	private Point3D StartPoint ; 
 	private Point3D EndPoint ; 
 	private Pixel FrameSize ; 
+	public BufferedImage myImage;
 
 
 	public Map()
@@ -22,6 +27,12 @@ public class Map
 		FrameSize = new Pixel(1433, 642);
 		StartPoint.GPS2Meter();
 		EndPoint.GPS2Meter();
+		try {
+			myImage = ImageIO.read(new File("Ariel1.PNG"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 

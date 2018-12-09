@@ -14,15 +14,20 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import Maps.Map;
+import Maps.Pixel;
+
 
 public class MainWindow extends JFrame implements MouseListener
 {
-	public BufferedImage myImage;
+	public Map GameMap ; 
+	ArrayList<Pixel> Circles ; 
 	public BufferedImage myLATERimage;
 
 	public MainWindow() 
@@ -47,18 +52,20 @@ public class MainWindow extends JFrame implements MouseListener
 
 	private void initGUI() 
 	{
-		MenuBar menuBar = new MenuBar();
-		Menu menu = new Menu("Menu"); 
-		MenuItem item1 = new MenuItem("menu item 1");
-		MenuItem item2 = new MenuItem("menu item 2");
-
-		menuBar.add(menu);
-		menu.add(item1);
-		menu.add(item2);
-		this.setMenuBar(menuBar);
+//		MenuBar menuBar = new MenuBar();
+//		Menu menu = new Menu("Menu"); 
+//		MenuItem item1 = new MenuItem("menu item 1");
+//		MenuItem item2 = new MenuItem("menu item 2");
+//
+//		menuBar.add(menu);
+//		menu.add(item1);
+//		menu.add(item2);
+//		this.setMenuBar(menuBar);
+		GameMap = new Map();
+	    Circles = new ArrayList<Pixel>();
 
 		try {
-			myImage = ImageIO.read(new File("Ariel1.PNG"));
+			GameMap.myImage = ImageIO.read(new File("Ariel1.PNG"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +87,8 @@ public class MainWindow extends JFrame implements MouseListener
 		g2.drawImage(img, 0, 0, w, h, null);
 		g2.dispose();
 
-		myImage=resizedImage;
+		GameMap.myImage=resizedImage;
+		
 		this.repaint();
 		
 	}
@@ -90,24 +98,27 @@ public class MainWindow extends JFrame implements MouseListener
 
 	public void paint(Graphics g)
 	{
-		g.drawImage(myImage, 0, 100, this);
-
-		if(x!=-1 && y!=-1)
-		{
-			int r = 10;
-			x = x - (r / 2);
-			y = y - (r / 2);
-			g.fillOval(x, y, r, r);
-		}
+		g.drawImage(GameMap.myImage, 0, 0, this);
+	
+			if(x!=-1 && y!=-1)
+			{
+				
+				for (int i = 0; i < Circles.size(); i++) {
+					g.fillOval((int)Circles.get(i).get_PixelX(), (int)Circles.get(i).get_PixelY(), 10	, 10);
+				}
+			
+			}
+	
+		
 	}
 	public double getXsize()
 	{
-		return myImage.getWidth();
+		return GameMap.myImage.getWidth();
 	}
 	
 	public double getYsize()
 	{
-		return myImage.getHeight();
+		return GameMap.myImage.getHeight();
 	}
 
 	@Override
@@ -116,6 +127,7 @@ public class MainWindow extends JFrame implements MouseListener
 		System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 		x = arg.getX();
 		y = arg.getY();
+		Circles.add(new Pixel(x, y));
 		repaint();
 	}
 

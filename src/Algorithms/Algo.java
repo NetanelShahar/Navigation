@@ -18,7 +18,7 @@ public class Algo {
 	public ArrayList<Path> Short(ArrayList<Packman>  Pack, ArrayList<Fruit> Fruits)
 	{
 		ArrayList<Fruit> F = new ArrayList<>(Fruits);
-		ArrayList<Node> Nodes = new ArrayList<Node>();
+		ArrayList<Node> Nodes = new ArrayList<PackManNode>();
 		Nodes = init(Nodes, Pack.get(0), Fruits);
 		while(!F.isEmpty())
 		{
