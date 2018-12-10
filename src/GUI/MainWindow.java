@@ -32,12 +32,8 @@ public class MainWindow extends JFrame implements MouseListener
 
 	public MainWindow() 
 	{
-
 		initGUI();		
 		this.addMouseListener(this); 
-
-
-
 	}
 
 	private void initGUI() 

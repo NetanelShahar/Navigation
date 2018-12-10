@@ -7,20 +7,25 @@ public class Pixel {
 	
 	private double _PixelX;
 	private double _PixelY;
-	Map map ;
+	
 	
 	public  Pixel(double PixelX , double PixelY){
 		set_PixelX(PixelX);
 		set_PixelY(PixelY);
 	}
 
-	public Pixel(Point3D xYZlocation) {
-		map = new Map();
-		Pixel temp = map.GPSPoint2Pixel(xYZlocation);
+	public Pixel(Point3D GPS ,Map map) {
+		
+		Pixel temp = map.GPSPoint2Pixel(GPS);
 		set_PixelX(temp._PixelX);
 		set_PixelY(temp._PixelY);
+		
 	}
-
+	public Pixel(Pixel other)
+	{
+		set_PixelX(other.get_PixelX());
+		set_PixelY(other.get_PixelY());
+	}
 	public double get_PixelX() {
 		return _PixelX;
 	}

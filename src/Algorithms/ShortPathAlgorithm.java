@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Coords.MyCoords;
-import File_format.Game;
+import File_format.CSV2Game;
 import GUI.Line;
 import Game_objects.Fruit;
 import Game_objects.Packman;
 import Game_objects.Path;
 import Maps.Map;
 
-public class algo1 {
+public class ShortPathAlgorithm {
 	static MyCoords Convert = new MyCoords();
 	
 	public static ArrayList<Path> Short(ArrayList<Packman> packs , ArrayList<Fruit> Fruits, Map map)
@@ -25,9 +25,9 @@ public class algo1 {
 				for (int j = 0; j < Fruits.size(); j++) 
 				{
 					time = Time(packs.get(i), Fruits.get(j), map);
-					if(time+packs.get(i).time < Max.time)
+					if(time+packs.get(i)._time < Max.time)
 					{
-						Max.time = time+packs.get(i).time;
+						Max.time = time+packs.get(i)._time;
 						Max._pacman = packs.get(i);
 						Max.fruit = Fruits.get(j);
 						Max.fruitindex = j ; 
@@ -36,7 +36,7 @@ public class algo1 {
 				}
 			}
 			Max._pacman.path.Lines.add(new Line(Max._pacman.getPixelLocation(),Max.fruit.getPixelLocation()));
-			Max._pacman.time += Time(Max._pacman, Max.fruit, map);
+			Max._pacman._time += Time(Max._pacman, Max.fruit, map);
 			Max._pacman.setPixelLocation(Fruits.get(Max.fruitindex).getPixelLocation());
 			Fruits.remove(Max.fruitindex);
 			if(!Fruits.isEmpty())
@@ -62,8 +62,9 @@ public class algo1 {
 	
 	public static void main(String[] args) throws IOException 
 	{
-		Game g = new Game("C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\Ex2-4\\Ex3\\data\\game_1543684662657.csv");
 		Map m = new Map();
+		CSV2Game g = new CSV2Game("C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\Ex2-4\\Ex3\\data\\game_1543684662657.csv",m);
+		
 		ArrayList<Path> path = Short(g.packmanList, g.fruitList, m);
 		
 		for (int i = 0; i < path.size(); i++) {

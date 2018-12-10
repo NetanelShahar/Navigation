@@ -8,93 +8,93 @@ import Coords.MyCoords;
 
 public class Packman {
 
-	private int id;
-	private GpsPoint gpsLocation;
-	private Point3D XYZlocation;
-	private Pixel pixelLocation;
-	private int speed;
-	private int radius;
+	private int _id;
+	private GpsPoint _GPS;
+	private Point3D _GPSConvert;
+	private Pixel _PixelLocation;
+	private int _speed;
+	private int _radius;
 	public Path path;
-	public double time ; 
-	public Point3D p ;
+	public double _time ; 
+	
 
-	public Packman(int id,GpsPoint gpsLocation,int speed,int radius)
+	public Packman(int id,GpsPoint GpsLocation,int speed,int radius ,Map map)
 	{
 		path = new Path();
-		this.id=id;
-		this.gpsLocation=gpsLocation;
-		this.speed=speed;
-		this.radius=radius;
-		p = new Point3D(gpsLocation.getLon(),gpsLocation.getLat(),gpsLocation.getAlt());
-		this.XYZlocation=new Point3D(gpsLocation.getLat(),gpsLocation.getLon(),gpsLocation.getAlt()).GPS2Meter();
-		this.pixelLocation = new Pixel(p);
+		this._id=id;
+		this._GPS=GpsLocation;
+		this._speed=speed;
+		this._radius=radius;
+		_GPSConvert = new Point3D(GpsLocation.getLon(),GpsLocation.getLat(),GpsLocation.getAlt());
+		this._PixelLocation = new Pixel(_GPSConvert, map);
 
 	}
-	public Packman(int id,Pixel pixelLocation,int speed,int radius)
+	public Packman(int id,Pixel PixelLocation,int speed,int radius,Map map)
 	{
-		Map map=new Map();
-		this.id=id;
-		this.pixelLocation=pixelLocation;
-		this.gpsLocation=new GpsPoint(map.Pixel2GPSPoint(pixelLocation.get_PixelX(),pixelLocation.get_PixelY()).x(),map.Pixel2GPSPoint(pixelLocation.get_PixelX(),pixelLocation.get_PixelY()).y(),0);
-		this.speed=speed;
-		this.radius=radius;
+		
+		this._id=id;
+		this._PixelLocation=PixelLocation;
+		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));
+		this._GPS = new GpsPoint(_GPSConvert);
+		this._speed=speed;
+		this._radius=radius;
 	}
 	
 		public int getId() {
-			return id;
+			return _id;
 		}
 
 
 		public void setId(int id) {
-			this.id = id;
+			this._id = id;
 		}
 
 
 		public GpsPoint getGpsLocation() {
-			return gpsLocation;
+			return _GPS;
 		}
 
 
 		public void setGpsLocation(GpsPoint gpsLocation) {
-			this.gpsLocation = gpsLocation;
+			this._GPS = gpsLocation;
 		}
 
 
 		public Pixel getPixelLocation() {
-			return pixelLocation;
+			return _PixelLocation;
 		}
 
 
 		public void setPixelLocation(Pixel pixelLocation) {
-			this.pixelLocation = pixelLocation;
+			this._PixelLocation = pixelLocation;
 		}
 
 
 		public int getSpeed() {
-			return speed;
+			return _speed;
 		}
 
 
 		public void setSpeed(int speed) {
-			this.speed = speed;
+			this._speed = speed;
 		}
 
 
 		public int getRadius() {
-			return radius;
+			return _radius;
 		}
 
 
 		public void setRadius(int radius) {
-			this.radius = radius;
+			this._radius = radius;
 		}
 
-		public Point3D getXYZlocation() {
-			return XYZlocation;
+		public Point3D GPSConvert() {
+			return _GPSConvert;
 		}
 
-		public void setXYZlocation(Point3D xYZlocation) {
-			XYZlocation = xYZlocation;
+		public void GPSConvert(Point3D xYZlocation) {
+			_GPSConvert = xYZlocation;
 		}
 
 

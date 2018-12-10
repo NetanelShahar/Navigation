@@ -7,82 +7,73 @@ import Maps.Pixel;
 
 public class Fruit {
 
-	private int id;
-	private GpsPoint gpsLocation;
-	private Point3D XYZlocation;
-	private Pixel pixelLocation;
-	public Point3D p ; 
+	private int _id;
+	private int _value;
+	private GpsPoint _GPS; 
+	private Point3D _GPSConvert;
+	private Pixel _PixelLocation;
 	
-	public Fruit(int id,GpsPoint gpsLocation,int value)
+	
+	public Fruit(int id,GpsPoint GpsLocation,int value , Map map)
 	{
-		this.id=id;
-		this.gpsLocation=gpsLocation;
-		this.value=value;
-		p = new Point3D(gpsLocation.getLon(),gpsLocation.getLat(),gpsLocation.getAlt());
-		
-		this.XYZlocation=new Point3D(gpsLocation.getLat(),gpsLocation.getLon(),gpsLocation.getAlt()).GPS2Meter();
-		this.pixelLocation = new Pixel(p);
+		this._id=id;
+		this._GPS=GpsLocation;
+		this._value=value;
+		_GPSConvert = new Point3D(GpsLocation.getLon(),GpsLocation.getLat(),GpsLocation.getAlt());
+		this._PixelLocation = new Pixel(_GPSConvert, map);
 	}
-	public Fruit(int id,Pixel pixelLocation,int value)
+	public Fruit(int id,Pixel PixelLocation,int value, Map map)
 	{
-		Map map=new Map();
-		this.id=id;
-		this.pixelLocation=pixelLocation;
-		this.value=value;
-		this.gpsLocation=new GpsPoint(map.Pixel2GPSPoint(pixelLocation.get_PixelX(),pixelLocation.get_PixelY()).x(),map.Pixel2GPSPoint(pixelLocation.get_PixelX(),pixelLocation.get_PixelY()).y(),0);
-
+		this._id=id;
+		this._PixelLocation=PixelLocation;
+		this._value=value;
+		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));
+		this._GPS = new GpsPoint(_GPSConvert);
 	}
-	public Point3D getXYZlocation() {
-		return XYZlocation;
+	public Point3D _GPSConvert() {
+		return _GPSConvert;
 	}
 
-	public void setXYZlocation(Point3D xYZlocation) {
-		XYZlocation = xYZlocation;
+	public void _GPSConvert(Point3D xYZlocation) {
+		_GPSConvert = xYZlocation;
 	}
 
 	public int getId() {
-		return id;
+		return _id;
 	}
 
 
 	public void setId(int id) {
-		this.id = id;
+		this._id = id;
 	}
 
 
 	public GpsPoint getGpsLocation() {
-		return gpsLocation;
+		return _GPS;
 	}
 
 
 	public void setGpsLocation(GpsPoint gpsLocation) {
-		this.gpsLocation = gpsLocation;
+		this._GPS = gpsLocation;
 	}
 
 
 	public Pixel getPixelLocation() {
-		return pixelLocation;
+		return _PixelLocation;
 	}
 
 
 	public void setPixelLocation(Pixel pixelLocation) {
-		this.pixelLocation = pixelLocation;
+		this._PixelLocation = pixelLocation;
 	}
 
 
 	public int getValue() {
-		return value;
+		return _value;
 	}
 
 
 	public void setValue(int value) {
-		this.value = value;
+		this._value = value;
 	}
-
-
-	private int value;
-
-
-	
-
 }

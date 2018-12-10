@@ -11,20 +11,21 @@ import java.util.ArrayList;
 import Game_objects.Fruit;
 import Game_objects.Packman;
 import Geom.GpsPoint;
+import Maps.Map;
 
 
-public class Game {
+public class CSV2Game {
 
 	public ArrayList<Packman> packmanList;
 	public ArrayList<Fruit> fruitList;
 
-	public Game(String csvFileAdress) throws IOException
+	public CSV2Game(String csvFileAdress , Map map) throws IOException
 	{
 		this.packmanList=new ArrayList<Packman>() ;
 		this.fruitList=new ArrayList<Fruit>() ;
-		resolveCsv(csvFileAdress);
+		resolveCsv(csvFileAdress , map);
 	}
-	public void resolveCsv(String csvFileAdress) throws IOException
+	public void resolveCsv(String csvFileAdress , Map map) throws IOException
 	{
 
 		BufferedReader br = new BufferedReader(new FileReader(csvFileAdress)); 
@@ -38,7 +39,7 @@ public class Game {
 
 			line = br.readLine();
 			
-			pacmanORfruit(stringLine);
+			pacmanORfruit(stringLine , map);
 		}
 		try {
 			br.close();
@@ -49,18 +50,18 @@ public class Game {
 
 
 	}
-	private void pacmanORfruit(String line)
+	private void pacmanORfruit(String line,Map map)
 	{
 		String[] arr=line.split(",");
 		if(arr[0].equals("P"))
 		{
-			buildTHEpacman(arr);
+			buildTHEpacman(arr , map);
 		}
 		else
-			buildTHEfruit(arr);
+			buildTHEfruit(arr, map);
 
 	}
-	private void buildTHEpacman(String[] arr)
+	private void buildTHEpacman(String[] arr, Map map)
 	{
 
 		int id=Integer.parseInt(arr[1]);
@@ -68,19 +69,19 @@ public class Game {
 		int speed=Integer.parseInt(arr[5]);
 		int radius=Integer.parseInt(arr[6]);
 
-		Packman temp=new Packman(id,gpsLocation,speed,radius);
+		Packman temp=new Packman(id,gpsLocation,speed,radius,map);
 
 		this.packmanList.add(temp);
 
 
 	}
-	private void buildTHEfruit(String[] arr)
+	private void buildTHEfruit(String[] arr, Map map)
 	{
 		int id=Integer.parseInt(arr[1]);
 		GpsPoint gpsLocation=new GpsPoint(Double.parseDouble(arr[2]),Double.parseDouble( arr[3]),Double.parseDouble( arr[4]));
 		int value=Integer.parseInt(arr[5]);
 
-		Fruit temp=new Fruit(id,gpsLocation,value);
+		Fruit temp=new Fruit(id,gpsLocation,value,map);
 
 		this.fruitList.add(temp);
 

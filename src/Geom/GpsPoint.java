@@ -5,7 +5,7 @@ import  Coords.MyCoords;
  * This class represent a GPS point with fields : _lat , _lon , _alt
  * @author DanielAbergel
  */
-public class GpsPoint  implements Geom_element {
+public class GpsPoint  implements Geom_element  {
 	
 	private double _lat;
 	private double _lon;
@@ -28,6 +28,13 @@ public class GpsPoint  implements Geom_element {
 		this._lon = lon;
 		this._alt = alt;
 		
+	}
+	
+	public GpsPoint(Point3D p) 
+	{
+		this._lat = p.x();
+		this._lon = p.y();
+		this._alt = p.z();
 	}
 	/**
 	 * the function check if the point is valid . 
