@@ -7,6 +7,7 @@ import Coords.MyCoords;
 import File_format.CSV2Game;
 import GUI.Line;
 import Game_objects.Fruit;
+import Game_objects.Game;
 import Game_objects.Packman;
 import Game_objects.Path;
 import Maps.Map;
@@ -14,22 +15,22 @@ import Maps.Map;
 public class ShortPathAlgorithm {
 	static MyCoords Convert = new MyCoords();
 	
-	public static ArrayList<Path> Short(ArrayList<Packman> packs , ArrayList<Fruit> Fruits, Map map)
+	public static ArrayList<Path> Short(Game game, Map map)
 	{
 		ArrayList<Path> Path = new ArrayList<Path>();
-		PackManNode Max = new PackManNode(Double.MAX_VALUE , packs.get(0) , Fruits.get(0));
+		PackManNode Max = new PackManNode(Double.MAX_VALUE , game.packmans.get(0) , game.fruits.get(0));
 		double time = 0 ; 
-		while(!Fruits.isEmpty())
+		while(!game.fruits.isEmpty())
 		{
-			for (int i = 0; i < packs.size(); i++) {
-				for (int j = 0; j < Fruits.size(); j++) 
+			for (int i = 0; i < game.packmans.size(); i++) {
+				for (int j = 0; j < game.fruits.size(); j++) 
 				{
-					time = Time(packs.get(i), Fruits.get(j), map);
-					if(time+packs.get(i)._time < Max.time)
+					time = Time(game.packmans.get(i), game.fruits.get(j), map);
+					if(time+game.packmans.get(i)._time < Max.time)
 					{
-						Max.time = time+packs.get(i)._time;
-						Max._pacman = packs.get(i);
-						Max.fruit = Fruits.get(j);
+						Max.time = time+game.packmans.get(i)._time;
+						Max._pacman = game.packmans.get(i);
+						Max.fruit = game.fruits.get(j);
 						Max.fruitindex = j ; 
 					}
 					time = 0 ; 
@@ -37,14 +38,14 @@ public class ShortPathAlgorithm {
 			}
 			Max._pacman.path.Lines.add(new Line(Max._pacman.getPixelLocation(),Max.fruit.getPixelLocation()));
 			Max._pacman._time += Time(Max._pacman, Max.fruit, map);
-			Max._pacman.setPixelLocation(Fruits.get(Max.fruitindex).getPixelLocation());
-			Fruits.remove(Max.fruitindex);
-			if(!Fruits.isEmpty())
-			Max.init(Fruits.get(0));
+			Max._pacman.setPixelLocation(game.fruits.get(Max.fruitindex).getPixelLocation());
+			game.fruits.remove(Max.fruitindex);
+			if(!game.fruits.isEmpty())
+			Max.init(game.fruits.get(0));
 		}
-		for (int i = 0; i < packs.size(); i++)
+		for (int i = 0; i < game.packmans.size(); i++)
 		{
-			Path.add(packs.get(i).path);
+			Path.add(game.packmans.get(i).path);
 			System.out.println();
 		}
 		
@@ -63,9 +64,9 @@ public class ShortPathAlgorithm {
 	public static void main(String[] args) throws IOException 
 	{
 		Map m = new Map();
-		CSV2Game g = new CSV2Game("C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\Ex2-4\\Ex3\\data\\game_1543684662657.csv",m);
+		Game game = new Game(m,"C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\Ex2-4\\Ex3\\data\\game_1543684662657.csv");
 		
-		ArrayList<Path> path = Short(g.packmanList, g.fruitList, m);
+		ArrayList<Path> path = Short(game, m);
 		
 		for (int i = 0; i < path.size(); i++) {
 			System.out.println(path.get(i));

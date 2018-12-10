@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import Game_objects.Fruit;
+import Game_objects.Game;
 import Game_objects.Packman;
 import Geom.GpsPoint;
 import Maps.Map;
@@ -16,16 +17,14 @@ import Maps.Map;
 
 public class CSV2Game {
 
-	public ArrayList<Packman> packmanList;
-	public ArrayList<Fruit> fruitList;
+	public Game _game ;
 
-	public CSV2Game(String csvFileAdress , Map map) throws IOException
+	public CSV2Game(Map map , Game game , String path) throws IOException
 	{
-		this.packmanList=new ArrayList<Packman>() ;
-		this.fruitList=new ArrayList<Fruit>() ;
-		resolveCsv(csvFileAdress , map);
+		this._game = game ; 
+		resolveCsv(path, map);
 	}
-	public void resolveCsv(String csvFileAdress , Map map) throws IOException
+	public Game resolveCsv(String csvFileAdress , Map map) throws IOException
 	{
 
 		BufferedReader br = new BufferedReader(new FileReader(csvFileAdress)); 
@@ -47,7 +46,8 @@ public class CSV2Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		return _game;
 
 	}
 	private void pacmanORfruit(String line,Map map)
@@ -71,7 +71,7 @@ public class CSV2Game {
 
 		Packman temp=new Packman(id,gpsLocation,speed,radius,map);
 
-		this.packmanList.add(temp);
+		this._game.packmans.add(temp);
 
 
 	}
@@ -83,7 +83,7 @@ public class CSV2Game {
 
 		Fruit temp=new Fruit(id,gpsLocation,value,map);
 
-		this.fruitList.add(temp);
+		this._game.fruits.add(temp);
 
 	}
 
