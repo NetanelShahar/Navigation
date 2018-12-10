@@ -16,16 +16,20 @@ public class Packmans extends ArrayList<Packman> {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		 StringBuilder toString  = new StringBuilder();
-		 toString.append(str)
+		 StringBuilder StringB  = new StringBuilder();
+		Iterator<Packman> it= this.iterator();
+		 while(it.hasNext())
+		 StringB.append(it.next().toString() + "\n");
+		 
+		return StringB.toString();
 	}
 	
 	public static void main(String[] args) {
 		StringBuilder S = new StringBuilder();
-		S.append("HELLO WORLD");
-		S.append("HELLO WORLD");
-		S.append("HELLO WORLD");
-		S.append("HELLO WORLD");
+		S.append("HELLO WORLD ");
+		S.append("HELLO WORLD ");
+		S.append("HELLO WORLD ");
+		S.append("HELLO WORLD ");
 		
 		System.out.println(S.toString());
 	}
