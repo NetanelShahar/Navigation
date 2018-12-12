@@ -9,7 +9,7 @@ import Coords.MyCoords;
 public class Packman {
 
 	private int _id;
-	private GpsPoint _GPS;
+	public GpsPoint _GPS;
 	private Point3D _GPSConvert;
 	public Pixel _PixelLocation;
 	private int _speed;

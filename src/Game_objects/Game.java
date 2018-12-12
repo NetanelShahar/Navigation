@@ -3,6 +3,7 @@ package Game_objects;
 import java.io.IOException;
 
 import File_format.CSV2Game;
+import File_format.Game2CSV;
 import Maps.Map;
 
 public class Game {
@@ -11,6 +12,7 @@ public class Game {
 	public Fruits fruits;
 	public Packmans packmans;
 	public CSV2Game Convert;
+	public Game2CSV saving;
 	
 	public Game(Map map) 
 	{

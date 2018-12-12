@@ -8,8 +8,8 @@ import Maps.Pixel;
 public class Fruit {
 
 	private int _id;
-	private int _value;
-	private GpsPoint _GPS; 
+	public int _value;
+	public GpsPoint _GPS; 
 	private Point3D _GPSConvert;
 	public Pixel _PixelLocation;
 	

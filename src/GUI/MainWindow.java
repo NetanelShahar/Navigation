@@ -24,6 +24,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
 import File_format.CSV2Game;
+import File_format.Game2CSV;
 import Game_objects.Fruit;
 import Game_objects.Game;
 import Game_objects.Packman;
@@ -83,7 +84,7 @@ public class MainWindow extends JFrame implements MouseListener
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
+				
 				repaint();
 
 
@@ -94,7 +95,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				game.saving=new Game2CSV(game.packmans,game.fruits);
 
 			}
 		});
