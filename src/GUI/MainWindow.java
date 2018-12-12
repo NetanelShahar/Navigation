@@ -15,20 +15,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import Game_objects.Game;
+import Game_objects.Packman;
 import Maps.Map;
 import Maps.Pixel;
 
 
 public class MainWindow extends JFrame implements MouseListener
 {
-	public Map GameMap ; 
-	ArrayList<Pixel> Circles ; 
+
+
+	Game game ; 
 	ArrayList<Line> Lines ;
 	int x = -1;
 	int y = -1;
-	
-	public BufferedImage myLATERimage;
-	
+
+
+	public BufferedImage PackManImage;
+
 
 	public MainWindow() 
 	{
@@ -37,51 +42,55 @@ public class MainWindow extends JFrame implements MouseListener
 	}
 
 	private void initGUI() 
-	{
-
-		GameMap = new Map();
-		Circles = new ArrayList<Pixel>();
-		Lines=new ArrayList<Line>();
+	{	
+		Map GameMap = new Map();
 		try {
+			PackManImage = ImageIO.read(new File("PackMan.PNG"));
 			GameMap.myImage = ImageIO.read(new File("Ariel1.PNG"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		game = new Game(GameMap);
+		Lines=new ArrayList<Line>();
+	
 	}
 
 
-	
+
 
 	public void paint(Graphics g)
 	{
-		
-		g.drawImage(GameMap.myImage, 0, 0,this.getWidth(),this.getHeight(), this);
-		GameMap.ChangeFrameSize(new Pixel(this.getWidth(), this.getHeight()), Circles);
-		
+
+		g.drawImage(game.GameMap.myImage, 0, 0,this.getWidth(),this.getHeight(), this);
+		game.GameMap.ChangeFrameSize(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
+
+
+
 		if(x!=-1 && y!=-1)
 		{
 
-			for (int i = 0; i < Circles.size(); i++) {
-				g.fillOval((int)Circles.get(i).get_PixelX(), (int)Circles.get(i).get_PixelY(), 10	, 10);
-				if(i!=Circles.size()-1)
+			for (int i = 0; i < game.packmans.size(); i++) {
+
+				g.drawImage(PackManImage,(int)game.packmans.get(i).getPixelLocation().get_PixelX()-20,(int)game.packmans.get(i).getPixelLocation().get_PixelY()-10,this);
+				if(i!=game.packmans.size()-1)
 					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
 			}
 
 		}
 
 	}
-	
+
 	@Override
 	public void mouseClicked(MouseEvent arg) {
 		System.out.println("mouse Clicked");
 		System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 		x = arg.getX();
 		y = arg.getY();
-		Circles.add(new Pixel(x, y));
-		if(Circles.size()>1)
+		game.packmans.add(new Packman(0, new Pixel(x, y), 0, 0, game.GameMap));
+		if(game.packmans.size()>1)
 		{
-			Lines.add(new Line(Circles.get(Circles.size()-2) , Circles.get(Circles.size()-1)) );
+			Lines.add(new Line(game.packmans.get(game.packmans.size()-2).getPixelLocation() , game.packmans.get(game.packmans.size()-1).getPixelLocation() ));
 		}
 
 		repaint();
@@ -110,15 +119,15 @@ public class MainWindow extends JFrame implements MouseListener
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public double getXsize()
 	{
-		return GameMap.myImage.getWidth();
+		return game.GameMap.myImage.getWidth();
 	}
 
 	public double getYsize()
 	{
-		return GameMap.myImage.getHeight();
+		return game.GameMap.myImage.getHeight();
 	}
 
 }

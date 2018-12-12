@@ -11,7 +11,7 @@ public class Packman {
 	private int _id;
 	private GpsPoint _GPS;
 	private Point3D _GPSConvert;
-	private Pixel _PixelLocation;
+	public Pixel _PixelLocation;
 	private int _speed;
 	private int _radius;
 	public Path path;
