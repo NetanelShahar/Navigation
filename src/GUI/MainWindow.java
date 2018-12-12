@@ -4,6 +4,9 @@ package GUI;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -15,6 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 
 import Game_objects.Game;
 import Game_objects.Packman;
@@ -30,8 +35,6 @@ public class MainWindow extends JFrame implements MouseListener
 	ArrayList<Line> Lines ;
 	int x = -1;
 	int y = -1;
-
-
 	public BufferedImage PackManImage;
 
 
@@ -41,8 +44,29 @@ public class MainWindow extends JFrame implements MouseListener
 		this.addMouseListener(this); 
 	}
 
+	private void InitMenu() {
+		MenuBar  menubar = new MenuBar ();
+		
+		Menu file = new Menu("File"); 
+		Menu gameM = new Menu("Game");
+		MenuItem load = new MenuItem("Save");
+		MenuItem save = new MenuItem("Load");
+		MenuItem clear = new MenuItem("Clear");
+		MenuItem packmanM = new MenuItem("PackMan");
+		MenuItem fruitM = new MenuItem("Fruit");
+		menubar.add(file);
+		menubar.add(gameM);
+		file.add(load);
+		file.add(save);
+		file.add(clear);
+		gameM.add(packmanM);
+		gameM.add(fruitM);
+		this.setMenuBar(menubar);
+		
+	}
 	private void initGUI() 
 	{	
+		InitMenu();
 		Map GameMap = new Map();
 		try {
 			PackManImage = ImageIO.read(new File("PackMan.PNG"));
@@ -61,8 +85,8 @@ public class MainWindow extends JFrame implements MouseListener
 
 	public void paint(Graphics g)
 	{
-
-		g.drawImage(game.GameMap.myImage, 0, 0,this.getWidth(),this.getHeight(), this);
+		
+		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
 		game.GameMap.ChangeFrameSize(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
 
 
