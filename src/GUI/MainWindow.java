@@ -8,6 +8,8 @@ import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
@@ -21,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
+import Game_objects.Fruit;
 import Game_objects.Game;
 import Game_objects.Packman;
 import Maps.Map;
@@ -33,10 +36,12 @@ public class MainWindow extends JFrame implements MouseListener
 
 	Game game ; 
 	ArrayList<Line> Lines ;
+	ArrayList<Line> Lines1 ;
+	boolean PacOrFruit  ;  // false = packman , true = fruit
 	int x = -1;
 	int y = -1;
 	public BufferedImage PackManImage;
-
+	public BufferedImage FruitImage;
 
 	public MainWindow() 
 	{
@@ -46,7 +51,6 @@ public class MainWindow extends JFrame implements MouseListener
 
 	private void InitMenu() {
 		MenuBar  menubar = new MenuBar ();
-		
 		Menu file = new Menu("File"); 
 		Menu gameM = new Menu("Game");
 		MenuItem load = new MenuItem("Save");
@@ -54,6 +58,7 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem clear = new MenuItem("Clear");
 		MenuItem packmanM = new MenuItem("PackMan");
 		MenuItem fruitM = new MenuItem("Fruit");
+		MenuItem run = new MenuItem("Run");
 		menubar.add(file);
 		menubar.add(gameM);
 		file.add(load);
@@ -61,14 +66,66 @@ public class MainWindow extends JFrame implements MouseListener
 		file.add(clear);
 		gameM.add(packmanM);
 		gameM.add(fruitM);
+		gameM.add(run);
 		this.setMenuBar(menubar);
-		
+		load.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+
+			}
+		});
+		save.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+
+			}
+		});
+		clear.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+
+			}
+		});
+		packmanM.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PacOrFruit = false;
+
+			}
+		});
+		fruitM.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PacOrFruit = true;
+
+			}
+		});
+		run.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+
+			}
+		});
+
+
 	}
+
 	private void initGUI() 
 	{	
 		InitMenu();
 		Map GameMap = new Map();
 		try {
+			FruitImage = ImageIO.read(new File("Fruit.PNG"));
 			PackManImage = ImageIO.read(new File("PackMan.PNG"));
 			GameMap.myImage = ImageIO.read(new File("Ariel1.PNG"));
 		} catch (IOException e) {
@@ -77,7 +134,8 @@ public class MainWindow extends JFrame implements MouseListener
 
 		game = new Game(GameMap);
 		Lines=new ArrayList<Line>();
-	
+		Lines1 =new ArrayList<Line>();
+
 	}
 
 
@@ -85,7 +143,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	public void paint(Graphics g)
 	{
-		
+
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
 		game.GameMap.ChangeFrameSize(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
 
@@ -101,6 +159,13 @@ public class MainWindow extends JFrame implements MouseListener
 					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
 			}
 
+			for (int i = 0; i < game.fruits.size(); i++) {
+
+				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
+				if(i!=game.fruits.size()-1)
+					g.drawLine((int)Lines1.get(i).start.get_PixelX(), (int)Lines1.get(i).start.get_PixelY(),(int)Lines1.get(i).end.get_PixelX(), (int)Lines1.get(i).end.get_PixelY());
+			}
+
 		}
 
 	}
@@ -111,10 +176,19 @@ public class MainWindow extends JFrame implements MouseListener
 		System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 		x = arg.getX();
 		y = arg.getY();
-		game.packmans.add(new Packman(0, new Pixel(x, y), 0, 0, game.GameMap));
-		if(game.packmans.size()>1)
+		if(!PacOrFruit) {
+			game.packmans.add(new Packman(0, new Pixel(x, y), 0, 0, game.GameMap));
+			if(game.packmans.size()>1)
+			{
+				Lines.add(new Line(game.packmans.get(game.packmans.size()-2).getPixelLocation() , game.packmans.get(game.packmans.size()-1).getPixelLocation() ));
+			}
+		}else
 		{
-			Lines.add(new Line(game.packmans.get(game.packmans.size()-2).getPixelLocation() , game.packmans.get(game.packmans.size()-1).getPixelLocation() ));
+			game.fruits.add(new Fruit(0, new Pixel(x, y), 0, game.GameMap));
+			if(game.fruits.size()>1)
+			{
+				Lines1.add(new Line(game.fruits.get(game.fruits.size()-2).getPixelLocation() , game.fruits.get(game.fruits.size()-1).getPixelLocation() ));
+			}
 		}
 
 		repaint();
