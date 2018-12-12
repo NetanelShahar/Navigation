@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
+import File_format.CSV2Game;
 import Game_objects.Fruit;
 import Game_objects.Game;
 import Game_objects.Packman;
@@ -50,11 +51,12 @@ public class MainWindow extends JFrame implements MouseListener
 	}
 
 	private void InitMenu() {
+
 		MenuBar  menubar = new MenuBar ();
 		Menu file = new Menu("File"); 
 		Menu gameM = new Menu("Game");
-		MenuItem load = new MenuItem("Save");
-		MenuItem save = new MenuItem("Load");
+		MenuItem load = new MenuItem("Load");
+		MenuItem save = new MenuItem("Save");
 		MenuItem clear = new MenuItem("Clear");
 		MenuItem packmanM = new MenuItem("PackMan");
 		MenuItem fruitM = new MenuItem("Fruit");
@@ -68,11 +70,23 @@ public class MainWindow extends JFrame implements MouseListener
 		gameM.add(fruitM);
 		gameM.add(run);
 		this.setMenuBar(menubar);
+
+
 		load.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
+				try {
+					game.Convert=new CSV2Game(game.GameMap, game, "game_1543684662657.csv");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				repaint();
+
+
 
 			}
 		});
@@ -145,8 +159,8 @@ public class MainWindow extends JFrame implements MouseListener
 	{
 
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
-		game.GameMap.ChangeFrameSize(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
-
+		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
+		game.GameMap.ChangeFrameSizeFruit(new Pixel(this.getWidth(), this.getHeight()), game.fruits);
 
 
 		if(x!=-1 && y!=-1)
@@ -155,21 +169,23 @@ public class MainWindow extends JFrame implements MouseListener
 			for (int i = 0; i < game.packmans.size(); i++) {
 
 				g.drawImage(PackManImage,(int)game.packmans.get(i).getPixelLocation().get_PixelX()-20,(int)game.packmans.get(i).getPixelLocation().get_PixelY()-10,this);
-				if(i!=game.packmans.size()-1)
-					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
-			}
 
+
+				//				if(i!=game.packmans.size()-1)
+				//					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
+			}
 			for (int i = 0; i < game.fruits.size(); i++) {
 
 				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
-				if(i!=game.fruits.size()-1)
-					g.drawLine((int)Lines1.get(i).start.get_PixelX(), (int)Lines1.get(i).start.get_PixelY(),(int)Lines1.get(i).end.get_PixelX(), (int)Lines1.get(i).end.get_PixelY());
+
+
+				//				if(i!=game.packmans.size()-1)
+				//					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
 			}
 
 		}
 
 	}
-
 	@Override
 	public void mouseClicked(MouseEvent arg) {
 		System.out.println("mouse Clicked");

@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.xml.ws.Endpoint;
 
 import Coords.MyCoords;
+import Game_objects.Fruit;
 import Game_objects.Packman;
 import Geom.Point3D;
 
@@ -85,7 +86,23 @@ public class Map
 		Pixel PSubtract = FrameSize.Subtract(p) ;
 		return PSubtract.get_PixelX() > 0 && PSubtract.get_PixelY() > 0;
 	}
-	public void ChangeFrameSize(Pixel p , ArrayList<Packman> arr )
+	public void ChangeFrameSizePacman(Pixel p , ArrayList<Packman> arr )
+	{
+		ArrayList<Point3D> change = new ArrayList<Point3D>();
+		for (int i = 0; i < arr.size(); i++) {
+			change.add(Pixel2GPSPoint(arr.get(i)._PixelLocation.get_PixelX(), arr.get(i)._PixelLocation.get_PixelY()));
+		}
+		FrameSize.set_PixelX(p.get_PixelX());
+		FrameSize.set_PixelY(p.get_PixelY());
+		for (int i = 0; i < arr.size(); i++) {
+			Pixel temp = GPSPoint2Pixel(change.get(i));
+			arr.get(i)._PixelLocation.set_PixelX(temp.get_PixelX());
+			arr.get(i)._PixelLocation.set_PixelY(temp.get_PixelY());
+			
+		}	
+	}
+	
+	public void ChangeFrameSizeFruit(Pixel p , ArrayList<Fruit> arr )
 	{
 		ArrayList<Point3D> change = new ArrayList<Point3D>();
 		for (int i = 0; i < arr.size(); i++) {

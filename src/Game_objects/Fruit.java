@@ -11,7 +11,7 @@ public class Fruit {
 	private int _value;
 	private GpsPoint _GPS; 
 	private Point3D _GPSConvert;
-	private Pixel _PixelLocation;
+	public Pixel _PixelLocation;
 	
 	
 	public Fruit(int id,GpsPoint GpsLocation,int value , Map map)
