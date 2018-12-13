@@ -32,7 +32,7 @@ public class Game {
 	public void Csv2Game(String path) throws IOException 
 	{
 		
-		CSV2Game newGame=new CSV2Game(this.GameMap,this,"game_1543684662657.csv");
+		CSV2Game newGame=new CSV2Game(this.GameMap,this,path);
 		
 	}
 	public void Game2Csv() 

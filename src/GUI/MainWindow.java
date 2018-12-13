@@ -19,9 +19,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.plaf.FileChooserUI;
 
 import File_format.CSV2Game;
 import File_format.Game2CSV;
@@ -77,9 +80,26 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				String direction="";
+				JButton open=new JButton();
+				JFileChooser fc =new JFileChooser();
+			//	fc.setCurrentDirectory(new java.io.File("‪‪C://Users//נתנאל בן יששכר//Desktop"));
+				fc.setDialogTitle("chose your game file");
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+				if(fc.showOpenDialog(open)==JFileChooser.APPROVE_OPTION)
+				{
+					direction=fc.getSelectedFile().getAbsolutePath();
+					System.out.println(direction);
+					direction=direction.replaceAll("\\\\", "\\\\\\\\");
+					//direction="C:\\Users\\נתנאל בן יששכר\\Desktop\\data\\game_1543684662657.csv";
+					System.out.println(direction);
+				;
+				}
+				
 
 				try {
-					game.Convert=new CSV2Game(game.GameMap, game, "game_1543684662657.csv");
+					game.Convert=new CSV2Game(game.GameMap, game, direction);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
