@@ -103,7 +103,9 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				game.fruits.clear();
+				game.packmans.clear();
+				repaint();
 
 			}
 		});
