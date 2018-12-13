@@ -26,11 +26,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.plaf.FileChooserUI;
 
+import Algorithms.ShortPathAlgorithm;
 import File_format.CSV2Game;
 import File_format.Game2CSV;
 import Game_objects.Fruit;
 import Game_objects.Game;
 import Game_objects.Packman;
+import Game_objects.Packmans;
+import Game_objects.Path;
 import Maps.Map;
 import Maps.Pixel;
 
@@ -47,6 +50,7 @@ public class MainWindow extends JFrame implements MouseListener
 	int y = -1;
 	public BufferedImage PackManImage;
 	public BufferedImage FruitImage;
+	ArrayList<Path> PackmansPath;
 
 	public MainWindow() 
 	{
@@ -80,11 +84,11 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String direction="";
 				JButton open=new JButton();
 				JFileChooser fc =new JFileChooser();
-			//	fc.setCurrentDirectory(new java.io.File("‪‪C://Users//נתנאל בן יששכר//Desktop"));
+				//	fc.setCurrentDirectory(new java.io.File("‪‪C://Users//נתנאל בן יששכר//Desktop"));
 				fc.setDialogTitle("chose your game file");
 				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				if(fc.showOpenDialog(open)==JFileChooser.APPROVE_OPTION)
@@ -94,9 +98,9 @@ public class MainWindow extends JFrame implements MouseListener
 					direction=direction.replaceAll("\\\\", "\\\\\\\\");
 					//direction="C:\\Users\\נתנאל בן יששכר\\Desktop\\data\\game_1543684662657.csv";
 					System.out.println(direction);
-				;
+					;
 				}
-				
+
 
 				try {
 					game.Convert=new CSV2Game(game.GameMap, game, direction);
@@ -104,7 +108,7 @@ public class MainWindow extends JFrame implements MouseListener
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
+
 				repaint();
 
 
@@ -123,8 +127,12 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game.fruits.clear();
-				game.packmans.clear();
+				if(game.fruits!=null)
+					game.fruits.clear();
+				if(game.packmans!=null)
+					game.packmans.clear();
+				if(PackmansPath!=null)
+					PackmansPath.clear();
 				repaint();
 
 			}
@@ -149,8 +157,20 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				PackmansPath=new ArrayList<Path>();
+				game.algo=new ShortPathAlgorithm(game);
 
+				PackmansPath=game.algo.Short(game, game.GameMap);
 
+				//path=ShortPathAlgorithm.Short(game, game.GameMap);
+				//				for(int i=0;i<game.packmans.size();++i)
+				//				{
+				//					for(int j=0;j<game.packmans.get(i).path.Lines.size();++j)
+				//					{
+				//						PackmansPath.add(game.packmans.get(i).path.Lines.get(j));
+				//					}
+				//				}
+				repaint();
 			}
 		});
 
@@ -181,9 +201,23 @@ public class MainWindow extends JFrame implements MouseListener
 	public void paint(Graphics g)
 	{
 
+
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
 		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
 		game.GameMap.ChangeFrameSizeFruit(new Pixel(this.getWidth(), this.getHeight()), game.fruits);
+
+//		ArrayList<Pixel> ends=new ArrayList<Pixel>();
+//		if(PackmansPath!=null)
+//			for(int i=0;i<PackmansPath.size();++i)
+//			{
+//				if(PackmansPath.get(i)!=null)
+//					for(int j=0;j<PackmansPath.get(i).Lines.size();++j)
+//					{
+//						ends.add(PackmansPath.get(i).Lines.get(j).end);
+//					}
+//			}
+		//game.GameMap.ChangeFrameSizePixel(new Pixel(this.getWidth(), this.getHeight()),ends);		
+
 
 
 		if(x!=-1 && y!=-1)
@@ -205,9 +239,48 @@ public class MainWindow extends JFrame implements MouseListener
 				//				if(i!=game.packmans.size()-1)
 				//					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
 			}
+//			if(PackmansPath!=null)
+//			for (int i = 0; i < PackmansPath.size(); i++) {
+//				{
+//					for (int j = 0; j < PackmansPath.get(i).Lines.size(); j++)
+//
+//
+//						//		if(i!=PackmansPath.size()-1)
+//						g.drawLine((int)PackmansPath.get(i).Lines.get(i).start.get_PixelX(), (int)PackmansPath.get(i).Lines.get(i).end.get_PixelY(),(int)PackmansPath.get(i).Lines.get(i).end.get_PixelX(), (int)PackmansPath.get(i).Lines.get(i).start.get_PixelY());
+//				}
+//			}
+			
+			
+					if(PackmansPath!=null)
+					{
+						for(int i=0;i<game.packmans.size();++i)
+						{
+							if(game.packmans.get(i).path!=null)
+							{
+								for (int j=1;j<game.packmans.get(i).path.Lines.size();++j)
+								{
+									g.drawLine((int)game.packmans.get(i).path.Lines.get(j).start.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).start.get_PixelY(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelY());
+								}
+							}
+						}
+					}
 
+			
+			
+//			if(PackmansPath!=null)
+//			{
+//				for(int i=0;i<PackmansPath.size();++i)
+//				{
+//					if(PackmansPath.get(i)!=null)
+//					{
+//						for(int j=0;j<PackmansPath.get(i).Lines.size();++j)
+//						{
+//							g.drawLine((int)PackmansPath.get(i).Lines.get(j).start.get_PixelX(),(int)PackmansPath.get(i).Lines.get(j).start.get_PixelY(),(int)PackmansPath.get(i).Lines.get(j).end.get_PixelX(),(int)PackmansPath.get(i).Lines.get(j).end.get_PixelY());
+//						}
+//					}
+//				}
+//			}
 		}
-
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg) {
@@ -216,18 +289,18 @@ public class MainWindow extends JFrame implements MouseListener
 		x = arg.getX();
 		y = arg.getY();
 		if(!PacOrFruit) {
-			game.packmans.add(new Packman(0, new Pixel(x, y), 0, 0, game.GameMap));
-			if(game.packmans.size()>1)
-			{
-				Lines.add(new Line(game.packmans.get(game.packmans.size()-2).getPixelLocation() , game.packmans.get(game.packmans.size()-1).getPixelLocation() ));
-			}
+			game.packmans.add(new Packman(0, new Pixel(x, y), 1, 0, game.GameMap));
+			//			if(game.packmans.size()>1)
+			//			{
+			//				Lines.add(new Line(game.packmans.get(game.packmans.size()-2).getPixelLocation() , game.packmans.get(game.packmans.size()-1).getPixelLocation() ));
+			//			}
 		}else
 		{
 			game.fruits.add(new Fruit(0, new Pixel(x, y), 0, game.GameMap));
-			if(game.fruits.size()>1)
-			{
-				Lines1.add(new Line(game.fruits.get(game.fruits.size()-2).getPixelLocation() , game.fruits.get(game.fruits.size()-1).getPixelLocation() ));
-			}
+			//			if(game.fruits.size()>1)
+			//			{
+			//				Lines1.add(new Line(game.fruits.get(game.fruits.size()-2).getPixelLocation() , game.fruits.get(game.fruits.size()-1).getPixelLocation() ));
+			//			}
 		}
 
 		repaint();

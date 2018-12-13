@@ -14,7 +14,13 @@ import Maps.Map;
 
 public class ShortPathAlgorithm {
 	static MyCoords Convert = new MyCoords();
+	public Game game;
 	
+	public ShortPathAlgorithm(Game game)
+	{
+		this.game=game;
+//		Short(game, map);
+	}
 	public static ArrayList<Path> Short(Game game, Map map)
 	{
 		ArrayList<Path> Path = new ArrayList<Path>();
@@ -61,16 +67,17 @@ public class ShortPathAlgorithm {
 		return dist_closestFruit;
 	}
 	
-	public static void main(String[] args) throws IOException 
-	{
-		Map m = new Map();
-		Game game = new Game(m,"C:\\Users\\דניאל\\Desktop\\מדעי המחשב\\מונחה עצמים\\Ex2-4\\Ex3\\data\\game_1543684662657.csv");
-		
-		ArrayList<Path> path = Short(game, m);
-		
-		for (int i = 0; i < path.size(); i++) {
-			System.out.println(path.get(i));
-		}
- 
-	}
+//	public static void main(String[] args) throws IOException 
+//	{
+//		Map m = new Map();
+//		Game game = new Game(m);
+//		
+//		ArrayList<Path> path = Short(game, m);
+//		
+//		for (int i = 0; i < path.size(); i++) {
+//			System.out.println(path.get(i));
+//		}
+// 
+//	}
+	
 }

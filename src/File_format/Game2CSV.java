@@ -33,21 +33,28 @@ public class Game2CSV {
 		{
 			type="P,";
 			id=""+i+",";
-			lat=""+packmanList.get(i)._GPS.getLat()+",";
-			lon=""+packmanList.get(i)._GPS.getLon()+",";
+//			lat=""+packmanList.get(i)._GPS.getLat()+",";
+//			lon=""+packmanList.get(i)._GPS.getLon()+",";
+			lat=""+packmanList.get(i)._GPS.getLon()+",";
+			lon=""+packmanList.get(i)._GPS.getLat()+",";
 			alt=""+packmanList.get(i)._GPS.getAlt()+",";
 			speedORweight=""+packmanList.get(i).getSpeed()+",";
 			radius=""+packmanList.get(i).getSpeed()+",";
 			csv+=type+id+lat+lon+alt+speedORweight+radius+",\n";
 			
 		}
-		
+//		lat=""+packmanList.get(i)._GPS.getLon()+",";
+//		lon=""+packmanList.get(i)._GPS.getLat()+",";
+//		lat=""+fruitList.get(i)._GPS.getLon()+",";
+//		lon=""+fruitList.get(i)._GPS.getLat()+",";
 		for(int i=0;i<fruitList.size();++i)
 		{
 			type="F,";
 			id=""+i+",";
-			lat=""+fruitList.get(i)._GPS.getLat()+",";
-			lon=""+fruitList.get(i)._GPS.getLon()+",";
+//			lat=""+fruitList.get(i)._GPS.getLat()+",";
+//			lon=""+fruitList.get(i)._GPS.getLon()+",";
+			lat=""+fruitList.get(i)._GPS.getLon()+",";
+			lon=""+fruitList.get(i)._GPS.getLat()+",";
 			alt=""+fruitList.get(i)._GPS.getAlt()+",";
 			speedORweight=""+fruitList.get(i).getValue()+",";
 			csv+=type+id+lat+lon+alt+speedORweight+",,\n";
@@ -60,6 +67,8 @@ public class Game2CSV {
 			if(!file.exists())
 				file.createNewFile();
 
+			System.out.println(csv);
+			
 			PrintWriter pw=new PrintWriter(file);
 			pw.print(csv);
 			pw.close();
