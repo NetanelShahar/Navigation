@@ -43,8 +43,6 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 	Game game ; 
-	ArrayList<Line> Lines ;
-	ArrayList<Line> Lines1 ;
 	boolean PacOrFruit  ;  // false = packman , true = fruit
 	int x = -1;
 	int y = -1;
@@ -88,7 +86,6 @@ public class MainWindow extends JFrame implements MouseListener
 				String direction="";
 				JButton open=new JButton();
 				JFileChooser fc =new JFileChooser();
-				//	fc.setCurrentDirectory(new java.io.File("‪‪C://Users//נתנאל בן יששכר//Desktop"));
 				fc.setDialogTitle("chose your game file");
 				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				if(fc.showOpenDialog(open)==JFileChooser.APPROVE_OPTION)
@@ -96,7 +93,6 @@ public class MainWindow extends JFrame implements MouseListener
 					direction=fc.getSelectedFile().getAbsolutePath();
 					System.out.println(direction);
 					direction=direction.replaceAll("\\\\", "\\\\\\\\");
-					//direction="C:\\Users\\נתנאל בן יששכר\\Desktop\\data\\game_1543684662657.csv";
 					System.out.println(direction);
 					;
 				}
@@ -104,16 +100,13 @@ public class MainWindow extends JFrame implements MouseListener
 
 				try {
 					game.Convert=new CSV2Game(game.GameMap, game, direction);
+					repaint();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
-				repaint();
-
-
-
 			}
+
 		});
 		save.addActionListener(new ActionListener() {
 
@@ -161,15 +154,6 @@ public class MainWindow extends JFrame implements MouseListener
 				game.algo=new ShortPathAlgorithm(game);
 
 				PackmansPath=game.algo.Short(game, game.GameMap);
-
-				//path=ShortPathAlgorithm.Short(game, game.GameMap);
-				//				for(int i=0;i<game.packmans.size();++i)
-				//				{
-				//					for(int j=0;j<game.packmans.get(i).path.Lines.size();++j)
-				//					{
-				//						PackmansPath.add(game.packmans.get(i).path.Lines.get(j));
-				//					}
-				//				}
 				repaint();
 			}
 		});
@@ -190,9 +174,6 @@ public class MainWindow extends JFrame implements MouseListener
 		}
 
 		game = new Game(GameMap);
-		Lines=new ArrayList<Line>();
-		Lines1 =new ArrayList<Line>();
-
 	}
 
 
@@ -203,83 +184,36 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
-		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans);
-		game.GameMap.ChangeFrameSizeFruit(new Pixel(this.getWidth(), this.getHeight()), game.fruits);
-
-//		ArrayList<Pixel> ends=new ArrayList<Pixel>();
-//		if(PackmansPath!=null)
-//			for(int i=0;i<PackmansPath.size();++i)
-//			{
-//				if(PackmansPath.get(i)!=null)
-//					for(int j=0;j<PackmansPath.get(i).Lines.size();++j)
-//					{
-//						ends.add(PackmansPath.get(i).Lines.get(j).end);
-//					}
-//			}
-		//game.GameMap.ChangeFrameSizePixel(new Pixel(this.getWidth(), this.getHeight()),ends);		
-
+		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans,game.fruits);
 
 
 		if(x!=-1 && y!=-1)
 		{
 
-			for (int i = 0; i < game.packmans.size(); i++) {
-
+			for (int i = 0; i < game.packmans.size(); i++) 
+			{
 				g.drawImage(PackManImage,(int)game.packmans.get(i).getPixelLocation().get_PixelX()-20,(int)game.packmans.get(i).getPixelLocation().get_PixelY()-10,this);
-
-
-				//				if(i!=game.packmans.size()-1)
-				//					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
 			}
-			for (int i = 0; i < game.fruits.size(); i++) {
-
+			for (int i = 0; i < game.fruits.size(); i++) 
+			{
 				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
-
-
-				//				if(i!=game.packmans.size()-1)
-				//					g.drawLine((int)Lines.get(i).start.get_PixelX(), (int)Lines.get(i).start.get_PixelY(),(int)Lines.get(i).end.get_PixelX(), (int)Lines.get(i).end.get_PixelY());
 			}
-//			if(PackmansPath!=null)
-//			for (int i = 0; i < PackmansPath.size(); i++) {
-//				{
-//					for (int j = 0; j < PackmansPath.get(i).Lines.size(); j++)
-//
-//
-//						//		if(i!=PackmansPath.size()-1)
-//						g.drawLine((int)PackmansPath.get(i).Lines.get(i).start.get_PixelX(), (int)PackmansPath.get(i).Lines.get(i).end.get_PixelY(),(int)PackmansPath.get(i).Lines.get(i).end.get_PixelX(), (int)PackmansPath.get(i).Lines.get(i).start.get_PixelY());
-//				}
-//			}
-			
-			
-					if(PackmansPath!=null)
+		
+
+
+			if(PackmansPath!=null)
+			{
+				for(int i=0;i<game.packmans.size();++i)
+				{
+					if(game.packmans.get(i).path!=null)
 					{
-						for(int i=0;i<game.packmans.size();++i)
+						for (int j=0;j<game.packmans.get(i).path.Lines.size();++j)
 						{
-							if(game.packmans.get(i).path!=null)
-							{
-								for (int j=1;j<game.packmans.get(i).path.Lines.size();++j)
-								{
-									g.drawLine((int)game.packmans.get(i).path.Lines.get(j).start.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).start.get_PixelY(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelY());
-								}
-							}
+							g.drawLine((int)game.packmans.get(i).path.Lines.get(j).start.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).start.get_PixelY(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelY());
 						}
 					}
-
-			
-			
-//			if(PackmansPath!=null)
-//			{
-//				for(int i=0;i<PackmansPath.size();++i)
-//				{
-//					if(PackmansPath.get(i)!=null)
-//					{
-//						for(int j=0;j<PackmansPath.get(i).Lines.size();++j)
-//						{
-//							g.drawLine((int)PackmansPath.get(i).Lines.get(j).start.get_PixelX(),(int)PackmansPath.get(i).Lines.get(j).start.get_PixelY(),(int)PackmansPath.get(i).Lines.get(j).end.get_PixelX(),(int)PackmansPath.get(i).Lines.get(j).end.get_PixelY());
-//						}
-//					}
-//				}
-//			}
+				}
+			}
 		}
 	}
 	@Override
@@ -288,19 +222,13 @@ public class MainWindow extends JFrame implements MouseListener
 		System.out.println("("+ arg.getX() + "," + arg.getY() +")");
 		x = arg.getX();
 		y = arg.getY();
-		if(!PacOrFruit) {
+		if(!PacOrFruit) 
+		{
 			game.packmans.add(new Packman(0, new Pixel(x, y), 1, 0, game.GameMap));
-			//			if(game.packmans.size()>1)
-			//			{
-			//				Lines.add(new Line(game.packmans.get(game.packmans.size()-2).getPixelLocation() , game.packmans.get(game.packmans.size()-1).getPixelLocation() ));
-			//			}
-		}else
+		}
+		else
 		{
 			game.fruits.add(new Fruit(0, new Pixel(x, y), 0, game.GameMap));
-			//			if(game.fruits.size()>1)
-			//			{
-			//				Lines1.add(new Line(game.fruits.get(game.fruits.size()-2).getPixelLocation() , game.fruits.get(game.fruits.size()-1).getPixelLocation() ));
-			//			}
 		}
 
 		repaint();

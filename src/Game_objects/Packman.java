@@ -31,7 +31,7 @@ public class Packman {
 	}
 	public Packman(int id,Pixel PixelLocation,int speed,int radius,Map map)
 	{
-		
+		path = new Path();
 		this._id=id;
 		this._PixelLocation=PixelLocation;
 		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));

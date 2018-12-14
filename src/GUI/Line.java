@@ -13,8 +13,8 @@ public class Line {
 	}
 	public Line(Pixel start , Pixel end)
 	{
-		this.start = start;
-		this.end = end;
+		this.start = new Pixel(start);
+		this.end =  new Pixel(end);
 	}
 
 	public Pixel getStart() {

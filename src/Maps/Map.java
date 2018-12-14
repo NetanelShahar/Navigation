@@ -86,50 +86,31 @@ public class Map
 		Pixel PSubtract = FrameSize.Subtract(p) ;
 		return PSubtract.get_PixelX() > 0 && PSubtract.get_PixelY() > 0;
 	}
-	public void ChangeFrameSizePacman(Pixel p , ArrayList<Packman> arr )
+	public void ChangeFrameSizePacman(Pixel p , ArrayList<Packman> PackArr  ,ArrayList<Fruit> FruitArr)
 	{
-		ArrayList<Point3D> change = new ArrayList<Point3D>();
-		for (int i = 0; i < arr.size(); i++) {
-			change.add(Pixel2GPSPoint(arr.get(i)._PixelLocation.get_PixelX(), arr.get(i)._PixelLocation.get_PixelY()));
+		ArrayList<Point3D> PackChange = new ArrayList<Point3D>();
+		ArrayList<Point3D> FruitChange = new ArrayList<Point3D>();
+		for (int i = 0; i < PackArr .size(); i++) {
+			PackChange.add(Pixel2GPSPoint(PackArr .get(i)._PixelLocation.get_PixelX(), PackArr .get(i)._PixelLocation.get_PixelY()));
+		}
+		for (int i = 0; i < FruitArr .size(); i++) {
+			FruitChange.add(Pixel2GPSPoint(FruitArr .get(i)._PixelLocation.get_PixelX(), FruitArr .get(i)._PixelLocation.get_PixelY()));
 		}
 		FrameSize.set_PixelX(p.get_PixelX());
 		FrameSize.set_PixelY(p.get_PixelY());
-		for (int i = 0; i < arr.size(); i++) {
-			Pixel temp = GPSPoint2Pixel(change.get(i));
-			arr.get(i)._PixelLocation.set_PixelX(temp.get_PixelX());
-			arr.get(i)._PixelLocation.set_PixelY(temp.get_PixelY());
+		for (int i = 0; i < PackArr .size(); i++) {
+			Pixel temp = GPSPoint2Pixel(PackChange.get(i));
+			PackArr .get(i)._PixelLocation.set_PixelX(temp.get_PixelX());
+			PackArr .get(i)._PixelLocation.set_PixelY(temp.get_PixelY());
+			
+		}	
+		for (int i = 0; i < FruitArr .size(); i++) {
+			Pixel temp = GPSPoint2Pixel(FruitChange.get(i));
+			FruitArr .get(i)._PixelLocation.set_PixelX(temp.get_PixelX());
+			FruitArr .get(i)._PixelLocation.set_PixelY(temp.get_PixelY());
 			
 		}	
 	}
 	
-	public void ChangeFrameSizeFruit(Pixel p , ArrayList<Fruit> arr )
-	{
-		ArrayList<Point3D> change = new ArrayList<Point3D>();
-		for (int i = 0; i < arr.size(); i++) {
-			change.add(Pixel2GPSPoint(arr.get(i)._PixelLocation.get_PixelX(), arr.get(i)._PixelLocation.get_PixelY()));
-		}
-		FrameSize.set_PixelX(p.get_PixelX());
-		FrameSize.set_PixelY(p.get_PixelY());
-		for (int i = 0; i < arr.size(); i++) {
-			Pixel temp = GPSPoint2Pixel(change.get(i));
-			arr.get(i)._PixelLocation.set_PixelX(temp.get_PixelX());
-			arr.get(i)._PixelLocation.set_PixelY(temp.get_PixelY());
-			
-		}	
-	}
-//	public void ChangeFrameSizePixel(Pixel p , ArrayList<Pixel> arr )
-//	{
-//		ArrayList<Point3D> change = new ArrayList<Point3D>();
-//		for (int i = 0; i < arr.size(); i++) {
-//			change.add(Pixel2GPSPoint(arr.get(i).get_PixelX(), arr.get(i).get_PixelY()));
-//		}
-//		FrameSize.set_PixelX(p.get_PixelX());
-//		FrameSize.set_PixelY(p.get_PixelY());
-//		for (int i = 0; i < arr.size(); i++) {
-//			Pixel temp = GPSPoint2Pixel(change.get(i));
-//			arr.get(i).set_PixelX(temp.get_PixelX());
-//			arr.get(i).set_PixelY(temp.get_PixelY());
-//			
-//		}	
-//	}
+	
 }
