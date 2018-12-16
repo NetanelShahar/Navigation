@@ -61,12 +61,16 @@ public class Packman {
 
 
 		public Pixel getPixelLocation() {
+			
 			return _PixelLocation;
+			
 		}
 
 
-		public void setPixelLocation(Pixel pixelLocation) {
-			this._PixelLocation = pixelLocation;
+		public void setPixelLocation(Pixel PixelLocation,Map map) {
+		this._PixelLocation = PixelLocation;
+		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));
+		this._GPS = new GpsPoint(_GPSConvert);
 		}
 
 

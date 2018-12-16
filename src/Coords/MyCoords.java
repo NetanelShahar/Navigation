@@ -63,6 +63,11 @@ public class MyCoords implements coords_converter  {
 		double y_meter=Math.sin(diff_rad_y)*earth_r*lon_norm;
 		return Math.sqrt(Math.pow(x_meter, 2)+Math.pow(y_meter, 2));
 	}
+	public static void main(String[] args) {
+		MyCoords m = new MyCoords(); 
+	double d = 	m.distance2d(new GpsPoint(32.103745548224765,35.20650560715309,0), new GpsPoint(32.104945548224765,35.2070560715309,0));
+	System.out.println(d);
+	}
 	/**
 	 * This function computes the 3D distance (in meters) between the two GPS points
 	 * we used the file Excel that was send to use by Boaz formola.

@@ -90,6 +90,7 @@ public class Map
 	{
 		ArrayList<Point3D> PackChange = new ArrayList<Point3D>();
 		ArrayList<Point3D> FruitChange = new ArrayList<Point3D>();
+		
 		for (int i = 0; i < PackArr .size(); i++) {
 			PackChange.add(Pixel2GPSPoint(PackArr .get(i)._PixelLocation.get_PixelX(), PackArr .get(i)._PixelLocation.get_PixelY()));
 		}

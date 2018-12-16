@@ -6,11 +6,11 @@
 	<classpathentry kind="src" path="Tests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="JAR Files/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="JAR Files/JavaAPIforKml-2.2.1.jar"/>
-	<classpathentry kind="lib" path="JAR Files/jaxb-api-2.2.jar"/>
-	<classpathentry kind="lib" path="JAR Files/jaxb-impl-2.2.jar"/>
 	<classpathentry kind="lib" path="JAR Files/jaxb-xjc-2.2.jar"/>
 	<classpathentry kind="lib" path="JAR Files/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="JAR Files/stax-api-1.0-2.jar"/>
+	<classpathentry kind="lib" path="JAR Files/JavaAPIforKml-2.2.0.jar"/>
+	<classpathentry kind="lib" path="JAR Files/jaxb-api-2.1.jar"/>
+	<classpathentry kind="lib" path="JAR Files/jaxb-impl-2.1.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

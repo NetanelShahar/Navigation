@@ -1,6 +1,7 @@
 package GUI;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -44,6 +45,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	Game game ; 
 	boolean PacOrFruit  ;  // false = packman , true = fruit
+	boolean Run ; // false = before run , true = after ; 
 	int x = -1;
 	int y = -1;
 	public BufferedImage PackManImage;
@@ -99,12 +101,16 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 				try {
+					repaint();
 					game.Convert=new CSV2Game(game.GameMap, game, direction);
 					repaint();
+
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+
+				repaint();
 			}
 
 		});
@@ -127,6 +133,7 @@ public class MainWindow extends JFrame implements MouseListener
 				if(PackmansPath!=null)
 					PackmansPath.clear();
 				repaint();
+				Run = false ; 
 
 			}
 		});
@@ -154,6 +161,7 @@ public class MainWindow extends JFrame implements MouseListener
 				game.algo=new ShortPathAlgorithm(game);
 
 				PackmansPath=game.algo.Short(game, game.GameMap);
+				Run = true ; 
 				repaint();
 			}
 		});
@@ -196,9 +204,10 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 			for (int i = 0; i < game.fruits.size(); i++) 
 			{
+			
 				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
 			}
-		
+
 
 
 			if(PackmansPath!=null)
@@ -209,6 +218,7 @@ public class MainWindow extends JFrame implements MouseListener
 					{
 						for (int j=0;j<game.packmans.get(i).path.Lines.size();++j)
 						{
+							g.setColor(Color.YELLOW);
 							g.drawLine((int)game.packmans.get(i).path.Lines.get(j).start.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).start.get_PixelY(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelX(),(int)game.packmans.get(i).path.Lines.get(j).end.get_PixelY());
 						}
 					}

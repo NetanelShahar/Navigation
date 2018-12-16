@@ -3,7 +3,7 @@ package GUI;
 import Maps.Pixel;
 
 public class Line {
-	Pixel start;
+	public Pixel start;
 	public Pixel end;
 	
 	public Line(int start_x,int start_y,int end_x,int end_y)
@@ -13,8 +13,8 @@ public class Line {
 	}
 	public Line(Pixel start , Pixel end)
 	{
-		this.start = new Pixel(start);
-		this.end =  new Pixel(end);
+		this.start = start;
+		this.end =  end;
 	}
 
 	public Pixel getStart() {

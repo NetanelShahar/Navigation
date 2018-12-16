@@ -32,8 +32,8 @@ public class GpsPoint  implements Geom_element  {
 	
 	public GpsPoint(Point3D p) 
 	{
-		this._lat = p.x();
-		this._lon = p.y();
+		this._lat = p.y();
+		this._lon = p.x();
 		this._alt = p.z();
 	}
 	/**
