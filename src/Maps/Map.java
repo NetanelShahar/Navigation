@@ -88,17 +88,18 @@ public class Map
 	}
 	public void ChangeFrameSizePacman(Pixel p , ArrayList<Packman> PackArr  ,ArrayList<Fruit> FruitArr)
 	{
-//		ArrayList<Point3D> PackChange = new ArrayList<Point3D>();
-//		ArrayList<Point3D> FruitChange = new ArrayList<Point3D>();
-//		
-//		for (int i = 0; i < PackArr .size(); i++) {
-//			PackChange.add(Pixel2GPSPoint(PackArr .get(i)._PixelLocation.get_PixelX(), PackArr .get(i)._PixelLocation.get_PixelY()));
-//		}
-//		for (int i = 0; i < FruitArr .size(); i++) {
-//			FruitChange.add(Pixel2GPSPoint(FruitArr .get(i)._PixelLocation.get_PixelX(), FruitArr .get(i)._PixelLocation.get_PixelY()));
-//		}
+
+		
 		FrameSize.set_PixelX(p.get_PixelX());
 		FrameSize.set_PixelY(p.get_PixelY());
+
+		for (int i = 0; i < PackArr.size(); i++) {
+			for (int j = 0; j < PackArr.get(i).path.Lines.size(); j++) 
+			{
+				PackArr.get(i).path.Lines.get(j).setStartR(this);
+				PackArr.get(i).path.Lines.get(j).setEndR(this);
+			}
+		}
 		for (int i = 0; i < PackArr .size(); i++) {
 			Pixel temp = GPSPoint2Pixel(new Point3D(PackArr.get(i)._GPS));
 			PackArr .get(i)._PixelLocation.set_PixelX(temp.get_PixelX());

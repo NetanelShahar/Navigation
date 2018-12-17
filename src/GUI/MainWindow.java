@@ -46,7 +46,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	Game game ; 
 	boolean PacOrFruit  ;  // false = packman , true = fruit
-	boolean Run ; // false = before run , true = after ; 
+
 	int x = -1;
 	int y = -1;
 	public BufferedImage PackManImage;
@@ -121,12 +121,7 @@ public class MainWindow extends JFrame implements MouseListener
 			public void actionPerformed(ActionEvent e) {
 				CompareFruits f = new CompareFruits();
 				game.fruits.sort(f);
-				if(Run)
-				{
-					for (int i = 0; i <= game.packmans.size(); i++) {
-						game.fruits.remove(i);
-					}
-				}
+			
 				game.saving=new Game2CSV(game.packmans,game.fruits);
 
 			}
@@ -142,7 +137,7 @@ public class MainWindow extends JFrame implements MouseListener
 				if(PackmansPath!=null)
 					PackmansPath.clear();
 				repaint();
-				Run = false ; 
+			
 
 			}
 		});
@@ -170,7 +165,7 @@ public class MainWindow extends JFrame implements MouseListener
 				game.algo=new ShortPathAlgorithm(game);
 
 				PackmansPath=game.algo.Short(game, game.GameMap);
-				Run = true ; 
+			
 				
 				repaint();
 			}
@@ -213,7 +208,7 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 			for (int i = 0; i < game.fruits.size(); i++) 
 			{
-				if(!Run || game.fruits.size()-game.packmans.size() > i)
+			
 				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
 			}
 

@@ -23,36 +23,37 @@ public class ShortPathAlgorithm {
 	}
 	public static ArrayList<Path> Short(Game game, Map map)
 	{
-		for (int i = 0; i < game.packmans.size(); i++) {
-			game.fruits.add(new Fruit(0, game.packmans.get(i)._PixelLocation,100000, game.GameMap));
-		}
+//		for (int i = 0; i < game.packmans.size(); i++) 
+//		{
+//			game.fruits.add(new Fruit(0, game.packmans.get(i)._PixelLocation,100000, game.GameMap));
+//		}
 		ArrayList<Path> Path = new ArrayList<Path>();
-		ArrayList<Fruit> FruitsA = new ArrayList<>(game.fruits);
-		if(!FruitsA.isEmpty() && !game.packmans.isEmpty()) {
-			PackManNode Max = new PackManNode(Double.MAX_VALUE , game.packmans.get(0) , FruitsA.get(0));
+	
+		if(!game.fruits.isEmpty() && !game.packmans.isEmpty()) {
+			PackManNode Max = new PackManNode(Double.MAX_VALUE , game.packmans.get(0) , game.fruits.get(0));
 			double time = 0 ; 
-			while(!FruitsA.isEmpty())
+			while(!game.fruits.isEmpty())
 			{
 				for (int i = 0; i < game.packmans.size(); i++) {
-					for (int j = 0; j < FruitsA.size(); j++) 
+					for (int j = 0; j < game.fruits.size(); j++) 
 					{
-						time = Time(game.packmans.get(i), FruitsA.get(j), map);
+						time = Time(game.packmans.get(i), game.fruits.get(j), map);
 						if(time+game.packmans.get(i)._time < Max.time)
 						{
 							Max.time = time+game.packmans.get(i)._time;
 							Max._pacman = game.packmans.get(i);
-							Max.fruit = FruitsA.get(j);
+							Max.fruit = game.fruits.get(j);
 							Max.fruitindex = j ; 
 						}
 						time = 0 ; 
 					}
 				}
-				Max._pacman.path.Lines.add(new Line(Max._pacman.getPixelLocation(),Max.fruit.getPixelLocation()));
+				Max._pacman.path.Lines.add(new Line(Max._pacman.getPixelLocation(),Max.fruit.getPixelLocation(),game.GameMap));
 				Max._pacman._time += Time(Max._pacman, Max.fruit, map);
-				Max._pacman.setPixelLocation(FruitsA.get(Max.fruitindex).getPixelLocation(),game.GameMap);
+				Max._pacman.setPixelLocation(game.fruits.get(Max.fruitindex).getPixelLocation(),game.GameMap);
 				Max._pacman.setGpsLocation(new GpsPoint(map.Pixel2GPSPoint(Max._pacman.getPixelLocation().get_PixelX(), Max._pacman.getPixelLocation().get_PixelY())));
-				FruitsA.remove(Max.fruitindex);
-				if(!FruitsA.isEmpty())
+				game.fruits.remove(Max.fruitindex);
+				if(!game.fruits.isEmpty())
 					Max.init(game.fruits.get(0));
 				
 			}
