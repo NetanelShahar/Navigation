@@ -27,6 +27,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.plaf.FileChooserUI;
 
+import Algorithms.CompareFruits;
 import Algorithms.ShortPathAlgorithm;
 import File_format.CSV2Game;
 import File_format.Game2CSV;
@@ -118,6 +119,14 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				CompareFruits f = new CompareFruits();
+				game.fruits.sort(f);
+				if(Run)
+				{
+					for (int i = 0; i <= game.packmans.size(); i++) {
+						game.fruits.remove(i);
+					}
+				}
 				game.saving=new Game2CSV(game.packmans,game.fruits);
 
 			}
@@ -162,6 +171,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 				PackmansPath=game.algo.Short(game, game.GameMap);
 				Run = true ; 
+				
 				repaint();
 			}
 		});
@@ -193,8 +203,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
 		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans,game.fruits);
-
-
+	
 		if(x!=-1 && y!=-1)
 		{
 
@@ -204,7 +213,7 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 			for (int i = 0; i < game.fruits.size(); i++) 
 			{
-			
+				if(!Run || game.fruits.size()-game.packmans.size() > i)
 				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
 			}
 

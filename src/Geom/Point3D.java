@@ -17,6 +17,12 @@ public class Point3D implements Geom_element, Serializable
 		_y=y; //alt
 		_z=z;
 	}
+	public Point3D(GpsPoint p)
+	{
+		_x = p.getLon();
+		_y = p.getLat();
+		_z = p.getAlt();
+	}
 
 	public Point3D(Point3D p) 
 	{

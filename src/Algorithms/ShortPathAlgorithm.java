@@ -24,7 +24,7 @@ public class ShortPathAlgorithm {
 	public static ArrayList<Path> Short(Game game, Map map)
 	{
 		for (int i = 0; i < game.packmans.size(); i++) {
-			game.fruits.add(new Fruit(0, game.packmans.get(i)._PixelLocation, 0, game.GameMap));
+			game.fruits.add(new Fruit(0, game.packmans.get(i)._PixelLocation,100000, game.GameMap));
 		}
 		ArrayList<Path> Path = new ArrayList<Path>();
 		ArrayList<Fruit> FruitsA = new ArrayList<>(game.fruits);
