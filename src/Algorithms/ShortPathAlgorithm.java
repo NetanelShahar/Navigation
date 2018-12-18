@@ -14,6 +14,7 @@ import Geom.GpsPoint;
 import Maps.Map;
 
 public class ShortPathAlgorithm {
+	
 	static MyCoords Convert = new MyCoords();
 	public Game game;
 
@@ -23,12 +24,9 @@ public class ShortPathAlgorithm {
 	}
 	public static ArrayList<Path> Short(Game game, Map map)
 	{
-//		for (int i = 0; i < game.packmans.size(); i++) 
-//		{
-//			game.fruits.add(new Fruit(0, game.packmans.get(i)._PixelLocation,100000, game.GameMap));
-//		}
+		
 		ArrayList<Path> Path = new ArrayList<Path>();
-	
+
 		if(!game.fruits.isEmpty() && !game.packmans.isEmpty()) {
 			PackManNode Max = new PackManNode(Double.MAX_VALUE , game.packmans.get(0) , game.fruits.get(0));
 			double time = 0 ; 
@@ -55,8 +53,9 @@ public class ShortPathAlgorithm {
 				game.fruits.remove(Max.fruitindex);
 				if(!game.fruits.isEmpty())
 					Max.init(game.fruits.get(0));
-				
+
 			}
+			
 			for (int i = 0; i < game.packmans.size(); i++)
 			{
 				Path.add(game.packmans.get(i).path);

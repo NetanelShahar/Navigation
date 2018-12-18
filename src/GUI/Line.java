@@ -6,10 +6,10 @@ import Maps.Map;
 import Maps.Pixel;
 
 public class Line {
-	public GpsPoint startGPS ; 
+	private GpsPoint startGPS ; 
 	public Pixel start;
 	public Pixel end;
-	public GpsPoint endGPS ;
+	private GpsPoint endGPS ;
 	
 	public Line(int start_x,int start_y,int end_x,int end_y)
 	{
