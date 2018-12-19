@@ -9,7 +9,13 @@ import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert
 
 import Coords.MyCoords;
 import GUI.Line;
-
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author daniel abargel
+ * 
+ * this class represnt a pacman object
+ */
 public class Packman {
 
 	private int _id;
@@ -22,7 +28,14 @@ public class Packman {
 	public double _time ; 
 
 
-
+	/**
+	 * this constructor build a packman.
+	 * @param id the packman id.
+	 * @param GpsLocation the packman gps location.
+	 * @param speed the packman speed.
+	 * @param radius the packman radius.
+	 * @param map the game map
+	 */
 	public Packman(int id,GpsPoint GpsLocation,int speed,int radius ,Map map)
 	{
 		path = new Path();
@@ -35,6 +48,15 @@ public class Packman {
 
 
 	}
+	
+	/**
+	 * this constructor build a packman.
+	 * @param id the packman id.
+	 * @param PixelLocation the packman pixel location.
+	 * @param speed the packman speed.
+	 * @param radius the packman radius.
+	 * @param map the game map
+	 */
 	public Packman(int id,Pixel PixelLocation,int speed,int radius,Map map)
 	{
 		path = new Path();
@@ -73,7 +95,11 @@ public class Packman {
 
 	}
 
-
+	/**
+	 * this function sets a new pixel location.
+	 * @param PixelLocation  the packman pixel location.
+	 * @param map the game map.
+	 */
 	public void setPixelLocation(Pixel PixelLocation,Map map) {
 		this._PixelLocation = PixelLocation;
 		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));
@@ -108,6 +134,12 @@ public class Packman {
 		_GPSConvert = xYZlocation;
 	}
 	
+	/**
+	 * this function calculate the packman's location after some time.
+	 * @param time represents a time after game started.
+	 * @param map represents the map.
+	 * @return the packman's location after some time.
+	 */
 	public GpsPoint WhereInTime (double time ,Map map) 
 	{
 		double CurTime  = 0 ; 
@@ -140,16 +172,5 @@ public class Packman {
 		
 		return this._GPS;
  	}
-
-
-
-public static void main(String[] args) {
-	double d = 0/0.0 ; 
-	System.out.println(d);
-}
-
-
-
-
 
 }

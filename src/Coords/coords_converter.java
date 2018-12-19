@@ -32,5 +32,4 @@ public interface coords_converter {
 	 * @return true if its valid false otherwise
 	 */
 	public boolean isValid_GPS_Point(Point3D p);
-	
 }

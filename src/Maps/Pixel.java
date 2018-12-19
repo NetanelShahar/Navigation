@@ -2,18 +2,33 @@ package Maps;
 
 import Geom.GpsPoint;
 import Geom.Point3D;
-
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author daniel abargel
+ * 
+ * this class represent a location of a point on the screen by pixels.
+ */
 public class Pixel {
 	
 	private double _PixelX;
 	private double _PixelY;
 	
-	
+	/**
+	 * this constructor build the x&y pixels values of the point.
+	 * @param PixelX represent the x value of the point.
+	 * @param PixelY represent the y value of the point.
+	 */
 	public  Pixel(double PixelX , double PixelY){
 		set_PixelX(PixelX);
 		set_PixelY(PixelY);
 	}
 
+	/**
+	 * this function convert a gps point to pixels.
+	 * @param GPS represent thr gps point.
+	 * @param map represent thr map
+	 */
 	public Pixel(Point3D GPS ,Map map) {
 		
 		Pixel temp = map.GPSPoint2Pixel(GPS);
@@ -21,6 +36,10 @@ public class Pixel {
 		set_PixelY(temp._PixelY);
 		
 	}
+	/**
+	 * copy constructor
+	 * @param other represent the original point.
+	 */
 	public Pixel(Pixel other)
 	{
 		set_PixelX(other.get_PixelX());

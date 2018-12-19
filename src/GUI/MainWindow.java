@@ -41,7 +41,13 @@ import Game_objects.Path;
 import Maps.Map;
 import Maps.Pixel;
 
-
+/**
+ * 
+ *@author Netanel Ben-Isahar
+ *@author daniel abargel
+ *
+ *this class is for the gui interface and include all of the graphic items inside.
+ */
 public class MainWindow extends JFrame implements MouseListener
 {
 
@@ -169,7 +175,7 @@ public class MainWindow extends JFrame implements MouseListener
 				game.algo=new ShortPathAlgorithm(game);
 				PackmansPath=game.algo.Short(game, game.GameMap);
 				move();
-				
+
 
 
 				repaint();
@@ -257,7 +263,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+
 
 	}
 
@@ -297,7 +303,7 @@ public class MainWindow extends JFrame implements MouseListener
 			for (int i = 0; i < 400; i++) {
 				for (int j = 0; j < game.packmans.size(); j++) {
 					game.packmans.get(j).WhereInTime(i, game.GameMap);
-				System.out.println(game.packmans.get(j).getPixelLocation());
+					System.out.println(game.packmans.get(j).getPixelLocation());
 				}
 				for (int o = 0; o < game.fruits.size(); o++) {
 					if(game.fruits.get(o).EatenTime < i) game.fruits.remove(o);

@@ -13,17 +13,39 @@ import Game_objects.Game;
 import Game_objects.Packman;
 import Geom.GpsPoint;
 import Maps.Map;
-
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author Daniel abargel
+ *
+ *this class suppose to get a csv file and convert it to a game.
+ *
+ */
 
 public class CSV2Game {
 
 	public Game _game ;
 
+	/**
+	 * this constructor suppose to build the game.
+	 * @param map receiving a map.
+	 * @param game receiving a game .
+	 * @param path receiving a path to the file.
+	 * @throws IOException.
+	 */
 	public CSV2Game(Map map , Game game , String path) throws IOException
 	{
 		this._game = game ; 
 		resolveCsv(path, map);
 	}
+
+	/**
+	 * 
+	 * @param csvFileAdress receiving a path to the file.
+	 * @param map receiving a map.
+	 * @return returns the game with all the information that include.
+	 * @throws IOException
+	 */
 	public Game resolveCsv(String csvFileAdress , Map map) throws IOException
 	{
 
@@ -37,7 +59,7 @@ public class CSV2Game {
 			String stringLine=line.toString();
 
 			line = br.readLine();
-			
+
 			pacmanORfruit(stringLine , map);
 		}
 		try {
@@ -46,10 +68,16 @@ public class CSV2Game {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return _game;
 
 	}
+
+	/**
+	 * this function decide if the line is presents packman or fruit.
+	 * @param line getting a line from a file.
+	 * @param map getting map.
+	 */
 	private void pacmanORfruit(String line,Map map)
 	{
 		String[] arr=line.split(",");
@@ -61,6 +89,12 @@ public class CSV2Game {
 			buildTHEfruit(arr, map);
 
 	}
+
+	/**
+	 * this fiction build the packman.
+	 * @param arr getting an array with all of information from the line.
+	 * @param map getting a map
+	 */
 	private void buildTHEpacman(String[] arr, Map map)
 	{
 
@@ -75,6 +109,12 @@ public class CSV2Game {
 
 
 	}
+	/**
+	 * 
+	 *this fiction build the packman.
+	 * @param arr getting an array with all of information from the line.
+	 * @param map getting a map
+	 */
 	private void buildTHEfruit(String[] arr, Map map)
 	{
 		int id=Integer.parseInt(arr[1]);

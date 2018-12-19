@@ -156,6 +156,4 @@ public class MyCoords implements coords_converter  {
 		return p.x()<90&&p.x()>-90&&p.y()>-180&&p.y()<180&&p.z()>-450;
 	}
 
-
-
 }

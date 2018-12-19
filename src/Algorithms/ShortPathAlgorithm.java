@@ -12,19 +12,36 @@ import Game_objects.Packman;
 import Game_objects.Path;
 import Geom.GpsPoint;
 import Maps.Map;
-
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author daniel abargel
+ * 
+ * this class calculate the path of every pacman using this algorithm.
+ */
 public class ShortPathAlgorithm {
-	
+
 	static MyCoords Convert = new MyCoords();
 	public Game game;
 
+	/**
+	 * this constructor using a game data for the algorithm.
+	 * @param game represent the game.
+	 */
 	public ShortPathAlgorithm(Game game)
 	{
 		this.game=game;
 	}
+
+	/**
+	 * this function calculate the fastest way to finish all of the fruits in game.
+	 * @param game represent the game.
+	 * @param map represent the map.
+	 * @return a arraylist of path of every packman.
+	 */
 	public static ArrayList<Path> Short(Game game, Map map)
 	{
-		
+
 		ArrayList<Path> Path = new ArrayList<Path>();
 		ArrayList<Fruit> TempFruits = new ArrayList<Fruit>(game.fruits);
 		if(!TempFruits.isEmpty() && !game.packmans.isEmpty()) {
@@ -56,7 +73,7 @@ public class ShortPathAlgorithm {
 					Max.init(TempFruits.get(0));
 
 			}
-			
+
 			for (int i = 0; i < game.packmans.size(); i++)
 			{
 				Path.add(game.packmans.get(i).path);
@@ -65,7 +82,13 @@ public class ShortPathAlgorithm {
 
 		return Path ; 
 	}
-
+	/**
+	 * this function calculate the time that takes to the packman to eat some fruit.
+	 * @param p represent a packman.
+	 * @param f represent s fruit.
+	 * @param map represent a map.
+	 * @return returns the time it takes to the packman to eat some fruit.
+	 */
 	private static double Time (Packman p , Fruit f , Map map)
 	{
 		double dist_closestFruit=Convert.distance2d(p.getGpsLocation(),f.getGpsLocation())/(p.getSpeed());

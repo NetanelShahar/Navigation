@@ -7,7 +7,14 @@ import File_format.CSV2Game;
 import File_format.Game2CSV;
 import Maps.Map;
 
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author daniel abargel
+ * this class is the game class that holds all of the game components.
+ */
 public class Game {
+	
 	
 	public Map GameMap;
 	public Fruits fruits;
@@ -16,6 +23,10 @@ public class Game {
 	public Game2CSV saving;
 	public ShortPathAlgorithm algo;
 	
+	/**
+	 * this constructor builds the game.
+	 * @param map represent the map.
+	 */
 	public Game(Map map) 
 	{
 		fruits = new Fruits();
@@ -23,15 +34,11 @@ public class Game {
 		GameMap = map;
 		
 	}
-	
-//	public Game(Map map , String path) throws IOException
-//	{
-//		fruits = new Fruits();
-//		packmans = new Packmans();
-//		Convert = new CSV2Game(map,this,path);
-//		GameMap = map;
-//	}
-	
+	/**
+	 * 
+	 * @param path represent the path to the csv file that we want to open
+	 * @throws IOException
+	 */
 	public void Csv2Game(String path) throws IOException 
 	{
 		

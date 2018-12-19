@@ -3,7 +3,14 @@ package Game_objects;
 import java.util.ArrayList;
 
 import GUI.Line;
-
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author daniel abargel
+ * 
+ * this class represnt a pacman path is a game.
+ * it use a list of lines.
+ */
 public class Path {
 	
 	public ArrayList<Line> Lines ; 

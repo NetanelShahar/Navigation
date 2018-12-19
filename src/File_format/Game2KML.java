@@ -33,7 +33,8 @@ public class Game2KML {
 		Map map = new Map();
 		this.game =new Game(map); ; 
 	}
-
+	
+	
 	public void Game2KMLfunction() throws ParseException
 	{
 
@@ -96,6 +97,8 @@ public class Game2KML {
 			TimeSpan a=p.createAndSetTimeSpan();
 			a.setEnd(time1);
 			
+
+
 		}
 
 

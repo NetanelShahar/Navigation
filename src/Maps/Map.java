@@ -13,7 +13,14 @@ import Coords.MyCoords;
 import Game_objects.Fruit;
 import Game_objects.Packman;
 import Geom.Point3D;
-
+/**
+ * 
+ * @author Netanel Ben-Isahar
+ * @author daniel abergel
+ * this class represent a map with objects that represent the edges of the map.
+ * it also support some conversion functions.
+ *
+ */
 public class Map 
 {
 
@@ -22,7 +29,9 @@ public class Map
 	private Pixel FrameSize ; 
 	public BufferedImage myImage;
 
-
+/**
+ * this constructor build the map with the appropriate values.
+ */
 	public Map()
 	{
 		StartPoint =  new Point3D(35.20234,32.10584,0); 
@@ -38,7 +47,12 @@ public class Map
 		
 	}
 
-
+	/**
+	 * this function calculate the gps location after adding pixels distance
+	 * @param PixelXMove represent the move on the x axis
+	 * @param PixelYMove represent the move on the y axis
+	 * @return the new gps point after the move
+	 */
 
 	public  Point3D Pixel2GPSPoint( double PixelXMove , double PixelYMove )
 	{
@@ -50,6 +64,12 @@ public class Map
 		return result ;
 	}
 
+	/**
+	* this function calculate the pixel location after adding pixels distance
+	 * @param PixelXMove represent the move on the x axis
+	 * @param PixelYMove represent the move on the y axis
+	 * @return the new pixel point after the move
+	 */
 	private Pixel Pixel2Meter(double PixelXSize , double PixelYSize )
 	{
 
@@ -61,7 +81,11 @@ public class Map
 		Pixel _Pixel = new Pixel(PixelAsMeterX, PixelAsMeterY);
 		return _Pixel ;
 	}
-
+	/**
+	 * this function convert between gps point to pixels
+	 * @param Point represent the 3D point
+	 * @return the pixel location
+	 */
 	public  Pixel GPSPoint2Pixel(Point3D Point)
 	{
 		Point.GPS2Meter();
@@ -80,12 +104,24 @@ public class Map
 		} 
 		return Pix ; 
 	}
+	/**
+	 * this function is checking if the point is in our area
+	 * @param p represent the pixel point
+	 * @return true if the point is in our area
+	 */
 
 	private boolean isVaildPixel(Pixel p)
 	{
 		Pixel PSubtract = FrameSize.Subtract(p) ;
 		return PSubtract.get_PixelX() > 0 && PSubtract.get_PixelY() > 0;
 	}
+	
+	/**
+	 * this function calculate the correct pixels position after rescaling the picture 
+	 * @param p represent the new end point
+	 * @param PackArr arraylist of packmans
+	 * @param FruitArr arraylist of fruits
+	 */
 	public void ChangeFrameSizePacman(Pixel p , ArrayList<Packman> PackArr  ,ArrayList<Fruit> FruitArr)
 	{
 
