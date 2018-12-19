@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import Game_objects.Fruit;
 import Game_objects.Game;
 import Game_objects.Packman;
 import Maps.Map;
@@ -37,13 +38,19 @@ public class Game2KML {
 			p.withDescription("Mac: "  + "\nType: pacman")
 			.withOpen(Boolean.TRUE).createAndSetPoint().
 			addToCoordinates(it.getGpsLocation().getLon(),it.getGpsLocation().getLat());
-			p.createAndSetTimeStamp().withWhen(TimeNow());
-			p.createAndSetLineString().addToCoordinates("32.4,35.23423232.5,32.2344");
+		
+			
+		}
+		for (Fruit it: game.fruits) { //The iterator runs on a csv file.
+			Placemark p = doc.createAndAddPlacemark();
+			p.withDescription("Mac: "  + "\nType: pacman")
+			.withOpen(Boolean.TRUE).createAndSetPoint().
+			addToCoordinates(it.getGpsLocation().getLon(),it.getGpsLocation().getLat());
 		
 			
 		}
 		try {
-			kml.marshal(new File("C:\\Users\\נתנאל בן יששכר\\eclipse-workspace\\Navigation\\k.kml"));
+			kml.marshal(new File("C:\\Users\\דניאל\\eclipse-workspace\\Navigation\\k.kml"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -68,7 +75,7 @@ public class Game2KML {
 	
 	public static void main(String[] args) throws IOException {
 		Game2KML g = new Game2KML();
-		CSV2Game K = new CSV2Game(game.GameMap,game,"letsTRY.csv" );
+		CSV2Game K = new CSV2Game(game.GameMap,game,"C:\\Users\\דניאל\\Desktop\\game_1543685769754.csv" );
 		g.Game2KMLfunction();
 		
 	}

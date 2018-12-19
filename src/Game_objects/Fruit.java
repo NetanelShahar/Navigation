@@ -12,6 +12,7 @@ public class Fruit {
 	public GpsPoint _GPS; 
 	private Point3D _GPSConvert;
 	public Pixel _PixelLocation;
+	public double EatenTime ; 
 	
 	
 	public Fruit(int id,GpsPoint GpsLocation,int value , Map map)
@@ -21,6 +22,7 @@ public class Fruit {
 		this._value=value;
 		_GPSConvert = new Point3D(GpsLocation.getLon(),GpsLocation.getLat(),GpsLocation.getAlt());
 		this._PixelLocation = new Pixel(_GPSConvert, map);
+		EatenTime = 0 ;
 	}
 	public Fruit(int id,Pixel PixelLocation,int value, Map map)
 	{
@@ -29,6 +31,7 @@ public class Fruit {
 		this._value=value;
 		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));
 		this._GPS = new GpsPoint(_GPSConvert);
+		EatenTime = 0 ; 
 	}
 	public Point3D _GPSConvert() {
 		return _GPSConvert;
@@ -75,5 +78,8 @@ public class Fruit {
 
 	public void setValue(int value) {
 		this._value = value;
+	}
+	public void SetEatenTime(double time) {
+		EatenTime = time ;
 	}
 }

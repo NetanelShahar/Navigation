@@ -257,7 +257,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		System.out.println("mouse entered");
+		
 
 	}
 
@@ -297,9 +297,13 @@ public class MainWindow extends JFrame implements MouseListener
 			for (int i = 0; i < 400; i++) {
 				for (int j = 0; j < game.packmans.size(); j++) {
 					game.packmans.get(j).WhereInTime(i, game.GameMap);
+				System.out.println(game.packmans.get(j).getPixelLocation());
+				}
+				for (int o = 0; o < game.fruits.size(); o++) {
+					if(game.fruits.get(o).EatenTime < i) game.fruits.remove(o);
 				}
 				try {
-					this.sleep(100);
+					this.sleep(400);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -307,10 +311,6 @@ public class MainWindow extends JFrame implements MouseListener
 				repaint();
 			}
 			repaint();
-			
-
-
-
 
 		}
 

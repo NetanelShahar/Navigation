@@ -129,6 +129,7 @@ public class Packman {
 		Point3D Vector = line.Verctor();
 		double DisTime = time - CurTime ; 
 		double RelativeTime = (dis/_speed)/DisTime;
+		if(RelativeTime !=  0.0 &&  DisTime != 0.0)
 		Vector = new Point3D(Vector.x()/RelativeTime ,Vector.y()/RelativeTime ,Vector.z()/RelativeTime );
 		Point3D Start = line.getGpsStart();
 		Start.GPS2Meter();
@@ -140,7 +141,10 @@ public class Packman {
 
 
 
-
+public static void main(String[] args) {
+	double d = 0/0.0 ; 
+	System.out.println(d);
+}
 
 
 
