@@ -108,7 +108,7 @@ public class Packman {
 		_GPSConvert = xYZlocation;
 	}
 	
-	public void WhereInTime (double time ,Map map) 
+	public GpsPoint WhereInTime (double time ,Map map) 
 	{
 		double CurTime  = 0 ; 
 		Line line = null;
@@ -137,6 +137,8 @@ public class Packman {
 		Start.Meter2GPS();
 		setPixelLocation(map.GPSPoint2Pixel(Start), map);
 		}
+		
+		return this._GPS;
  	}
 
 
