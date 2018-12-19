@@ -46,7 +46,7 @@ public class MainWindow extends JFrame implements MouseListener
 {
 
 
-	
+
 	Game game ; 
 	boolean PacOrFruit  ;  // false = packman , true = fruit
 
@@ -62,7 +62,7 @@ public class MainWindow extends JFrame implements MouseListener
 		this.addMouseListener(this); 
 	}
 
-	
+
 	private void InitMenu() {
 
 		MenuBar  menubar = new MenuBar ();
@@ -125,7 +125,7 @@ public class MainWindow extends JFrame implements MouseListener
 			public void actionPerformed(ActionEvent e) {
 				CompareFruits f = new CompareFruits();
 				game.fruits.sort(f);
-			
+
 				game.saving=new Game2CSV(game.packmans,game.fruits);
 
 			}
@@ -141,7 +141,7 @@ public class MainWindow extends JFrame implements MouseListener
 				if(PackmansPath!=null)
 					PackmansPath.clear();
 				repaint();
-			
+
 
 			}
 		});
@@ -166,11 +166,12 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				PackmansPath=new ArrayList<Path>();
-			//	game.algo=new ShortPathAlgorithm(game);
-			move();
-				//PackmansPath=game.algo.Short(game, game.GameMap);
-			
+				game.algo=new ShortPathAlgorithm(game);
+				PackmansPath=game.algo.Short(game, game.GameMap);
+				move();
 				
+
+
 				repaint();
 			}
 		});
@@ -196,7 +197,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 		game = new Game(GameMap);
 	}
-	
+
 
 
 	public void paint(Graphics g)
@@ -205,7 +206,6 @@ public class MainWindow extends JFrame implements MouseListener
 
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
 		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans,game.fruits);
-		System.out.println("lllllll");
 		if(x!=-1 && y!=-1)
 		{
 
@@ -215,7 +215,7 @@ public class MainWindow extends JFrame implements MouseListener
 			}
 			for (int i = 0; i < game.fruits.size(); i++) 
 			{
-			
+
 				g.drawImage(FruitImage,(int)game.fruits.get(i).getPixelLocation().get_PixelX()-20,(int)game.fruits.get(i).getPixelLocation().get_PixelY()-10,this);
 			}
 
@@ -288,34 +288,32 @@ public class MainWindow extends JFrame implements MouseListener
 	{
 		return game.GameMap.myImage.getHeight();
 	}
-	
-public class MyThread extends Thread {
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-	
-		
-			for (int i = 0; i < 20; i++) {
-				
-				System.out.println("helloo");
+	public class MyThread extends Thread {
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			for (int i = 0; i < 400; i++) {
+				for (int j = 0; j < game.packmans.size(); j++) {
+					game.packmans.get(j).WhereInTime(i, game.GameMap);
+				}
 				try {
-					Thread.sleep(300);
+					this.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				game.packmans.get(0).setPixelLocation(new Pixel(game.packmans.get(0).getPixelLocation().get_PixelX()+3,game.packmans.get(0).getPixelLocation().get_PixelY()-6), game.GameMap);
-				
 				repaint();
-				
-				
 			}
+			repaint();
 			
-			
-		
+
+
+
+
+		}
+
 	}
-	
-}
 
 }

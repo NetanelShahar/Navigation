@@ -4,7 +4,11 @@ import Geom.GpsPoint;
 import Geom.Point3D;
 import Maps.Map;
 import Maps.Pixel;
+
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
+
 import Coords.MyCoords;
+import GUI.Line;
 
 public class Packman {
 
@@ -16,7 +20,8 @@ public class Packman {
 	private int _radius;
 	public Path path;
 	public double _time ; 
-	
+
+
 
 	public Packman(int id,GpsPoint GpsLocation,int speed,int radius ,Map map)
 	{
@@ -28,6 +33,7 @@ public class Packman {
 		_GPSConvert = new Point3D(GpsLocation.getLon(),GpsLocation.getLat(),GpsLocation.getAlt());
 		this._PixelLocation = new Pixel(_GPSConvert, map);
 
+
 	}
 	public Packman(int id,Pixel PixelLocation,int speed,int radius,Map map)
 	{
@@ -38,76 +44,106 @@ public class Packman {
 		this._GPS = new GpsPoint(_GPSConvert);
 		this._speed=speed;
 		this._radius=radius;
+
 	}
-	
-		public int getId() {
-			return _id;
-		}
+
+	public int getId() {
+		return _id;
+	}
 
 
-		public void setId(int id) {
-			this._id = id;
-		}
+	public void setId(int id) {
+		this._id = id;
+	}
 
 
-		public GpsPoint getGpsLocation() {
-			return _GPS;
-		}
+	public GpsPoint getGpsLocation() {
+		return _GPS;
+	}
 
 
-		public void setGpsLocation(GpsPoint gpsLocation) {
-			this._GPS = gpsLocation;
-		}
+	public void setGpsLocation(GpsPoint gpsLocation) {
+		this._GPS = gpsLocation;
+	}
 
 
-		public Pixel getPixelLocation() {
-			
-			return _PixelLocation;
-			
-		}
+	public Pixel getPixelLocation() {
+
+		return _PixelLocation;
+
+	}
 
 
-		public void setPixelLocation(Pixel PixelLocation,Map map) {
+	public void setPixelLocation(Pixel PixelLocation,Map map) {
 		this._PixelLocation = PixelLocation;
 		this._GPSConvert = new Point3D(map.Pixel2GPSPoint(PixelLocation.get_PixelX(),PixelLocation.get_PixelY()));
 		this._GPS = new GpsPoint(_GPSConvert);
-		}
-
-
-		public int getSpeed() {
-			return _speed;
-		}
-
-
-		public void setSpeed(int speed) {
-			this._speed = speed;
-		}
-
-
-		public int getRadius() {
-			return _radius;
-		}
-
-
-		public void setRadius(int radius) {
-			this._radius = radius;
-		}
-
-		public Point3D GPSConvert() {
-			return _GPSConvert;
-		}
-
-		public void GPSConvert(Point3D xYZlocation) {
-			_GPSConvert = xYZlocation;
-		}
-
-
-
-
-
-
-
-
-
-
 	}
+
+
+	public int getSpeed() {
+		return _speed;
+	}
+
+
+	public void setSpeed(int speed) {
+		this._speed = speed;
+	}
+
+
+	public int getRadius() {
+		return _radius;
+	}
+
+
+	public void setRadius(int radius) {
+		this._radius = radius;
+	}
+
+	public Point3D GPSConvert() {
+		return _GPSConvert;
+	}
+
+	public void GPSConvert(Point3D xYZlocation) {
+		_GPSConvert = xYZlocation;
+	}
+	
+	public void WhereInTime (double time ,Map map) 
+	{
+		double CurTime  = 0 ; 
+		Line line = null;
+		double dis = 0 ; 
+				
+		for (int i = 0; i < path.Lines.size() ; i++) 
+		{
+			 dis = path.Lines.get(i).distance();
+		
+			if (CurTime + dis/_speed  >= time)
+			{
+				line = path.Lines.get(i);
+				break  ; 
+			}
+			 CurTime += dis/_speed ;	 // current time . 
+		}
+		if(!(line == null)) {
+		Point3D Vector = line.Verctor();
+		double DisTime = time - CurTime ; 
+		double RelativeTime = (dis/_speed)/DisTime;
+		Vector = new Point3D(Vector.x()/RelativeTime ,Vector.y()/RelativeTime ,Vector.z()/RelativeTime );
+		Point3D Start = line.getGpsStart();
+		Start.GPS2Meter();
+		Start.add(Vector);
+		Start.Meter2GPS();
+		setPixelLocation(map.GPSPoint2Pixel(Start), map);
+		}
+ 	}
+
+
+
+
+
+
+
+
+
+}

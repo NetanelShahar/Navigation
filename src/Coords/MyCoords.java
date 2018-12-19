@@ -65,8 +65,16 @@ public class MyCoords implements coords_converter  {
 	}
 	public static void main(String[] args) {
 		MyCoords m = new MyCoords(); 
-	double d = 	m.distance2d(new GpsPoint(32.103745548224765,35.20650560715309,0), new GpsPoint(32.104945548224765,35.2070560715309,0));
-	System.out.println(d);
+		Point3D StartPoint =  new Point3D(35.202384,32.105687,0); 
+		Point3D EndPoint = new Point3D(35.21237,32.10193,0);
+//		Point3D T = m.vector3D(StartPoint, EndPoint);
+//		Point3D R = m.add(StartPoint, new Point3D(T.x()*(1.0/8),T.y()*(1.0/8),T.z()*(1.0/8)));
+//		System.out.println(T.x()*(1.0/8) +" " +T.y()*(1.0/8) +" " +T.z()*(1.0/8));
+//		System.out.println(1/8);
+//		System.out.println(R);
+		System.out.println(m.vector3D(StartPoint, EndPoint));
+		
+	
 	}
 	/**
 	 * This function computes the 3D distance (in meters) between the two GPS points
@@ -98,9 +106,11 @@ public class MyCoords implements coords_converter  {
 		// TODO Auto-generated method stub
 		gps0.GPS2Meter();
 		gps1.GPS2Meter();
-		double X = gps0.x() - gps1.x();
-		double Y = gps0.y() - gps1.y();
-		double Z = gps0.z() - gps1.z();
+		double X = gps1.x() - gps0.x();
+		double Y = gps1.y() - gps0.y();
+		double Z = gps1.z() - gps0.z();
+		gps0.Meter2GPS();
+		gps1.Meter2GPS();
 		return new Point3D(X, Y, Z);
 	}
 	/**

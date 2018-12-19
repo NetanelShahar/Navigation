@@ -1,5 +1,6 @@
 package GUI;
 
+import Coords.MyCoords;
 import Geom.GpsPoint;
 import Geom.Point3D;
 import Maps.Map;
@@ -10,11 +11,13 @@ public class Line {
 	public Pixel start;
 	public Pixel end;
 	private GpsPoint endGPS ;
+	private  MyCoords Convert;
 	
 	public Line(int start_x,int start_y,int end_x,int end_y)
 	{
 		this.start=new Pixel(start_x, start_y);
 		this.end=new Pixel(end_x, end_y);
+		Convert = new MyCoords();
 		
 	}
 	public Line(Pixel start , Pixel end , Map map )
@@ -23,6 +26,7 @@ public class Line {
 		this.start = start ; 
 		this.end =  end ; 
 		this.endGPS = new GpsPoint(map.Pixel2GPSPoint(end.get_PixelX(), end.get_PixelY()));
+		Convert = new MyCoords();
 	}
 
 	public Pixel getStart() {
@@ -41,6 +45,18 @@ public class Line {
 		this.end =  map.GPSPoint2Pixel(new Point3D(this.endGPS));
 	}
 	
+	public double distance() 
+	{
+		return Convert.distance2d(startGPS, endGPS);
+	}
+	public Point3D Verctor()
+	{
+		return Convert.vector3D(new Point3D(startGPS), new Point3D(endGPS));
+	}
+	public Point3D getGpsStart()
+	{
+		return new Point3D(startGPS);
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
