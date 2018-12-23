@@ -9,6 +9,7 @@ There is an example below the map.
 ### Algorithms 
 In the algorithm package there is an algorithms:
 - MultiCSV : algorithm that receives a project and target folder for scanning, scans it recursively, and once it reaches a CSV file, it creates a layer and adds it to the project.
+- ShorthPathAlgorithm :The algorithm checks the shortest time for each Pacman, so at the end of the last Packman time all the fruits will be eaten (this is a greedy algorithm at the moment) .
 
 ### Coords 
 The Coords package has the:
@@ -28,7 +29,14 @@ The class has two functions:
 And manually converts it to a .kml file.
 - Object2Kml function accepts a project. Which inside it has layers and within layers there is information with points,
 Then the function converts the points to the directions on the map (each route on the map represents a layer)
-### ExampleAfterRun (the Picture is from GoogleEarth ) : 
+#### CSV2Game class
+The class convert a CSV file to Game (Object in java) . 
+#### Game2CSV class
+The class create CSV File and insert the data from Game Object . 
+#### Game2KML class
+The class create KML file that run on Google Earth.
+Running on Google Earth simulates a game like in gui in Java
+### ExampleAfterRun (the Picture is from GoogleEarth , GIS CLASS ( not game) ) : 
 ![1](https://user-images.githubusercontent.com/44754325/49378919-90792600-f716-11e8-9697-6fd1778c0049.png)
 
 ### Geom 
@@ -46,8 +54,16 @@ Each point is reserved as an element which has information for each point such a
 - GIS_Project : Represents a collection of layers / tracks on the map. (Similar to the folder of .csv files)
  #### ClassDiagram
  ![gisdiagram](https://user-images.githubusercontent.com/44754325/49364562-44fe5200-f6ed-11e8-9ab9-3a45eab38ee7.jpg)
+ 
+ 
 ### ExampleGameMap
 ![ariel1](https://user-images.githubusercontent.com/44754325/49361557-0b294d80-f6e5-11e8-90f0-a871b2571359.png)
+### ExampleBeforeRun
+![16](https://user-images.githubusercontent.com/44754325/50387581-72488980-0708-11e9-914f-c0835c6df1be.png)
+### ExampleAfterRun
+![17](https://user-images.githubusercontent.com/44754325/50387584-842a2c80-0708-11e9-95c0-a5d6c0b590b1.png)
+### ExampleKmlRun
+![18](https://user-images.githubusercontent.com/44754325/50387587-9ad08380-0708-11e9-8cb0-2c1ea3cc6bb4.png)
 ### Sorces
 
  - converting coordinates : https://stackoverflow.com/questions/1185408/converting-from-longitude-latitude-to-cartesian-coordinates  
