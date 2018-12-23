@@ -28,10 +28,9 @@ public class Game2KML {
 
 	public Game game ; 
 
-	public Game2KML() {
+	public Game2KML(Game game ) {
 		// TODO Auto-generated constructor stub
-		Map map = new Map();
-		this.game =new Game(map); ; 
+		this.game = game ; 
 	}
 	
 	
@@ -103,7 +102,7 @@ public class Game2KML {
 
 
 		try {
-			kml.marshal(new File("kamal.kml"));
+			kml.marshal(new File("KmlRun.kml"));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -126,12 +125,5 @@ public class Game2KML {
 		return sdf.format(new Date(millis));
 	}
 
-	public static void main(String[] args) throws IOException, ParseException {
-		
-		Game2KML g = new Game2KML();
-		CSV2Game K = new CSV2Game(g.game.GameMap,g.game,"C:\\Users\\נתנאל בן יששכר\\Desktop\\data\\game_1543685769754.csv" );
-		g.game.algo.Short(g.game, g.game.GameMap);
-		g.Game2KMLfunction();
 
-	}
 }

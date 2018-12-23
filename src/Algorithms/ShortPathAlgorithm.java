@@ -78,6 +78,9 @@ public class ShortPathAlgorithm {
 			{
 				Path.add(game.packmans.get(i).path);
 			}
+			ComparePackmanTime cpt = new ComparePackmanTime() ; 
+			game.packmans.sort(cpt);
+			if(game.packmans.size() > 0) System.out.println("The shortest time to eat all the fruits is : " +game.packmans.get(0)._time);
 		}
 
 		return Path ; 

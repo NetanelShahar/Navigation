@@ -66,7 +66,7 @@ public class Game2CSV {
 
 		}
 		try {
-			File file=new File("letsTRY"+".csv");
+			File file=new File("SaveandLoad"+".csv");
 
 			if(!file.exists())
 				file.createNewFile();

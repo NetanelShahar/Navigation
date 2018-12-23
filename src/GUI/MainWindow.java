@@ -18,6 +18,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -29,10 +30,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.plaf.FileChooserUI;
 
-import Algorithms.CompareFruits;
+
 import Algorithms.ShortPathAlgorithm;
 import File_format.CSV2Game;
 import File_format.Game2CSV;
+import File_format.Game2KML;
 import Game_objects.Fruit;
 import Game_objects.Game;
 import Game_objects.Packman;
@@ -40,6 +42,7 @@ import Game_objects.Packmans;
 import Game_objects.Path;
 import Maps.Map;
 import Maps.Pixel;
+import Threads.TestThreads;
 
 /**
  * 
@@ -61,6 +64,7 @@ public class MainWindow extends JFrame implements MouseListener
 	public BufferedImage PackManImage;
 	public BufferedImage FruitImage;
 	ArrayList<Path> PackmansPath;
+	MyThread thread ; 
 
 	public MainWindow() 
 	{
@@ -80,22 +84,43 @@ public class MainWindow extends JFrame implements MouseListener
 		MenuItem packmanM = new MenuItem("PackMan");
 		MenuItem fruitM = new MenuItem("Fruit");
 		MenuItem run = new MenuItem("Run");
+		MenuItem KML = new MenuItem("KmlRun");
 		menubar.add(file);
 		menubar.add(gameM);
 		file.add(load);
 		file.add(save);
 		file.add(clear);
+		file.add(KML);
 		gameM.add(packmanM);
 		gameM.add(fruitM);
 		gameM.add(run);
 		this.setMenuBar(menubar);
 
-
+		KML.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Game2KML G = new Game2KML(game); 
+				game.saving=new Game2CSV(game.packmans,game.fruits);
+				game.algo=new ShortPathAlgorithm(game);
+				PackmansPath=game.algo.Short(game, game.GameMap);
+				try {
+					G.Game2KMLfunction();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		load.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if(thread != null ) thread.stop();
+				game.fruits.clear();
+				game.packmans.clear();
+				PackmansPath.clear();
 				String direction="";
 				JButton open=new JButton();
 				JFileChooser fc =new JFileChooser();
@@ -112,15 +137,16 @@ public class MainWindow extends JFrame implements MouseListener
 
 
 				try {
-					repaint();
-					game.Convert=new CSV2Game(game.GameMap, game, direction);
-					repaint();
+					
+					CSV2Game S=new CSV2Game(game.GameMap, game, direction);
+					
+					
 
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-
+				
 				repaint();
 			}
 
@@ -129,9 +155,7 @@ public class MainWindow extends JFrame implements MouseListener
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CompareFruits f = new CompareFruits();
-				game.fruits.sort(f);
-
+			
 				game.saving=new Game2CSV(game.packmans,game.fruits);
 
 			}
@@ -146,6 +170,7 @@ public class MainWindow extends JFrame implements MouseListener
 					game.packmans.clear();
 				if(PackmansPath!=null)
 					PackmansPath.clear();
+				if(thread != null ) thread.stop();
 				repaint();
 
 
@@ -172,12 +197,11 @@ public class MainWindow extends JFrame implements MouseListener
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				PackmansPath=new ArrayList<Path>();
+				game.saving=new Game2CSV(game.packmans,game.fruits);
 				game.algo=new ShortPathAlgorithm(game);
 				PackmansPath=game.algo.Short(game, game.GameMap);
+				
 				move();
-
-
-
 				repaint();
 			}
 		});
@@ -186,12 +210,13 @@ public class MainWindow extends JFrame implements MouseListener
 	}
 	public void move()
 	{
-		MyThread s = new MyThread();
-		s.start();
+		thread = new MyThread();
+		thread.start();
 	}
 	private void initGUI() 
 	{	
 		InitMenu();
+		PackmansPath = new ArrayList<Path>();
 		Map GameMap = new Map();
 		try {
 			FruitImage = ImageIO.read(new File("Fruit.PNG"));
@@ -209,14 +234,15 @@ public class MainWindow extends JFrame implements MouseListener
 	public void paint(Graphics g)
 	{
 
-
+		
 		g.drawImage(game.GameMap.myImage, -10, -10,this.getWidth(),this.getHeight(), this);
 		game.GameMap.ChangeFrameSizePacman(new Pixel(this.getWidth(), this.getHeight()), game.packmans,game.fruits);
-		if(x!=-1 && y!=-1)
+		if(true)
 		{
 
 			for (int i = 0; i < game.packmans.size(); i++) 
 			{
+				
 				g.drawImage(PackManImage,(int)game.packmans.get(i).getPixelLocation().get_PixelX()-20,(int)game.packmans.get(i).getPixelLocation().get_PixelY()-10,this);
 			}
 			for (int i = 0; i < game.fruits.size(); i++) 
@@ -303,7 +329,7 @@ public class MainWindow extends JFrame implements MouseListener
 			for (int i = 0; i < 400; i++) {
 				for (int j = 0; j < game.packmans.size(); j++) {
 					game.packmans.get(j).WhereInTime(i, game.GameMap);
-					System.out.println(game.packmans.get(j).getPixelLocation());
+					
 				}
 				for (int o = 0; o < game.fruits.size(); o++) {
 					if(game.fruits.get(o).EatenTime < i) game.fruits.remove(o);
