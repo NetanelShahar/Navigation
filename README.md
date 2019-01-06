@@ -53,7 +53,7 @@ Each point is reserved as an element which has information for each point such a
 - GIS_Layer : Represents a collection of points / directions on the map. (Similar to one csv file)
 - GIS_Project : Represents a collection of layers / tracks on the map. (Similar to the folder of .csv files)
  #### ClassDiagram
- ![gisdiagram](https://user-images.githubusercontent.com/44754325/49364562-44fe5200-f6ed-11e8-9ab9-3a45eab38ee7.jpg)
+![classd](https://user-images.githubusercontent.com/44754325/50738259-8d23ff00-11da-11e9-9f86-abfeec50958b.png)
  
  
 ### ExampleGameMap
