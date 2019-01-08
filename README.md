@@ -6,14 +6,10 @@ The project represents a game called Pacman Navigation, the game is performed on
 Will be displayed on the map any track that Packman has made
 There is an example below the map.
 
-There are two game options:
-- Play independently with your mouse.
-- Automatic play with algorithm
-
 ### Algorithms 
 In the algorithm package there is an algorithms:
-- Algorithm - An algorithm that calculates the shortest path between a fruit and a player, and returns the path.
-(The algorithm knows how to avoid boxes that can not be passed through) .
+- MultiCSV : algorithm that receives a project and target folder for scanning, scans it recursively, and once it reaches a CSV file, it creates a layer and adds it to the project.
+- ShorthPathAlgorithm :The algorithm checks the shortest time for each Pacman, so at the end of the last Packman time all the fruits will be eaten (this is a greedy algorithm at the moment) .
 
 ### Coords 
 The Coords package has the:
@@ -27,21 +23,35 @@ The Coords package has the:
  
 ### File format 
 The File format package has:
-#### Board2Game
-The class Convert a ArrayList<String> which represent data of the game at a given moment, and creates a new game from the same data.
- 
-#### Game2CSV
+#### CSV2Kml class
+The class has two functions:
+- CSV2Kml function accepts a .csv file as a PATH,
+And manually converts it to a .kml file.
+- Object2Kml function accepts a project. Which inside it has layers and within layers there is information with points,
+Then the function converts the points to the directions on the map (each route on the map represents a layer)
+#### CSV2Game class
 The class convert a CSV file to Game (Object in java) . 
-And displays it on the screen
-
-
+#### Game2CSV class
+The class create CSV File and insert the data from Game Object . 
+#### Game2KML class
+The class create KML file that run on Google Earth.
+Running on Google Earth simulates a game like in gui in Java
+### ExampleAfterRun (the Picture is from GoogleEarth , GIS CLASS ( not game) ) : 
+![1](https://user-images.githubusercontent.com/44754325/49378919-90792600-f716-11e8-9697-6fd1778c0049.png)
 
 ### Geom 
 Geom package represents shapes in space:
 - GPSPoint: lat,long,alt (regular GPS Point ) 
 - Point3D : can represents GPSPoint and vec .
 
-
+### Gis package
+This package represents a data structure that contains GPS points information:
+- Meta_Data : represents Data according to class.
+For example, in GIS_Element the data represents the information on the point such as color time, etc. (comprehensive documentation is found in the departments themselves, see doc folder).
+Each point is reserved as an element which has information for each point such as: accuracy, name, etc.
+- GIS_Element : Represents a GPS point of a map with information about the point.
+- GIS_Layer : Represents a collection of points / directions on the map. (Similar to one csv file)
+- GIS_Project : Represents a collection of layers / tracks on the map. (Similar to the folder of .csv files)
  #### ClassDiagram
 ![classd](https://user-images.githubusercontent.com/44754325/50738259-8d23ff00-11da-11e9-9f86-abfeec50958b.png)
  
